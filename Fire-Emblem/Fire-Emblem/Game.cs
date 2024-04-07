@@ -17,7 +17,7 @@ public class Game
         _teamsFolder = teamsFolder;
     }
     // Método para chequear validez de los equipos
-    private bool ValidTeamChecker(List<Unit> player1Team, List<Unit> player2Team)
+    private bool IsValidTeam(List<Unit> player1Team, List<Unit> player2Team)
     {
         // Chequea si equipo es vacío o de más de tres unidades
         if ((player1Team.Count == 0 || player1Team.Count > 3) || (player2Team.Count == 0 || player2Team.Count > 3))
@@ -156,6 +156,50 @@ public class Game
         _view.WriteLine($"{attackUnit.Name} ({attackUnit.HPCurrent}) : {defenseUnit.Name} ({defenseUnit.HPCurrent})");
         return [attackUnit, defenseUnit];
     }
+    
+    private void PlayerTurn(List<Unit> currentPlayerUnits, List<Unit> opponentUnits, string currentPlayer, string opponent, int round)
+    {
+        // Se despliegan las unidades disponibles del atacante
+        ShowAvailableUnits(currentPlayerUnits, currentPlayer);
+
+        // Se lee la opción seleccionada y se asigna la unidad del equipo del atacante
+        int currentPlayerChoice = Convert.ToInt32(_view.ReadLine());
+        Unit currentPlayerSelectedUnit = currentPlayerUnits[currentPlayerChoice];
+    
+        // Se despliegan las unidades disponibles del defensor
+        ShowAvailableUnits(opponentUnits, opponent);
+
+        // Se lee la opción seleccionada y se asigna la unidad del equipo del defensor
+        int opponentChoice = Convert.ToInt32(_view.ReadLine());
+        Unit opponentSelectedUnit = opponentUnits[opponentChoice];
+    
+        _view.WriteLine($"Round {round}: {currentPlayerSelectedUnit.Name} ({currentPlayer}) comienza");
+        // Se entra al método Combat() para asignar daños
+        Unit[] postCombatUnits = Combat(currentPlayerSelectedUnit, opponentSelectedUnit);
+    
+        RemoveDeadUnits(currentPlayerUnits, postCombatUnits[0]);
+        RemoveDeadUnits(opponentUnits, postCombatUnits[1]);
+    }
+    
+    private void ShowAvailableUnits(List<Unit> units, string player)
+    {
+        _view.WriteLine($"{player} selecciona una opción");
+        for (int i = 0; i < units.Count; i++)
+        {
+            if (units[i].HPCurrent > 0)
+            {
+                _view.WriteLine($"{i}: {units[i].Name}");
+            }
+        }
+    }
+    
+    private void RemoveDeadUnits(List<Unit> units, Unit unitToRemove)
+    {
+        if (unitToRemove.HPCurrent <= 0)
+        {
+            units.Remove(unitToRemove);
+        }
+    }
 
     public void Play()
     {
@@ -227,7 +271,7 @@ public class Game
             }
         }
         // Se chequea validez de equipo, informando al usuario en caso de ser inválido
-        if (!ValidTeamChecker(player1Units, player2Units))
+        if (!IsValidTeam(player1Units, player2Units))
         {
             _view.WriteLine("Archivo de equipos no válido");
         }
@@ -240,82 +284,16 @@ public class Game
             int round = 1;
             while (continueBattle)
             {
-                _view.WriteLine($"{firstPlayer} selecciona una opción");
+                //_view.WriteLine($"{firstPlayer} selecciona una opción");
                 // En caso de que ataque (y empiece) el Player 1 esta ronda
                 if (firstPlayer == "Player 1")
                 {
-                    // Se despliegan las unidades disponibles del atacante
-                    for (int i = 0; i < player1Units.Count; i++)
-                    {
-                        if (player1Units[i].HPCurrent > 0)
-                        {
-                            _view.WriteLine($"{i}: {player1Units[i].Name}");
-                        }
-                    }
-                    // Se lee la opción seleccionada y se asigna la unidad del equipo del atacante
-                    int firstPlayerChoice = Convert.ToInt32(_view.ReadLine());
-                    Unit firstPlayerSelectedUnit = player1Units[firstPlayerChoice];
-                    _view.WriteLine($"{secondPlayer} selecciona una opción");
-                    // Se despliegan las unidades disponibles del defensor
-                    for (int i = 0; i < player2Units.Count; i++)
-                    {
-                        if (player2Units[i].HPCurrent > 0)
-                        {
-                            _view.WriteLine($"{i}: {player2Units[i].Name}");
-                        }
-                    }
-                    // Se lee la opción seleccionada y se asigna la unidad del equipo del defensor
-                    int secondPlayerChoice = Convert.ToInt32(_view.ReadLine());
-                    Unit secondPlayerSelectedUnit = player2Units[secondPlayerChoice];
-                    _view.WriteLine($"Round {round}: {firstPlayerSelectedUnit.Name} (Player 1) comienza");
-                    // Se entra al método Combat() para asignar daños
-                    Unit[] postCombatUnits = Combat(firstPlayerSelectedUnit, secondPlayerSelectedUnit);
-                    if (postCombatUnits[0].HPCurrent <= 0)
-                    {
-                        player1Units.RemoveAt(firstPlayerChoice);
-                    }
-                    if (postCombatUnits[1].HPCurrent <= 0)
-                    {
-                        player2Units.RemoveAt(secondPlayerChoice);
-                    }
-                    // player1Units[firstPlayerChoice] = postCombatUnits[0];
-                    // player2Units[secondPlayerChoice] = postCombatUnits[1];
+                    PlayerTurn(player1Units, player2Units, firstPlayer, secondPlayer, round);
                 }
-                // En caso de que ataque (y empiece) el Player 2 esta ronda (el código es simétrico con respecto
-                // al if anterior, por lo que se omiten los comentarios.
+                // Turno del jugador 2
                 else if (firstPlayer == "Player 2")
                 {
-                    for (int i = 0; i < player2Units.Count; i++)
-                    {
-                        if (player2Units[i].HPCurrent > 0)
-                        {
-                            _view.WriteLine($"{i}: {player2Units[i].Name}");
-                        }
-                    }
-                    int firstPlayerChoice = Convert.ToInt32(_view.ReadLine());
-                    Unit firstPlayerSelectedUnit = player2Units[firstPlayerChoice];
-                    _view.WriteLine($"{secondPlayer} selecciona una opción");
-                    for (int i = 0; i < player1Units.Count; i++)
-                    {
-                        if (player1Units[i].HPCurrent > 0)
-                        {
-                            _view.WriteLine($"{i}: {player1Units[i].Name}");
-                        }
-                    }
-                    int secondPlayerChoice = Convert.ToInt32(_view.ReadLine());
-                    Unit secondPlayerSelectedUnit = player1Units[secondPlayerChoice];
-                    _view.WriteLine($"Round {round}: {firstPlayerSelectedUnit.Name} (Player 2) comienza");
-                    Unit[] postCombatUnits = Combat(firstPlayerSelectedUnit, secondPlayerSelectedUnit);
-                    if (postCombatUnits[0].HPCurrent <= 0)
-                    {
-                        player2Units.RemoveAt(firstPlayerChoice);
-                    }
-                    if (postCombatUnits[1].HPCurrent <= 0)
-                    {
-                        player1Units.RemoveAt(secondPlayerChoice);
-                    }
-                    // player2Units[firstPlayerChoice] = postCombatUnits[0];
-                    // player1Units[secondPlayerChoice] = postCombatUnits[1];
+                    PlayerTurn(player2Units, player1Units, firstPlayer, secondPlayer, round);
                 }
                 // Se chequea que Player 1 tenga unidades vivas, de no ser el caso, se anuncia a Player 2 como ganador
                 if (!player1Units.Any())
@@ -332,16 +310,8 @@ public class Game
                     break;
                 }
                 // Se intercambia el orden de los jugadores para la siguiente ronda
-                if (firstPlayer == "Player 1")
-                {
-                    firstPlayer = "Player 2";
-                    secondPlayer = "Player 1";
-                }
-                else if (firstPlayer == "Player 2")
-                {
-                    firstPlayer = "Player 1";
-                    secondPlayer = "Player 2";
-                }
+                firstPlayer = firstPlayer == "Player 1" ? "Player 2" : "Player 1";
+                secondPlayer = secondPlayer == "Player 1" ? "Player 2" : "Player 1";
                 // Se avanza una ronda
                 round++;
             }

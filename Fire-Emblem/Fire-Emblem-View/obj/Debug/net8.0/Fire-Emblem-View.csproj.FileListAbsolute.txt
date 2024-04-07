@@ -9,3 +9,15 @@ C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño 
 C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño Detallado de Software\Proyecto\E2\Fire-Emblem\Fire-Emblem-View\obj\Debug\net8.0\refint\Fire-Emblem-View.dll
 C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño Detallado de Software\Proyecto\E2\Fire-Emblem\Fire-Emblem-View\obj\Debug\net8.0\Fire-Emblem-View.pdb
 C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño Detallado de Software\Proyecto\E2\Fire-Emblem\Fire-Emblem-View\obj\Debug\net8.0\ref\Fire-Emblem-View.dll
+C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño Detallado de Software\Proyecto\IIC2113-E2\Fire-Emblem\Fire-Emblem-View\bin\Debug\net8.0\Fire-Emblem-View.deps.json
+C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño Detallado de Software\Proyecto\IIC2113-E2\Fire-Emblem\Fire-Emblem-View\bin\Debug\net8.0\Fire-Emblem-View.dll
+C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño Detallado de Software\Proyecto\IIC2113-E2\Fire-Emblem\Fire-Emblem-View\bin\Debug\net8.0\Fire-Emblem-View.pdb
+C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño Detallado de Software\Proyecto\IIC2113-E2\Fire-Emblem\Fire-Emblem-View\obj\Debug\net8.0\Fire-Emblem-View.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño Detallado de Software\Proyecto\IIC2113-E2\Fire-Emblem\Fire-Emblem-View\obj\Debug\net8.0\Fire-Emblem-View.AssemblyInfoInputs.cache
+C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño Detallado de Software\Proyecto\IIC2113-E2\Fire-Emblem\Fire-Emblem-View\obj\Debug\net8.0\Fire-Emblem-View.AssemblyInfo.cs
+C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño Detallado de Software\Proyecto\IIC2113-E2\Fire-Emblem\Fire-Emblem-View\obj\Debug\net8.0\Fire-Emblem-View.csproj.CoreCompileInputs.cache
+C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño Detallado de Software\Proyecto\IIC2113-E2\Fire-Emblem\Fire-Emblem-View\obj\Debug\net8.0\Fire-Emblem-View.sourcelink.json
+C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño Detallado de Software\Proyecto\IIC2113-E2\Fire-Emblem\Fire-Emblem-View\obj\Debug\net8.0\Fire-Emblem-View.dll
+C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño Detallado de Software\Proyecto\IIC2113-E2\Fire-Emblem\Fire-Emblem-View\obj\Debug\net8.0\refint\Fire-Emblem-View.dll
+C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño Detallado de Software\Proyecto\IIC2113-E2\Fire-Emblem\Fire-Emblem-View\obj\Debug\net8.0\Fire-Emblem-View.pdb
+C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño Detallado de Software\Proyecto\IIC2113-E2\Fire-Emblem\Fire-Emblem-View\obj\Debug\net8.0\ref\Fire-Emblem-View.dll

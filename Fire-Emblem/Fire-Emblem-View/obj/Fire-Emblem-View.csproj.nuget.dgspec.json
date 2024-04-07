@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Francisco\\OneDrive - Universidad Católica de Chile\\Documentos\\Diseño Detallado de Software\\Proyecto\\E2\\Fire-Emblem\\Fire-Emblem-View\\Fire-Emblem-View.csproj": {}
+    "C:\\Users\\Francisco\\OneDrive - Universidad Católica de Chile\\Documentos\\Diseño Detallado de Software\\Proyecto\\IIC2113-E2\\Fire-Emblem\\Fire-Emblem-View\\Fire-Emblem-View.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Francisco\\OneDrive - Universidad Católica de Chile\\Documentos\\Diseño Detallado de Software\\Proyecto\\E2\\Fire-Emblem\\Fire-Emblem-View\\Fire-Emblem-View.csproj": {
+    "C:\\Users\\Francisco\\OneDrive - Universidad Católica de Chile\\Documentos\\Diseño Detallado de Software\\Proyecto\\IIC2113-E2\\Fire-Emblem\\Fire-Emblem-View\\Fire-Emblem-View.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Francisco\\OneDrive - Universidad Católica de Chile\\Documentos\\Diseño Detallado de Software\\Proyecto\\E2\\Fire-Emblem\\Fire-Emblem-View\\Fire-Emblem-View.csproj",
+        "projectUniqueName": "C:\\Users\\Francisco\\OneDrive - Universidad Católica de Chile\\Documentos\\Diseño Detallado de Software\\Proyecto\\IIC2113-E2\\Fire-Emblem\\Fire-Emblem-View\\Fire-Emblem-View.csproj",
         "projectName": "Fire-Emblem-View",
-        "projectPath": "C:\\Users\\Francisco\\OneDrive - Universidad Católica de Chile\\Documentos\\Diseño Detallado de Software\\Proyecto\\E2\\Fire-Emblem\\Fire-Emblem-View\\Fire-Emblem-View.csproj",
+        "projectPath": "C:\\Users\\Francisco\\OneDrive - Universidad Católica de Chile\\Documentos\\Diseño Detallado de Software\\Proyecto\\IIC2113-E2\\Fire-Emblem\\Fire-Emblem-View\\Fire-Emblem-View.csproj",
         "packagesPath": "C:\\Users\\Francisco\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Francisco\\OneDrive - Universidad Católica de Chile\\Documentos\\Diseño Detallado de Software\\Proyecto\\E2\\Fire-Emblem\\Fire-Emblem-View\\obj\\",
+        "outputPath": "C:\\Users\\Francisco\\OneDrive - Universidad Católica de Chile\\Documentos\\Diseño Detallado de Software\\Proyecto\\IIC2113-E2\\Fire-Emblem\\Fire-Emblem-View\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Francisco\\AppData\\Roaming\\NuGet\\NuGet.Config"
