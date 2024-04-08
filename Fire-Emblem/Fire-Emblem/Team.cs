@@ -1,9 +1,11 @@
+using System.Diagnostics;
+
 namespace Fire_Emblem;
 
 public class Team
 {
     public string PlayerName { get; }
-    public List<Unit> Units { get; }
+    public List<Unit> Units { get; set;}
 
     public Team(string playerName)
     {
@@ -11,20 +13,32 @@ public class Team
         Units = new List<Unit>();
     }
 
-    public static Team LoadTeamFromFile(string filePath)
+    public void ConstructTeamFromFileLines(string[] teamLines, List<Character> characters)
     {
-        string[] fileLines = File.ReadAllLines(filePath);
-        string playerName = fileLines[0];
-        Team team = new Team(playerName);
-        
-        for (int i = 1; i < fileLines.Length; i++)
+        foreach (var line in teamLines)
         {
-            string line = fileLines[i];
-            // Procesar la línea y agregar unidades al equipo
-            // Código para procesar y agregar unidades omitido por simplicidad
+            Units.Add(CreateUnitFromLine(line, characters));
         }
-
-        return team;
+    }
+    
+    public Unit CreateUnitFromLine(string line, List<Character> characters)
+    {
+        string[] parts = line.Split(new[] { " (" }, StringSplitOptions.RemoveEmptyEntries);
+        string unitName = parts[0].Trim();
+        string[] skills = parts.Length > 1 ? parts[1].Replace(")", "").Split(',') : Array.Empty<string>();
+        Character character = characters.FirstOrDefault(c => c.Name.Trim() == unitName.Trim());
+        return new Unit(
+            character.Name,
+            character.Weapon,
+            character.Gender,
+            character.DeathQuote,
+            skills.Select(s => s.Trim()).ToArray(), // Trim each skill
+            Convert.ToInt32(character.HP),
+            Convert.ToInt32(character.Atk),
+            Convert.ToInt32(character.Spd),
+            Convert.ToInt32(character.Def),
+            Convert.ToInt32(character.Res)
+        );
     }
 
     public void RemoveDeadUnits()
