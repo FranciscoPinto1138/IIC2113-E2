@@ -23,9 +23,9 @@ public class Team
     
     public Unit CreateUnitFromLine(string line, List<Character> characters)
     {
-        string[] parts = line.Split(new[] { " (" }, StringSplitOptions.RemoveEmptyEntries);
-        string unitName = parts[0].Trim();
-        string[] skills = parts.Length > 1 ? parts[1].Replace(")", "").Split(',') : Array.Empty<string>();
+        string[] partsUnitLine = line.Split(new[] { " (" }, StringSplitOptions.RemoveEmptyEntries);
+        string unitName = partsUnitLine[0].Trim();
+        string[] skills = partsUnitLine.Length > 1 ? partsUnitLine[1].Replace(")", "").Split(',') : Array.Empty<string>();
         Character character = characters.FirstOrDefault(c => c.Name.Trim() == unitName.Trim());
         return new Unit(
             character.Name,
@@ -41,8 +41,45 @@ public class Team
         );
     }
 
-    public void RemoveDeadUnits()
+    public void RemoveDeadUnits(Unit unitPostCombat)
     {
-        Units.RemoveAll(unit => unit.HPCurrent <= 0);
+        const int minimumHPofUnit = 0;
+        if (unitPostCombat.HPCurrent <= minimumHPofUnit)
+        {
+            Units.Remove(unitPostCombat);
+        }
+    }
+
+    public bool HasEqualUnits()
+    {
+        const int allowedNumberOfEqualUnits = 1;
+        return Units.GroupBy(u => u.Name)
+            .Any(g => g.Count() > allowedNumberOfEqualUnits);
+    }
+    
+    public bool TeamHasValidSkills()
+    {
+        const int maxValidAmountOfSkills = 2;
+        foreach (var unit in Units)
+        {
+            if (unit.Skill.Length > maxValidAmountOfSkills)
+            {
+                return false;
+            }
+
+            if (unit.UnitHasEqualSkills())
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    
+    public bool HasValidLength()
+    {
+        const int maxUnitsPerTeam = 3;
+        const int minUnitsPerTeam = 1;
+        return (Units.Count <= maxUnitsPerTeam && Units.Count >= minUnitsPerTeam);
     }
 }

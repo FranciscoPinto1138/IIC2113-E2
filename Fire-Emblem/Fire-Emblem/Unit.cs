@@ -29,4 +29,18 @@ public class Unit
         this.Def = def;
         this.Res = res;
     }
+    
+    public bool UnitHasEqualSkills()
+    {
+        const int maxValidAmountOfSkills = 2;
+        if (Skill.Length == maxValidAmountOfSkills)
+        {
+            if (Skill[0] == Skill[1])
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
