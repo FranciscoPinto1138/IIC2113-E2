@@ -2,17 +2,18 @@ namespace Fire_Emblem;
 
 public class Unit
 {
-    public string Name;
-    public string Weapon;
-    public string Gender;
-    public string DeathQuote;
-    public string[] Skill;
-    public int HPMax;
-    public int HPCurrent;
-    public int Atk;
-    public int Spd;
-    public int Def;
-    public int Res;
+    public string Name { get; set;}
+    public string Weapon { get; set;}
+    public string Gender { get; set;}
+    public string DeathQuote { get; set;}
+    public string[] Skill { get; set;}
+    public int HPMax { get; set;}
+    public int HPCurrent { get; set;}
+    public int Atk { get; set;}
+    public int Spd { get; set;}
+    public int Def { get; set;}
+    public int Res { get; set;}
+    private int MaxAmmountOfSkills = 2;
 
     public Unit(string name, string weapon, string gender, string deathQuote, string[] skill, int hp, int atk, int spd, int def,
         int res)
@@ -32,8 +33,7 @@ public class Unit
     
     public bool UnitHasEqualSkills()
     {
-        const int maxValidAmountOfSkills = 2;
-        if (Skill.Length == maxValidAmountOfSkills)
+        if (Skill.Length == MaxAmmountOfSkills)
         {
             if (Skill[0] == Skill[1])
             {
@@ -42,5 +42,10 @@ public class Unit
         }
 
         return false;
+    }
+    
+    public bool UnitHasValidAmountOfSkills()
+    {
+        return Skill.Length <= MaxAmmountOfSkills;
     }
 }

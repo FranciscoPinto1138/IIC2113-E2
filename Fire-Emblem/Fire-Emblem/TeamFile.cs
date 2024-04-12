@@ -18,8 +18,8 @@ public class TeamFile
         Team2Lines = Array.Empty<string>();
         this.SplitTeams();
     }
-    
-    public void SplitTeams()
+
+    private void SplitTeams()
     {
         int team1EndIndex = Array.IndexOf(_fileLines, "Player 2 Team");
         Team1Lines = new string[team1EndIndex - 1];

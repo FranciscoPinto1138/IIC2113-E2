@@ -21,7 +21,7 @@ public class Team
         }
     }
     
-    public Unit CreateUnitFromLine(string line, List<Character> characters)
+    private Unit CreateUnitFromLine(string line, List<Character> characters)
     {
         string[] partsUnitLine = line.Split(new[] { " (" }, StringSplitOptions.RemoveEmptyEntries);
         string unitName = partsUnitLine[0].Trim();
@@ -57,12 +57,12 @@ public class Team
             .Any(g => g.Count() > allowedNumberOfEqualUnits);
     }
     
+    
     public bool TeamHasValidSkills()
     {
-        const int maxValidAmountOfSkills = 2;
         foreach (var unit in Units)
         {
-            if (unit.Skill.Length > maxValidAmountOfSkills)
+            if (!unit.UnitHasValidAmountOfSkills())
             {
                 return false;
             }
