@@ -73,6 +73,12 @@ public class Battle
         return team.Units[playerChoice];
     }
     
+    private void SetUnitsLastRivalStats()
+    {
+        _currentPlayerSelectedUnit.MostRecentRival = _opponentSelectedUnit.Name;
+        _opponentSelectedUnit.MostRecentRival = _currentPlayerSelectedUnit.Name;
+    }
+    
     private void RemoveDeadUnitsFromTeams(Unit[] postCombatUnits)
     {
         _currentPlayerTeam.RemoveDeadUnits(postCombatUnits[0]);
@@ -99,6 +105,7 @@ public class Battle
     private void DevelopRound()
     {
         AssignSelectedUnits();
+        SetUnitsLastRivalStats();
         ShowRoundStart();
         StartCombat();
         RemoveDeadUnitsFromTeams(_postCombatUnits);

@@ -13,7 +13,8 @@ public class Unit
     public int Spd { get; set;}
     public int Def { get; set;}
     public int Res { get; set;}
-    private int MaxAmmountOfSkills = 2;
+    public string MostRecentRival { get; set; } = null!;
+    private int _maxAmountOfSkills = 2;
 
     public Unit(string name, string weapon, string gender, string deathQuote, string[] skill, int hp, int atk, int spd, int def,
         int res)
@@ -33,7 +34,7 @@ public class Unit
     
     public bool UnitHasEqualSkills()
     {
-        if (Skill.Length == MaxAmmountOfSkills)
+        if (Skill.Length == _maxAmountOfSkills)
         {
             if (Skill[0] == Skill[1])
             {
@@ -46,6 +47,6 @@ public class Unit
     
     public bool UnitHasValidAmountOfSkills()
     {
-        return Skill.Length <= MaxAmmountOfSkills;
+        return Skill.Length <= _maxAmountOfSkills;
     }
 }

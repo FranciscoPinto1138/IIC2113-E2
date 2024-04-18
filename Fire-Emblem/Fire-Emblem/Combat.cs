@@ -75,6 +75,10 @@ public class Combat
         double[] WTBs = ResolveWeaponTriangle(AttackUnit, DefenseUnit);
         double WTBAttacker = WTBs[0];
         double WTBDefender = WTBs[1];
+        Stats originalAttackUnitStats = new Stats(AttackUnit);
+        Stats originalDefenseUnitStats = new Stats(DefenseUnit);
+        Stats combatAttackUnitStats = new Stats(AttackUnit);
+        Stats combatDefenseUnitStats = new Stats(DefenseUnit);
         // Ataque
         // Se revisa si debe usarse Res o Def para el defensor
         int defenderDefOrRes = DetermineResOrDef(DefenseUnit, AttackUnit);
