@@ -9,9 +9,9 @@ public class HPBaseStatPlus15 : Effect
         _changeFactor = changeFactor;
     }
     
-    public void ApplyEffect(Unit unit, Unit opponent, Stats unitCombatStats, Stats opponentCombatStats)
+    public void ApplyEffect(Unit unit, Unit opponent)
     {
-        unitCombatStats.HPMax += _changeFactor;
-        unitCombatStats.HPCurrent += _changeFactor;
+        unit.HPMax += _changeFactor;
+        unit.HPCurrent += _changeFactor;
     }
 }

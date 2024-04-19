@@ -2,13 +2,20 @@ namespace Fire_Emblem;
 
 public abstract class Condition
 {
-    public abstract bool IsConditionFulfilled(Unit unit, Unit opponent, Stats unitCombatStats, Stats opponentCombatStats);
+    public abstract bool IsConditionFulfilled(Unit unit, Unit opponent);
+}
+
+public class NoCondition : Condition
+{
+    public override bool IsConditionFulfilled(Unit unit, Unit opponent)
+    {
+        return true;
+    }
 }
 
 public class UnitStartsCombatCondition : Condition
 {
-    public override bool IsConditionFulfilled(Unit unit, Unit opponent, Stats unitCombatStats,
-        Stats opponentCombatStats)
+    public override bool IsConditionFulfilled(Unit unit, Unit opponent)
     {
         return unit.Role == "Attacker";
     }
@@ -16,8 +23,7 @@ public class UnitStartsCombatCondition : Condition
 
 public class OpponentStartsCombatCondition : Condition
 {
-    public override bool IsConditionFulfilled(Unit unit, Unit opponent, Stats unitCombatStats,
-        Stats opponentCombatStats)
+    public override bool IsConditionFulfilled(Unit unit, Unit opponent)
     {
         return opponent.Role == "Attacker";
     }
@@ -25,8 +31,7 @@ public class OpponentStartsCombatCondition : Condition
 
 public class OpponentIsMostRecentRivalOfUnitCondition : Condition
 {
-    public override bool IsConditionFulfilled(Unit unit, Unit opponent, Stats unitCombatStats,
-        Stats opponentCombatStats)
+    public override bool IsConditionFulfilled(Unit unit, Unit opponent)
     {
         return unit.MostRecentRival == opponent.Name;
     }
@@ -41,8 +46,7 @@ public class UnitHasWeaponTypeCondition : Condition
         this._weaponType = weaponType;
     }
 
-    public override bool IsConditionFulfilled(Unit unit, Unit opponent, Stats unitCombatStats,
-        Stats opponentCombatStats)
+    public override bool IsConditionFulfilled(Unit unit, Unit opponent)
     {
         return unit.Weapon == _weaponType;
     }
@@ -57,8 +61,7 @@ public class OpponentHasWeaponTypeCondition : Condition
         this._weaponType = weaponType;
     }
 
-    public override bool IsConditionFulfilled(Unit unit, Unit opponent, Stats unitCombatStats,
-        Stats opponentCombatStats)
+    public override bool IsConditionFulfilled(Unit unit, Unit opponent)
     {
         return opponent.Weapon == _weaponType;
     }
@@ -66,8 +69,7 @@ public class OpponentHasWeaponTypeCondition : Condition
 
 public class OpponentIsMale : Condition
 {
-    public override bool IsConditionFulfilled(Unit unit, Unit opponent, Stats unitCombatStats,
-        Stats opponentCombatStats)
+    public override bool IsConditionFulfilled(Unit unit, Unit opponent)
     {
         return opponent.Gender == "Male";
     }
@@ -82,8 +84,7 @@ public class UnitDamageTypeCondition : Condition
         this._damageType = damageType;
     }
 
-    public override bool IsConditionFulfilled(Unit unit, Unit opponent, Stats unitCombatStats,
-        Stats opponentCombatStats)
+    public override bool IsConditionFulfilled(Unit unit, Unit opponent)
     {
         return IsUnitDamageTypeCorrect(unit);
     }
@@ -111,8 +112,7 @@ public class OpponentDamageTypeCondition : Condition
         this._damageType = damageType;
     }
 
-    public override bool IsConditionFulfilled(Unit unit, Unit opponent, Stats unitCombatStats,
-        Stats opponentCombatStats)
+    public override bool IsConditionFulfilled(Unit unit, Unit opponent)
     {
         return IsOpponentDamageTypeCorrect(opponent);
     }
@@ -138,10 +138,9 @@ public class UnitHPVsOpponentCondition : Condition
     {
         this._expectedHpDifference = expectedHPDifference;
     }
-    public override bool IsConditionFulfilled(Unit unit, Unit opponent, Stats unitCombatStats,
-        Stats opponentCombatStats)
+    public override bool IsConditionFulfilled(Unit unit, Unit opponent)
     {
-        return unitCombatStats.HPCurrent >= opponentCombatStats.HPCurrent + _expectedHpDifference;
+        return unit.HPCurrent >= opponent.HPCurrent + _expectedHpDifference;
     }
 }
 
@@ -158,32 +157,31 @@ public class UnitHPCondition : Condition
         this._comparisonType = comparisonType;
     }
 
-    public override bool IsConditionFulfilled(Unit unit, Unit opponent, Stats unitCombatStats,
-        Stats opponentCombatStats)
+    public override bool IsConditionFulfilled(Unit unit, Unit opponent)
     {
-        SetThresholdValue(unitCombatStats);
+        SetThresholdValue(unit);
 
-        return IsHPCorrect(unitCombatStats);
+        return IsHPCorrect(unit);
     }
 
-    private void SetThresholdValue(Stats stats)
+    private void SetThresholdValue(Unit unit)
     {
         if (_thresholdType == ThresholdType.Percentage)
         {
-            _threshold = (int)(stats.HPMax * (_threshold / 100.0));
+            _threshold = (int)(unit.HPMax * (_threshold / 100.0));
         }
     }
 
-    private bool IsHPCorrect(Stats stats)
+    private bool IsHPCorrect(Unit unit)
     {
         switch (_comparisonType)
         {
             case ComparisonType.GreaterThanOrEqual:
-                return stats.HPCurrent >= _threshold;
+                return unit.HPCurrent >= _threshold;
             case ComparisonType.LowerThanOrEqual:
-                return stats.HPCurrent <= _threshold;
+                return unit.HPCurrent <= _threshold;
             case ComparisonType.Equal:
-                return stats.HPCurrent == _threshold;
+                return unit.HPCurrent == _threshold;
             default:
                 return false;
         }

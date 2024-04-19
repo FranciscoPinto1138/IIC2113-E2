@@ -2,7 +2,7 @@ namespace Fire_Emblem;
 
 public abstract class PenaltyEffect : Effect
 {
-    public abstract void ApplyEffect(Unit unit, Unit opponent, Stats unitCombatStats, Stats opponentCombatStats);
+    public abstract void ApplyEffect(Unit unit, Unit opponent);
 }
 
 public class DecreaseAtk : PenaltyEffect
@@ -14,9 +14,9 @@ public class DecreaseAtk : PenaltyEffect
         _changeFactor = changeFactor;
     }
     
-    public override void ApplyEffect(Unit unit, Unit opponent, Stats unitCombatStats, Stats opponentCombatStats)
+    public override void ApplyEffect(Unit unit, Unit opponent)
     {
-        opponentCombatStats.Atk -= _changeFactor;
+        opponent.PenaltyStatsDiff.Atk -= _changeFactor;
     }
 }
 
@@ -29,9 +29,9 @@ public class DecreaseDef : PenaltyEffect
         _changeFactor = changeFactor;
     }
     
-    public override void ApplyEffect(Unit unit, Unit opponent, Stats unitCombatStats, Stats opponentCombatStats)
+    public override void ApplyEffect(Unit unit, Unit opponent)
     {
-        opponentCombatStats.Def -= _changeFactor;
+        opponent.PenaltyStatsDiff.Def -= _changeFactor;
     }
 }
 
@@ -44,9 +44,9 @@ public class DecreaseSpd : PenaltyEffect
         _changeFactor = changeFactor;
     }
     
-    public override void ApplyEffect(Unit unit, Unit opponent, Stats unitCombatStats, Stats opponentCombatStats)
+    public override void ApplyEffect(Unit unit, Unit opponent)
     {
-        opponentCombatStats.Spd -= _changeFactor;
+        opponent.PenaltyStatsDiff.Spd -= _changeFactor;
     }
 }
 
@@ -59,17 +59,17 @@ public class DecreaseRes : PenaltyEffect
         _changeFactor = changeFactor;
     }
     
-    public override void ApplyEffect(Unit unit, Unit opponent, Stats unitCombatStats, Stats opponentCombatStats)
+    public override void ApplyEffect(Unit unit, Unit opponent)
     {
-        opponentCombatStats.Res -= _changeFactor;
+        opponent.PenaltyStatsDiff.Res -= _changeFactor;
     }
 }
 
 public class IgnoreHalfDefandRes : PenaltyEffect
 {
-    public override void ApplyEffect(Unit unit, Unit opponent, Stats unitCombatStats, Stats opponentCombatStats)
+    public override void ApplyEffect(Unit unit, Unit opponent)
     {
-        opponentCombatStats.Def -= (int)(opponentCombatStats.Def * 0.5);
-        opponentCombatStats.Res -= (int)(opponentCombatStats.Res * 0.5);
+        opponent.PenaltyStatsDiff.Def -= (int)(opponent.Def * 0.5);
+        opponent.PenaltyStatsDiff.Res -= (int)(opponent.Res * 0.5);
     }
 }

@@ -13,10 +13,10 @@ public class Unit
     public int Spd { get; set;}
     public int Def { get; set;}
     public int Res { get; set;}
-    public string MostRecentRival { get; set; } = null!;
+    public string MostRecentRival { get; set; } = "";
     public string Role { get; set; } = null!;
-    public StatsDiff BonusStatsDiff;
-    public StatsDiff PenaltyStatsDiff;
+    public StatsDiff BonusStatsDiff = new StatsDiff();
+    public StatsDiff PenaltyStatsDiff = new StatsDiff();
     private int _maxAmountOfSkills = 2;
 
     public Unit(string name, string weapon, string gender, string deathQuote, string[] skill, int hp, int atk, int spd, int def,
@@ -51,5 +51,25 @@ public class Unit
     public bool UnitHasValidAmountOfSkills()
     {
         return Skill.Length <= _maxAmountOfSkills;
+    }
+    
+    public int UnitTotalAtk()
+    {
+        return Atk + BonusStatsDiff.Atk + PenaltyStatsDiff.Atk;
+    }
+    
+    public int UnitTotalSpd()
+    {
+        return Spd + BonusStatsDiff.Spd + PenaltyStatsDiff.Spd;
+    }
+    
+    public int UnitTotalDef()
+    {
+        return Def + BonusStatsDiff.Def + PenaltyStatsDiff.Def;
+    }
+    
+    public int UnitTotalRes()
+    {
+        return Res + BonusStatsDiff.Res + PenaltyStatsDiff.Res;
     }
 }

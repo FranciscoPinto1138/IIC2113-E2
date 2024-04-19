@@ -105,7 +105,6 @@ public class Battle
     private void DevelopRound()
     {
         AssignSelectedUnits();
-        SetUnitsLastRivalStats();
         ShowRoundStart();
         StartCombat();
         RemoveDeadUnitsFromTeams(_postCombatUnits);
@@ -133,6 +132,7 @@ public class Battle
         {
             AssignPlayersRolesForRound();
             DevelopRound();
+            SetUnitsLastRivalStats();
             SwapPlayersOrderForNextRound();
             AdvanceToNextRound();
         }

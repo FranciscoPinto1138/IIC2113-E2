@@ -6,33 +6,23 @@ public class SkillsController
 {
     private Unit _attackUnit;
     private Unit _defenseUnit;
-    private string _firstPlayerOfRoundName;
-    private string _secondPlayerOfRoundName;
     private List<Skill> _attackUnitSkills;
     private List<Skill> _defenseUnitSkills;
-    private Stats _attackUnitCombatStats;
-    private Stats _defenseUnitCombatStats;
     private View _view;
-    private Stats _attackUnitOriginalStats;
-    private Stats _defenseUnitOriginalStats;
     
-    public SkillsController(Unit attackUnit, Unit defenseUnit, Stats attackUnitCombatStats, Stats defenseUnitCombatStats, View view)
+    public SkillsController(Unit attackUnit, Unit defenseUnit, View view)
     {
         this._attackUnit = attackUnit;
         this._defenseUnit = defenseUnit;
-        this._attackUnitCombatStats = attackUnitCombatStats;
-        this._defenseUnitCombatStats = defenseUnitCombatStats;
         this._attackUnitSkills = new List<Skill>();
         this._defenseUnitSkills = new List<Skill>();
-        this._attackUnitOriginalStats = new Stats(_attackUnit);
-        this._defenseUnitOriginalStats = new Stats(_defenseUnit);
         this._view = view;
     }
     
     public void CreateSkills()
     {
-        SkillsFactory attackersSkillsFactory = new SkillsFactory(_attackUnit, _defenseUnit, _attackUnitCombatStats, _defenseUnitCombatStats);
-        SkillsFactory defendersSkillsFactory = new SkillsFactory(_defenseUnit, _attackUnit, _defenseUnitCombatStats, _attackUnitCombatStats);
+        SkillsFactory attackersSkillsFactory = new SkillsFactory(_attackUnit, _defenseUnit);
+        SkillsFactory defendersSkillsFactory = new SkillsFactory(_defenseUnit, _attackUnit);
         CreateSkillsOfUnit(_attackUnit, _attackUnitSkills, attackersSkillsFactory);
         CreateSkillsOfUnit(_defenseUnit, _defenseUnitSkills, defendersSkillsFactory);
     }
@@ -56,16 +46,14 @@ public class SkillsController
         {
             foreach (Skill skill in _attackUnitSkills)
             {
-                skill.ApplyEffectsIfConditionsAreSatisfied(_attackUnit, _defenseUnit, 
-                    _attackUnitCombatStats, _defenseUnitCombatStats);
+                skill.ApplyEffectsIfConditionsAreSatisfied(_attackUnit, _defenseUnit);
             }
         }
         if (_defenseUnitSkills.Count > 0)
         {
             foreach (Skill skill in _defenseUnitSkills)
             {
-                skill.ApplyEffectsIfConditionsAreSatisfied(_defenseUnit, _attackUnit, 
-                    _defenseUnitCombatStats, _attackUnitCombatStats);
+                skill.ApplyEffectsIfConditionsAreSatisfied(_defenseUnit, _attackUnit);
             }
         }
         ShowNetStatsOfUnitsAfterEffects();
@@ -73,42 +61,53 @@ public class SkillsController
     
     private void ShowNetStatsOfUnitsAfterEffects()
     {
-        ShowNetStatsEffects(_attackUnit, _attackUnitCombatStats, _attackUnitOriginalStats);
-        ShowNetStatsEffects(_defenseUnit, _defenseUnitCombatStats, _defenseUnitOriginalStats);
+        ShowNetStatsEffects(_attackUnit);
+        ShowNetStatsEffects(_defenseUnit);
     }
     
-    private void ShowNetStatsEffects(Unit unit, Stats unitCombatStats, Stats unitOriginalStats)
+    private void ShowNetStatsEffects(Unit unit)
     {
-        Dictionary<string, int> unitStatDifferences = GetStatDifferences(unitCombatStats, unitOriginalStats);
-        ShowNetStatsOfUnit(unitStatDifferences, unit);
+        ShowBonusStatsEffectsOfUnit(unit);
+        ShowPenaltyStatsEffectsOfUnit(unit);
     }
-    
-    private void ShowNetStatsOfUnit(Dictionary<string, int> statDifferences, Unit unit)
+
+    private void ShowBonusStatsEffectsOfUnit(Unit unit)
     {
-        foreach (var kvp in statDifferences)
+        if (unit.BonusStatsDiff.Atk > 0)
         {
-            _view.WriteLine($"{unit.Name} obtiene {kvp.Key}{kvp.Value}");
+            _view.WriteLine($"{unit.Name} obtiene Atk+{unit.BonusStatsDiff.Atk}");
+        }
+        if (unit.BonusStatsDiff.Spd > 0)
+        {
+            _view.WriteLine($"{unit.Name} obtiene Spd+{unit.BonusStatsDiff.Spd}");
+        }
+        if (unit.BonusStatsDiff.Def > 0)
+        {
+            _view.WriteLine($"{unit.Name} obtiene Def+{unit.BonusStatsDiff.Def}");
+        }
+        if (unit.BonusStatsDiff.Res > 0)
+        {
+            _view.WriteLine($"{unit.Name} obtiene Res+{unit.BonusStatsDiff.Res}");
         }
     }
     
-    private Dictionary<string, int> GetStatDifferences(Stats currentStats, Stats originalStats)
+    private void ShowPenaltyStatsEffectsOfUnit(Unit unit)
     {
-        Dictionary<string, int> statDifferences = new Dictionary<string, int>();
-
-        AddStatDifference("Atk", currentStats.Atk, originalStats.Atk, statDifferences);
-        AddStatDifference("Spd", currentStats.Spd, originalStats.Spd, statDifferences);
-        AddStatDifference("Def", currentStats.Def, originalStats.Def, statDifferences);
-        AddStatDifference("Res", currentStats.Res, originalStats.Res, statDifferences);
-
-        return statDifferences;
-    }
-
-    private void AddStatDifference(string statName, int currentStat, int originalStat, Dictionary<string, int> statDifferences)
-    {
-        int difference = currentStat - originalStat;
-        if (difference != 0)
+        if (unit.PenaltyStatsDiff.Atk < 0)
         {
-            statDifferences.Add($"{statName}{(difference > 0 ? "+" : "-")}", difference);
+            _view.WriteLine($"{unit.Name} obtiene Atk-{unit.PenaltyStatsDiff.Atk}");
+        }
+        if (unit.PenaltyStatsDiff.Spd < 0)
+        {
+            _view.WriteLine($"{unit.Name} obtiene Spd-{unit.PenaltyStatsDiff.Spd}");
+        }
+        if (unit.PenaltyStatsDiff.Def < 0)
+        {
+            _view.WriteLine($"{unit.Name} obtiene Def-{unit.PenaltyStatsDiff.Def}");
+        }
+        if (unit.PenaltyStatsDiff.Res < 0)
+        {
+            _view.WriteLine($"{unit.Name} obtiene Res-{unit.PenaltyStatsDiff.Res}");
         }
     }
 }

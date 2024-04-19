@@ -10,27 +10,23 @@ public abstract class Skill
     public Stats unitCombatStats;
     public Stats opponentCombatStats;
 
-    public Skill(Unit unit, Unit opponent, Stats unitCombatStats, Stats opponentCombatStats)
+    public Skill(Unit unit, Unit opponent)
     {
         this.unit = unit;
         this.opponent = opponent;
-        this.unitCombatStats = unitCombatStats;
-        this.opponentCombatStats = opponentCombatStats;
     }
-    public abstract void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent, Stats unitCombatStats, Stats opponentCombatStats);
+    public abstract void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent);
 }
 
 public abstract class Bonus : Skill
 {
-    public Bonus(Unit unit, Unit opponent, Stats unitCombatStats, Stats opponentCombatStats) : base(unit, opponent, unitCombatStats, opponentCombatStats)
+    public Bonus(Unit unit, Unit opponent) : base(unit, opponent)
     {
         this.unit = unit;
         this.opponent = opponent;
-        this.unitCombatStats = unitCombatStats;
-        this.opponentCombatStats = opponentCombatStats;
     }
     
-    public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent, Stats unitCombatStats, Stats opponentCombatStats)
+    public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)
     {
         throw new NotImplementedException();
     }

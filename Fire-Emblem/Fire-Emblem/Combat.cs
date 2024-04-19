@@ -7,10 +7,6 @@ public class Combat
     private Team AttackerTeam { get; }
     private Unit DefenseUnit { get; }
     private Team DefenderTeam { get; }
-    private Stats OriginalAttackUnitStats { get; set; }
-    private Stats OriginalDefenseUnitStats { get; set; }
-    private Stats CombatAttackUnitStats { get; set; }
-    private Stats CombatDefenseUnitStats { get; set; }
     private View _view;
     
     public Combat(Unit attacker, Unit defender, Team attackerTeam, Team defenderTeam ,View view)
@@ -22,39 +18,34 @@ public class Combat
         _view = view;
     }
     
-    private int DetermineResOrDef(Stats stats, Unit opponentUnit)
+    private int DetermineResOrDef(Unit unit, Unit opponentUnit)
     {
-        return opponentUnit.Weapon == "Magic" ? stats.Res : stats.Def;
+        return opponentUnit.Weapon == "Magic" ? unit.UnitTotalRes() : unit.UnitTotalDef();
     }
     
-    private void ResetStats()
+    private void ResetBonusAndPenaltyStatsDiff()
     {
-        AttackUnit.HPCurrent = CombatAttackUnitStats.HPCurrent;
-        AttackUnit.Atk = OriginalAttackUnitStats.Atk;
-        AttackUnit.Spd = OriginalAttackUnitStats.Spd;
-        AttackUnit.Def = OriginalAttackUnitStats.Def;
-        AttackUnit.Res = OriginalAttackUnitStats.Res;
-        DefenseUnit.HPCurrent = CombatDefenseUnitStats.HPCurrent;
-        DefenseUnit.Atk = OriginalDefenseUnitStats.Atk;
-        DefenseUnit.Spd = OriginalDefenseUnitStats.Spd;
-        DefenseUnit.Def = OriginalDefenseUnitStats.Def;
-        DefenseUnit.Res = OriginalDefenseUnitStats.Res;
+        AttackUnit.BonusStatsDiff = new StatsDiff();
+        AttackUnit.PenaltyStatsDiff = new StatsDiff();
+        DefenseUnit.BonusStatsDiff = new StatsDiff();
+        DefenseUnit.PenaltyStatsDiff = new StatsDiff();
     }
     
-    private void ApplyDamage(Unit damageMaker, Unit damageReceiver, double damageMakerWTB, Stats damageReceiverCombatStats, Stats damageMakerCombatStats)
+    private void ApplyDamage(Unit damageMaker, Unit damageReceiver, double damageMakerWTB)
     {
-        int defOrRes = DetermineResOrDef(damageReceiverCombatStats, damageMaker);
-        int damage = Convert.ToInt32(Math.Max(0, Math.Floor((damageMakerCombatStats.Atk * damageMakerWTB) - defOrRes)));
-        damageReceiverCombatStats.HPCurrent -= damage;
+        int defOrRes = DetermineResOrDef(damageReceiver, damageMaker);
+        int damage = Convert.ToInt32(Math.Max(0, Math.Floor((damageMaker.UnitTotalAtk() * damageMakerWTB) - defOrRes)));
+        //damageReceiverCombatStats.HPCurrent -= damage;
+        damageReceiver.HPCurrent -= damage;
         _view.WriteLine($"{damageMaker.Name} ataca a {damageReceiver.Name} con {damage} de daño");
     }
     
     private bool CheckIfUnitDied()
     {
-        bool unitDied = CombatAttackUnitStats.HPCurrent <= 0 || CombatDefenseUnitStats.HPCurrent <= 0;
+        bool unitDied = AttackUnit.HPCurrent <= 0 || DefenseUnit.HPCurrent <= 0;
         if (!unitDied) return unitDied;
-        CombatAttackUnitStats.HPCurrent = Math.Max(0, CombatAttackUnitStats.HPCurrent);
-        CombatDefenseUnitStats.HPCurrent = Math.Max(0, CombatDefenseUnitStats.HPCurrent);
+        AttackUnit.HPCurrent = Math.Max(0, AttackUnit.HPCurrent);
+        DefenseUnit.HPCurrent = Math.Max(0, DefenseUnit.HPCurrent);
         WrapUpCombat();
         return unitDied;
     }
@@ -67,26 +58,24 @@ public class Combat
     
     private void Attack(double WTBAttacker)
     {
-        ApplyDamage(AttackUnit, DefenseUnit, WTBAttacker, 
-            CombatDefenseUnitStats, CombatAttackUnitStats);
+        ApplyDamage(AttackUnit, DefenseUnit, WTBAttacker);
     }
 
     private void CounterAttack(double WTBDefender)
     {
-        ApplyDamage(DefenseUnit, AttackUnit, WTBDefender, 
-            CombatAttackUnitStats, CombatDefenseUnitStats);
+        ApplyDamage(DefenseUnit, AttackUnit, WTBDefender);
     }
     
     private bool AttackUnitCanFollowUp()
     {
         const int minimumSpdDifferenceForFollowUp = 5;
-        return CombatAttackUnitStats.Spd - CombatDefenseUnitStats.Spd >= minimumSpdDifferenceForFollowUp;
+        return AttackUnit.UnitTotalSpd() - DefenseUnit.UnitTotalSpd() >= minimumSpdDifferenceForFollowUp;
     }
     
     private bool DefenseUnitCanFollowUp()
     {
         const int minimumSpdDifferenceForFollowUp = 5;
-        return CombatDefenseUnitStats.Spd - CombatAttackUnitStats.Spd >= minimumSpdDifferenceForFollowUp;
+        return DefenseUnit.UnitTotalSpd() - AttackUnit.UnitTotalSpd() >= minimumSpdDifferenceForFollowUp;
     }
     
     private bool UnitsCanFollowUp()
@@ -110,24 +99,9 @@ public class Combat
         }
     }
     
-    private void SetUnitsLastRivalStats()
-    {
-        AttackUnit.MostRecentRival = DefenseUnit.Name;
-        DefenseUnit.MostRecentRival = AttackUnit.Name;
-    }
-    
-    private void SetCombatAndOriginalStats()
-    {
-        OriginalAttackUnitStats = new Stats(AttackUnit);
-        OriginalDefenseUnitStats = new Stats(DefenseUnit);
-        CombatAttackUnitStats = new Stats(AttackUnit);
-        CombatDefenseUnitStats = new Stats(DefenseUnit);
-    }
-    
     private void UpdateStatsPostCombat()
     {
-        ResetStats();
-        SetUnitsLastRivalStats();
+        ResetBonusAndPenaltyStatsDiff();
     }
     
     private void ShowCombatResults()
@@ -137,8 +111,7 @@ public class Combat
     
     private void ResolveSkills()
     {
-        SkillsController skillsController = new SkillsController(AttackUnit, DefenseUnit,
-            CombatAttackUnitStats, CombatDefenseUnitStats, _view);
+        SkillsController skillsController = new SkillsController(AttackUnit, DefenseUnit, _view);
         skillsController.CreateSkills();
         skillsController.ApplySkills();
     }
@@ -153,7 +126,6 @@ public class Combat
     {
         WeaponTriangle weaponTriangle = new WeaponTriangle(AttackUnit, DefenseUnit, _view);
         double[] WTBs = weaponTriangle.ResolveWeaponTriangle();
-        SetCombatAndOriginalStats();
         SetUnitRoles();
         ResolveSkills();
         Attack(WTBs[0]);

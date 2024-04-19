@@ -18,3 +18,11 @@ public enum ComparisonType
     GreaterThanOrEqual,
     Equal
 }
+
+public enum StatType
+{
+    Atk,
+    Spd,
+    Def,
+    Res
+}

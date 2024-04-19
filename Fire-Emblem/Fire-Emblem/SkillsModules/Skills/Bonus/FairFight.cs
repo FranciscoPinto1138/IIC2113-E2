@@ -2,7 +2,7 @@ namespace Fire_Emblem;
 
 public class FairFight : Bonus
 {
-    public FairFight(Unit unit, Unit opponent, Stats unitCombatStats, Stats opponentCombatStats) : base(unit, opponent, unitCombatStats, opponentCombatStats)
+    public FairFight(Unit unit, Unit opponent) : base(unit, opponent)
     {
         this.Name = "Fair Fight";
         this.Description = "Si la unidad inicia el combate, otorga Atk+6 a la unidad y al rival durante el combate.";
@@ -12,15 +12,15 @@ public class FairFight : Bonus
         //var effects = new List<Effect> { new IncreaseAtk(6) };
     }
 
-    public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent, Stats unitCombatStats, Stats opponentCombatStats)
+    public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)
     {
         var condition = new UnitStartsCombatCondition();
-        var effectOnUnit = new IncreaseAtk(6);
-        var effectOnOpponent = new IncreaseAtk(6);
-        if (condition.IsConditionFulfilled(unit, opponent, unitCombatStats, opponentCombatStats))
+        var effectOnUnit = new IncreaseStat(6, StatType.Atk);
+        var effectOnOpponent = new IncreaseStat(6, StatType.Atk);
+        if (condition.IsConditionFulfilled(unit, opponent))
         {
-            effectOnUnit.ApplyEffect(unit, opponent, unitCombatStats, opponentCombatStats);
-            effectOnOpponent.ApplyEffect(opponent, unit, opponentCombatStats, unitCombatStats);
+            effectOnUnit.ApplyEffect(unit, opponent);
+            effectOnOpponent.ApplyEffect(opponent, unit);
         }
     }
 }
