@@ -14,6 +14,9 @@ public class Unit
     public int Def { get; set;}
     public int Res { get; set;}
     public string MostRecentRival { get; set; } = null!;
+    public string Role { get; set; } = null!;
+    public StatsDiff BonusStatsDiff;
+    public StatsDiff PenaltyStatsDiff;
     private int _maxAmountOfSkills = 2;
 
     public Unit(string name, string weapon, string gender, string deathQuote, string[] skill, int hp, int atk, int spd, int def,

@@ -55,9 +55,14 @@ public class Combat
         if (!unitDied) return unitDied;
         CombatAttackUnitStats.HPCurrent = Math.Max(0, CombatAttackUnitStats.HPCurrent);
         CombatDefenseUnitStats.HPCurrent = Math.Max(0, CombatDefenseUnitStats.HPCurrent);
+        WrapUpCombat();
+        return unitDied;
+    }
+
+    private void WrapUpCombat()
+    {
         UpdateStatsPostCombat();
         ShowCombatResults();
-        return unitDied;
     }
     
     private void Attack(double WTBAttacker)
@@ -137,12 +142,19 @@ public class Combat
         skillsController.CreateSkills();
         skillsController.ApplySkills();
     }
+    
+    private void SetUnitRoles()
+    {
+        AttackUnit.Role = "Attacker";
+        DefenseUnit.Role = "Defender";
+    }
 
     public Unit[] ResolveCombat()
     {
         WeaponTriangle weaponTriangle = new WeaponTriangle(AttackUnit, DefenseUnit, _view);
         double[] WTBs = weaponTriangle.ResolveWeaponTriangle();
         SetCombatAndOriginalStats();
+        SetUnitRoles();
         ResolveSkills();
         Attack(WTBs[0]);
         if (CheckIfUnitDied())
@@ -159,8 +171,7 @@ public class Combat
         {
             return [AttackUnit, DefenseUnit];
         }
-        UpdateStatsPostCombat();
-        ShowCombatResults();
+        WrapUpCombat();
         return [AttackUnit, DefenseUnit];
     }
 }

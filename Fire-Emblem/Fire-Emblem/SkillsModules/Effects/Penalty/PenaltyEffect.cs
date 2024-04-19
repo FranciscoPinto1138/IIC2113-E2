@@ -50,6 +50,21 @@ public class DecreaseSpd : PenaltyEffect
     }
 }
 
+public class DecreaseRes : PenaltyEffect
+{
+    private int _changeFactor;
+    
+    public DecreaseRes(int changeFactor)
+    {
+        _changeFactor = changeFactor;
+    }
+    
+    public override void ApplyEffect(Unit unit, Unit opponent, Stats unitCombatStats, Stats opponentCombatStats)
+    {
+        opponentCombatStats.Res -= _changeFactor;
+    }
+}
+
 public class IgnoreHalfDefandRes : PenaltyEffect
 {
     public override void ApplyEffect(Unit unit, Unit opponent, Stats unitCombatStats, Stats opponentCombatStats)

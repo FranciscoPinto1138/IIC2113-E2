@@ -20,8 +20,6 @@ public class SkillsController
     {
         this._attackUnit = attackUnit;
         this._defenseUnit = defenseUnit;
-        this._firstPlayerOfRoundName = _attackUnit.Name;
-        this._secondPlayerOfRoundName = _defenseUnit.Name;
         this._attackUnitCombatStats = attackUnitCombatStats;
         this._defenseUnitCombatStats = defenseUnitCombatStats;
         this._attackUnitSkills = new List<Skill>();
@@ -33,10 +31,8 @@ public class SkillsController
     
     public void CreateSkills()
     {
-        SkillsFactory attackersSkillsFactory = new SkillsFactory(_attackUnit, _defenseUnit, _firstPlayerOfRoundName,
-            _secondPlayerOfRoundName, _attackUnitCombatStats, _defenseUnitCombatStats);
-        SkillsFactory defendersSkillsFactory = new SkillsFactory(_defenseUnit, _attackUnit, _firstPlayerOfRoundName, 
-            _secondPlayerOfRoundName, _defenseUnitCombatStats, _attackUnitCombatStats);
+        SkillsFactory attackersSkillsFactory = new SkillsFactory(_attackUnit, _defenseUnit, _attackUnitCombatStats, _defenseUnitCombatStats);
+        SkillsFactory defendersSkillsFactory = new SkillsFactory(_defenseUnit, _attackUnit, _defenseUnitCombatStats, _attackUnitCombatStats);
         CreateSkillsOfUnit(_attackUnit, _attackUnitSkills, attackersSkillsFactory);
         CreateSkillsOfUnit(_defenseUnit, _defenseUnitSkills, defendersSkillsFactory);
     }
