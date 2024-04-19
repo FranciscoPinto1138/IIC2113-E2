@@ -13,11 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="SkillsModules\Effects\BonusNeutralizer\" />
-      <Folder Include="SkillsModules\Effects\PenaltyNeutralizer\" />
       <Folder Include="SkillsModules\Skills\BaseStats\" />
-      <Folder Include="SkillsModules\Skills\BonusNeutralizer\" />
-      <Folder Include="SkillsModules\Skills\PenaltyNeutralizer\" />
       <Folder Include="SkillsModules\Skills\Penalty\" />
     </ItemGroup>
 

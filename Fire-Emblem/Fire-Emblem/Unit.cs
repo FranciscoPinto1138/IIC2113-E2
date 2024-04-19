@@ -17,6 +17,8 @@ public class Unit
     public string Role { get; set; } = null!;
     public StatsDiff BonusStatsDiff = new StatsDiff();
     public StatsDiff PenaltyStatsDiff = new StatsDiff();
+    public BonusNeutralizationManager BonusNeutralizationManager = new BonusNeutralizationManager();
+    public PenaltyNeutralizationManager PenaltyNeutralizationManager = new PenaltyNeutralizationManager();
     private int _maxAmountOfSkills = 2;
 
     public Unit(string name, string weapon, string gender, string deathQuote, string[] skill, int hp, int atk, int spd, int def,
@@ -55,21 +57,21 @@ public class Unit
     
     public int UnitTotalAtk()
     {
-        return Atk + BonusStatsDiff.Atk + PenaltyStatsDiff.Atk;
+        return Atk + BonusStatsDiff.Atk * BonusNeutralizationManager.Atk + PenaltyStatsDiff.Atk * PenaltyNeutralizationManager.Atk;
     }
     
     public int UnitTotalSpd()
     {
-        return Spd + BonusStatsDiff.Spd + PenaltyStatsDiff.Spd;
+        return Spd + BonusStatsDiff.Spd * BonusNeutralizationManager.Spd + PenaltyStatsDiff.Spd * PenaltyNeutralizationManager.Spd;
     }
     
     public int UnitTotalDef()
     {
-        return Def + BonusStatsDiff.Def + PenaltyStatsDiff.Def;
+        return Def + BonusStatsDiff.Def * BonusNeutralizationManager.Def + PenaltyStatsDiff.Def * PenaltyNeutralizationManager.Def;
     }
     
     public int UnitTotalRes()
     {
-        return Res + BonusStatsDiff.Res + PenaltyStatsDiff.Res;
+        return Res + BonusStatsDiff.Res * BonusNeutralizationManager.Res + PenaltyStatsDiff.Res * PenaltyNeutralizationManager.Res;
     }
 }

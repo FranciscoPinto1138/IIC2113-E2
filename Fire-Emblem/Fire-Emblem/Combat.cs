@@ -27,8 +27,12 @@ public class Combat
     {
         AttackUnit.BonusStatsDiff = new StatsDiff();
         AttackUnit.PenaltyStatsDiff = new StatsDiff();
+        AttackUnit.BonusNeutralizationManager = new BonusNeutralizationManager();
+        AttackUnit.PenaltyNeutralizationManager = new PenaltyNeutralizationManager();
         DefenseUnit.BonusStatsDiff = new StatsDiff();
         DefenseUnit.PenaltyStatsDiff = new StatsDiff();
+        DefenseUnit.BonusNeutralizationManager = new BonusNeutralizationManager();
+        DefenseUnit.PenaltyNeutralizationManager = new PenaltyNeutralizationManager();
     }
     
     private void ApplyDamage(Unit damageMaker, Unit damageReceiver, double damageMakerWTB)

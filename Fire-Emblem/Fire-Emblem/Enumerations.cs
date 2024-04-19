@@ -24,5 +24,6 @@ public enum StatType
     Atk,
     Spd,
     Def,
-    Res
+    Res,
+    HP
 }

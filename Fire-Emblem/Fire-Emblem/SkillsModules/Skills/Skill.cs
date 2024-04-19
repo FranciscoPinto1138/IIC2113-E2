@@ -31,3 +31,31 @@ public abstract class Bonus : Skill
         throw new NotImplementedException();
     }
 }
+
+public abstract class BonusNeutralizer : Skill
+{
+    public BonusNeutralizer(Unit unit, Unit opponent) : base(unit, opponent)
+    {
+        this.unit = unit;
+        this.opponent = opponent;
+    }
+    
+    public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public abstract class PenaltyNeutralizer : Skill
+{
+    public PenaltyNeutralizer(Unit unit, Unit opponent) : base(unit, opponent)
+    {
+        this.unit = unit;
+        this.opponent = opponent;
+    }
+    
+    public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)
+    {
+        throw new NotImplementedException();
+    }
+}

@@ -62,13 +62,21 @@ public class SkillsController
     private void ShowNetStatsOfUnitsAfterEffects()
     {
         ShowNetStatsEffects(_attackUnit);
+        ShowNeutralizedBonusAndPenalties(_attackUnit);
         ShowNetStatsEffects(_defenseUnit);
+        ShowNeutralizedBonusAndPenalties(_defenseUnit);
     }
     
     private void ShowNetStatsEffects(Unit unit)
     {
         ShowBonusStatsEffectsOfUnit(unit);
         ShowPenaltyStatsEffectsOfUnit(unit);
+    }
+
+    private void ShowNeutralizedBonusAndPenalties(Unit unit)
+    {
+        ShowNeutralizedBonusByStats(unit);
+        ShowNeutralizedPenaltyByStats(unit);
     }
 
     private void ShowBonusStatsEffectsOfUnit(Unit unit)
@@ -108,6 +116,46 @@ public class SkillsController
         if (unit.PenaltyStatsDiff.Res < 0)
         {
             _view.WriteLine($"{unit.Name} obtiene Res-{unit.PenaltyStatsDiff.Res}");
+        }
+    }
+    
+    private void ShowNeutralizedBonusByStats(Unit unit)
+    {
+        if (unit.BonusNeutralizationManager.Atk == 0)
+        {
+            _view.WriteLine($"Los bonus de Atk de {unit.Name} fueron neutralizados");
+        }
+        if (unit.BonusNeutralizationManager.Spd == 0)
+        {
+            _view.WriteLine($"Los bonus de Spd de {unit.Name} fueron neutralizados");
+        }
+        if (unit.BonusNeutralizationManager.Def == 0)
+        {
+            _view.WriteLine($"Los bonus de Def de {unit.Name} fueron neutralizados");
+        }
+        if (unit.BonusNeutralizationManager.Res == 0)
+        {
+            _view.WriteLine($"Los bonus de Res de {unit.Name} fueron neutralizados");
+        }
+    }
+    
+    private void ShowNeutralizedPenaltyByStats(Unit unit)
+    {
+        if (unit.PenaltyNeutralizationManager.Atk == 0)
+        {
+            _view.WriteLine($"Los penalty de Atk de {unit.Name} fueron neutralizados");
+        }
+        if (unit.PenaltyNeutralizationManager.Spd == 0)
+        {
+            _view.WriteLine($"Los penalty de Spd de {unit.Name} fueron neutralizados");
+        }
+        if (unit.PenaltyNeutralizationManager.Def == 0)
+        {
+            _view.WriteLine($"Los penalty de Def de {unit.Name} fueron neutralizados");
+        }
+        if (unit.PenaltyNeutralizationManager.Res == 0)
+        {
+            _view.WriteLine($"Los penalty de Res de {unit.Name} fueron neutralizados");
         }
     }
 }
