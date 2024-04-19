@@ -2,8 +2,7 @@ namespace Fire_Emblem;
 
 public abstract class BonusEffect : Effect
 {
-    public abstract void ApplyEffect(Unit unit, Unit opponent);
-    public abstract void RemoveEffect(Unit unit, Unit opponent);
+    public abstract void ApplyEffect(Unit unit, Unit opponent, Stats unitCombatStats, Stats opponentCombatStats);
 }
 
 public class IncreaseAtk : BonusEffect
@@ -15,14 +14,9 @@ public class IncreaseAtk : BonusEffect
         _changeFactor = changeFactor;
     }
     
-    public override void ApplyEffect(Unit unit, Unit opponent)
+    public override void ApplyEffect(Unit unit, Unit opponent, Stats unitCombatStats, Stats opponentCombatStats)
     {
-        unit.Atk += _changeFactor;
-    }
-    
-    public override void RemoveEffect(Unit unit, Unit opponent)
-    {
-        unit.Atk -= _changeFactor;
+        unitCombatStats.Atk += _changeFactor;
     }
 }
 
@@ -35,14 +29,9 @@ public class IncreaseDef : BonusEffect
         _changeFactor = changeFactor;
     }
     
-    public override void ApplyEffect(Unit unit, Unit opponent)
+    public override void ApplyEffect(Unit unit, Unit opponent, Stats unitCombatStats, Stats opponentCombatStats)
     {
-        unit.Def += _changeFactor;
-    }
-    
-    public override void RemoveEffect(Unit unit, Unit opponent)
-    {
-        unit.Def -= _changeFactor;
+        unitCombatStats.Def += _changeFactor;
     }
 }
 
@@ -55,14 +44,9 @@ public class IncreaseSpd : BonusEffect
         _changeFactor = changeFactor;
     }
     
-    public override void ApplyEffect(Unit unit, Unit opponent)
+    public override void ApplyEffect(Unit unit, Unit opponent, Stats unitCombatStats, Stats opponentCombatStats)
     {
-        unit.Spd += _changeFactor;
-    }
-    
-    public override void RemoveEffect(Unit unit, Unit opponent)
-    {
-        unit.Spd -= _changeFactor;
+        unitCombatStats.Spd += _changeFactor;
     }
 }
 
@@ -75,14 +59,9 @@ public class IncreaseRes : BonusEffect
         _changeFactor = changeFactor;
     }
     
-    public override void ApplyEffect(Unit unit, Unit opponent)
+    public override void ApplyEffect(Unit unit, Unit opponent, Stats unitCombatStats, Stats opponentCombatStats)
     {
-        unit.Res += _changeFactor;
-    }
-    
-    public override void RemoveEffect(Unit unit, Unit opponent)
-    {
-        unit.Res -= _changeFactor;
+        unitCombatStats.Res += _changeFactor;
     }
 }
 
@@ -98,14 +77,9 @@ public class IncreaseAtkByPercentage : BonusEffect
         _changeFactor = changeFactor;
     }
     
-    public override void ApplyEffect(Unit unit, Unit opponent)
+    public override void ApplyEffect(Unit unit, Unit opponent, Stats unitCombatStats, Stats opponentCombatStats)
     {
-        unit.Atk += (int)(unit.Atk * (_changeFactor / 100));
-    }
-    
-    public override void RemoveEffect(Unit unit, Unit opponent)
-    {
-        unit.Atk -= (int)(unit.Atk * (_changeFactor / 100));
+        unitCombatStats.Atk += (int)(unitCombatStats.Atk * (_changeFactor / 100));
     }
 }
 
@@ -113,16 +87,10 @@ public class IncreaseAtkByPercentage : BonusEffect
 public class IncreaseAtkSpdByLostHP : BonusEffect
 {
     private int _originalBonus;
-    public override void ApplyEffect(Unit unit, Unit opponent)
+    public override void ApplyEffect(Unit unit, Unit opponent, Stats unitCombatStats, Stats opponentCombatStats)
     {
-        _originalBonus = Math.Min(unit.HPMax - unit.HPCurrent, 30);
-        unit.Atk += -_originalBonus;
-        unit.Spd += -_originalBonus;
-    }
-    
-    public override void RemoveEffect(Unit unit, Unit opponent)
-    {
-        unit.Atk -= _originalBonus;
-        unit.Spd -= _originalBonus;
+        _originalBonus = Math.Min(unitCombatStats.HPMax - unitCombatStats.HPCurrent, 30);
+        unitCombatStats.Atk += -_originalBonus;
+        unitCombatStats.Spd += -_originalBonus;
     }
 }

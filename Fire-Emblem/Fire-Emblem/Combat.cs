@@ -7,6 +7,10 @@ public class Combat
     private Team AttackerTeam { get; }
     private Unit DefenseUnit { get; }
     private Team DefenderTeam { get; }
+    private Stats OriginalAttackUnitStats { get; set; }
+    private Stats OriginalDefenseUnitStats { get; set; }
+    private Stats CombatAttackUnitStats { get; set; }
+    private Stats CombatDefenseUnitStats { get; set; }
     private View _view;
     
     public Combat(Unit attacker, Unit defender, Team attackerTeam, Team defenderTeam ,View view)
@@ -18,124 +22,145 @@ public class Combat
         _view = view;
     }
     
-    private static bool UnitHasWeaponAdvantage(Unit unit, Unit opponentUnit)
+    private int DetermineResOrDef(Stats stats, Unit opponentUnit)
     {
-        return (unit.Weapon == "Sword" && opponentUnit.Weapon == "Axe") ||
-               (unit.Weapon == "Axe" && opponentUnit.Weapon == "Lance") ||
-               (unit.Weapon == "Lance" && opponentUnit.Weapon == "Sword");
+        return opponentUnit.Weapon == "Magic" ? stats.Res : stats.Def;
     }
     
-    private static bool UnitsHaveNoWeaponAdvantage(Unit unit, Unit opponentUnit)
+    private void ResetStats()
     {
-        return (unit.Weapon == opponentUnit.Weapon || (unit.Weapon == "Magic" || opponentUnit.Weapon == "Magic") ||
-                (unit.Weapon == "Bow" || opponentUnit.Weapon == "Bow"));
+        AttackUnit.HPCurrent = CombatAttackUnitStats.HPCurrent;
+        AttackUnit.Atk = OriginalAttackUnitStats.Atk;
+        AttackUnit.Spd = OriginalAttackUnitStats.Spd;
+        AttackUnit.Def = OriginalAttackUnitStats.Def;
+        AttackUnit.Res = OriginalAttackUnitStats.Res;
+        DefenseUnit.HPCurrent = CombatDefenseUnitStats.HPCurrent;
+        DefenseUnit.Atk = OriginalDefenseUnitStats.Atk;
+        DefenseUnit.Spd = OriginalDefenseUnitStats.Spd;
+        DefenseUnit.Def = OriginalDefenseUnitStats.Def;
+        DefenseUnit.Res = OriginalDefenseUnitStats.Res;
     }
     
-    private void DetermineWeaponAdvantage(Unit attackUnit, Unit defenseUnit, ref double WTBAttacker, ref double WTBDefender)
+    private void ApplyDamage(Unit damageMaker, Unit damageReceiver, double damageMakerWTB, Stats damageReceiverCombatStats, Stats damageMakerCombatStats)
     {
-        if (UnitHasWeaponAdvantage(attackUnit, defenseUnit))
-        {
-            WTBAttacker = 1.2;
-            WTBDefender = 0.8;
-            _view.WriteLine($"{attackUnit.Name} ({attackUnit.Weapon}) tiene ventaja con respecto a {defenseUnit.Name} ({defenseUnit.Weapon})");
-        }
-        else if (UnitHasWeaponAdvantage(defenseUnit, attackUnit))
-        {
-            WTBAttacker = 0.8;
-            WTBDefender = 1.2;
-            _view.WriteLine($"{defenseUnit.Name} ({defenseUnit.Weapon}) tiene ventaja con respecto a {attackUnit.Name} ({attackUnit.Weapon})");
-        }
+        int defOrRes = DetermineResOrDef(damageReceiverCombatStats, damageMaker);
+        int damage = Convert.ToInt32(Math.Max(0, Math.Floor((damageMakerCombatStats.Atk * damageMakerWTB) - defOrRes)));
+        damageReceiverCombatStats.HPCurrent -= damage;
+        _view.WriteLine($"{damageMaker.Name} ataca a {damageReceiver.Name} con {damage} de daño");
+    }
+    
+    private bool CheckIfUnitDied()
+    {
+        bool unitDied = CombatAttackUnitStats.HPCurrent <= 0 || CombatDefenseUnitStats.HPCurrent <= 0;
+        if (!unitDied) return unitDied;
+        CombatAttackUnitStats.HPCurrent = Math.Max(0, CombatAttackUnitStats.HPCurrent);
+        CombatDefenseUnitStats.HPCurrent = Math.Max(0, CombatDefenseUnitStats.HPCurrent);
+        UpdateStatsPostCombat();
+        ShowCombatResults();
+        return unitDied;
+    }
+    
+    private void Attack(double WTBAttacker)
+    {
+        ApplyDamage(AttackUnit, DefenseUnit, WTBAttacker, 
+            CombatDefenseUnitStats, CombatAttackUnitStats);
     }
 
-    private double[] ResolveWeaponTriangle(Unit attackUnit, Unit defenseUnit)
+    private void CounterAttack(double WTBDefender)
     {
-        double WTBAttacker = 1.0;
-        double WTBDefender = 1.0;
-        
-        if (UnitsHaveNoWeaponAdvantage(attackUnit, defenseUnit))
-        {
-            _view.WriteLine("Ninguna unidad tiene ventaja con respecto a la otra");
-        }
-        else
-        {
-            DetermineWeaponAdvantage(attackUnit, defenseUnit, ref WTBAttacker, ref WTBDefender);
-        }
-        
-        return new double[] { WTBAttacker, WTBDefender };
+        ApplyDamage(DefenseUnit, AttackUnit, WTBDefender, 
+            CombatAttackUnitStats, CombatDefenseUnitStats);
     }
     
-    private static int DetermineResOrDef(Unit unit, Unit opponentUnit)
+    private bool AttackUnitCanFollowUp()
     {
-        return opponentUnit.Weapon == "Magic" ? unit.Res : unit.Def;
+        const int minimumSpdDifferenceForFollowUp = 5;
+        return CombatAttackUnitStats.Spd - CombatDefenseUnitStats.Spd >= minimumSpdDifferenceForFollowUp;
+    }
+    
+    private bool DefenseUnitCanFollowUp()
+    {
+        const int minimumSpdDifferenceForFollowUp = 5;
+        return CombatDefenseUnitStats.Spd - CombatAttackUnitStats.Spd >= minimumSpdDifferenceForFollowUp;
+    }
+    
+    private bool UnitsCanFollowUp()
+    {
+        return AttackUnitCanFollowUp() || DefenseUnitCanFollowUp();
+    }
+
+    private void FollowUp(double WTBAttacker, double WTBDefender)
+    {
+        if (AttackUnitCanFollowUp()) // Atacante hace Follow-Up
+        {
+            Attack(WTBAttacker);
+        }
+        if (DefenseUnitCanFollowUp()) // Defensor hace Follow-Up
+        {
+            CounterAttack(WTBDefender);
+        }
+        else if (!UnitsCanFollowUp())
+        {
+            _view.WriteLine("Ninguna unidad puede hacer un follow up");
+        }
+    }
+    
+    private void SetUnitsLastRivalStats()
+    {
+        AttackUnit.MostRecentRival = DefenseUnit.Name;
+        DefenseUnit.MostRecentRival = AttackUnit.Name;
+    }
+    
+    private void SetCombatAndOriginalStats()
+    {
+        OriginalAttackUnitStats = new Stats(AttackUnit);
+        OriginalDefenseUnitStats = new Stats(DefenseUnit);
+        CombatAttackUnitStats = new Stats(AttackUnit);
+        CombatDefenseUnitStats = new Stats(DefenseUnit);
+    }
+    
+    private void UpdateStatsPostCombat()
+    {
+        ResetStats();
+        SetUnitsLastRivalStats();
+    }
+    
+    private void ShowCombatResults()
+    {
+        _view.WriteLine($"{AttackUnit.Name} ({AttackUnit.HPCurrent}) : {DefenseUnit.Name} ({DefenseUnit.HPCurrent})");
+    }
+    
+    private void ResolveSkills()
+    {
+        SkillsController skillsController = new SkillsController(AttackUnit, DefenseUnit,
+            CombatAttackUnitStats, CombatDefenseUnitStats, _view);
+        skillsController.CreateSkills();
+        skillsController.ApplySkills();
     }
 
     public Unit[] ResolveCombat()
     {
-        // Se determinan los WTB usando el método WeaponTriangle()
-        double[] WTBs = ResolveWeaponTriangle(AttackUnit, DefenseUnit);
-        double WTBAttacker = WTBs[0];
-        double WTBDefender = WTBs[1];
-        Stats originalAttackUnitStats = new Stats(AttackUnit);
-        Stats originalDefenseUnitStats = new Stats(DefenseUnit);
-        Stats combatAttackUnitStats = new Stats(AttackUnit);
-        Stats combatDefenseUnitStats = new Stats(DefenseUnit);
-        // Ataque
-        // Se revisa si debe usarse Res o Def para el defensor
-        int defenderDefOrRes = DetermineResOrDef(DefenseUnit, AttackUnit);
-        // Se calcula el daño y se resta al defensor
-        int damageToDefender = Convert.ToInt32(Math.Max(0, Math.Floor((AttackUnit.Atk * WTBAttacker) - defenderDefOrRes)));
-        DefenseUnit.HPCurrent = DefenseUnit.HPCurrent - damageToDefender;
-        _view.WriteLine($"{AttackUnit.Name} ataca a {DefenseUnit.Name} con {damageToDefender} de daño");
-        // Si la unidad muere se termina el round
-        if (DefenseUnit.HPCurrent <= 0)
+        WeaponTriangle weaponTriangle = new WeaponTriangle(AttackUnit, DefenseUnit, _view);
+        double[] WTBs = weaponTriangle.ResolveWeaponTriangle();
+        SetCombatAndOriginalStats();
+        ResolveSkills();
+        Attack(WTBs[0]);
+        if (CheckIfUnitDied())
         {
-            DefenseUnit.HPCurrent = 0;
-            _view.WriteLine($"{AttackUnit.Name} ({AttackUnit.HPCurrent}) : {DefenseUnit.Name} ({DefenseUnit.HPCurrent})");
             return [AttackUnit, DefenseUnit];
         }
-        // Contraataque
-        // Se revisa si debe usarse Res o Def para el atacante
-        int attackerDefOrRes = DetermineResOrDef(AttackUnit, DefenseUnit);
-        // Se calcula el daño y se resta al atacante
-        int damageToAttacker = Convert.ToInt32(Math.Max(0, Math.Floor((DefenseUnit.Atk * WTBDefender) - attackerDefOrRes)));
-        AttackUnit.HPCurrent = AttackUnit.HPCurrent - damageToAttacker;
-        _view.WriteLine($"{DefenseUnit.Name} ataca a {AttackUnit.Name} con {damageToAttacker} de daño");
-        // Si la unidad muere se termina el round
-        if (AttackUnit.HPCurrent <= 0)
+        CounterAttack(WTBs[1]);
+        if (CheckIfUnitDied())
         {
-            AttackUnit.HPCurrent = 0;
-            _view.WriteLine($"{AttackUnit.Name} ({AttackUnit.HPCurrent}) : {DefenseUnit.Name} ({DefenseUnit.HPCurrent})");
             return [AttackUnit, DefenseUnit];
         }
-        // Follow-Up (si aplica)
-        if (AttackUnit.Spd - DefenseUnit.Spd >= 5) // Atacante hace Follow-Up
+        FollowUp(WTBs[0], WTBs[1]);
+        if (CheckIfUnitDied())
         {
-            DefenseUnit.HPCurrent = DefenseUnit.HPCurrent - damageToDefender;
-            _view.WriteLine($"{AttackUnit.Name} ataca a {DefenseUnit.Name} con {damageToDefender} de daño");
-            if (DefenseUnit.HPCurrent <= 0)
-            {
-                DefenseUnit.HPCurrent = 0;
-                _view.WriteLine($"{AttackUnit.Name} ({AttackUnit.HPCurrent}) : {DefenseUnit.Name} ({DefenseUnit.HPCurrent})");
-                return [AttackUnit, DefenseUnit];
-            }
+            return [AttackUnit, DefenseUnit];
         }
-        if (DefenseUnit.Spd - AttackUnit.Spd >= 5) // Defensor hace Follow-Up
-        {
-            AttackUnit.HPCurrent = AttackUnit.HPCurrent - damageToAttacker;
-            _view.WriteLine($"{DefenseUnit.Name} ataca a {AttackUnit.Name} con {damageToAttacker} de daño");
-            if (AttackUnit.HPCurrent <= 0)
-            {
-                AttackUnit.HPCurrent = 0;
-                _view.WriteLine($"{AttackUnit.Name} ({AttackUnit.HPCurrent}) : {DefenseUnit.Name} ({DefenseUnit.HPCurrent})");
-                return [AttackUnit, DefenseUnit];
-            }
-        }
-        if (!((DefenseUnit.Spd - AttackUnit.Spd >= 5) || (AttackUnit.Spd - DefenseUnit.Spd >= 5))) // No ocurre Follow-Up
-        {
-          _view.WriteLine("Ninguna unidad puede hacer un follow up");
-        }
-
-        _view.WriteLine($"{AttackUnit.Name} ({AttackUnit.HPCurrent}) : {DefenseUnit.Name} ({DefenseUnit.HPCurrent})");
+        UpdateStatsPostCombat();
+        ShowCombatResults();
         return [AttackUnit, DefenseUnit];
     }
 }
