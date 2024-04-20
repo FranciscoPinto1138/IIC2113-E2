@@ -12,7 +12,7 @@ public class WillToWin : Bonus
 
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)
     {
-        var condition = new UnitHPCondition(50, ThresholdType.Absolute, ComparisonType.LowerThanOrEqual);
+        var condition = new UnitHPCondition(50, ThresholdType.Percentage, ComparisonType.LowerThanOrEqual);
         var effectOnUnit = new IncreaseStat(8, StatType.Atk);
         if (condition.IsConditionFulfilled(unit, opponent))
         {

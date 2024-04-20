@@ -13,8 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="SkillsModules\Skills\BaseStats\" />
-      <Folder Include="SkillsModules\Skills\Penalty\" />
+      <Folder Include="SkillsModules\Skills\Hybrids\" />
     </ItemGroup>
 
 </Project>

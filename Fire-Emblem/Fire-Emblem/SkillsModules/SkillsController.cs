@@ -103,19 +103,19 @@ public class SkillsController
     {
         if (unit.PenaltyStatsDiff.Atk < 0)
         {
-            _view.WriteLine($"{unit.Name} obtiene Atk-{unit.PenaltyStatsDiff.Atk}");
+            _view.WriteLine($"{unit.Name} obtiene Atk{unit.PenaltyStatsDiff.Atk}");
         }
         if (unit.PenaltyStatsDiff.Spd < 0)
         {
-            _view.WriteLine($"{unit.Name} obtiene Spd-{unit.PenaltyStatsDiff.Spd}");
+            _view.WriteLine($"{unit.Name} obtiene Spd{unit.PenaltyStatsDiff.Spd}");
         }
         if (unit.PenaltyStatsDiff.Def < 0)
         {
-            _view.WriteLine($"{unit.Name} obtiene Def-{unit.PenaltyStatsDiff.Def}");
+            _view.WriteLine($"{unit.Name} obtiene Def{unit.PenaltyStatsDiff.Def}");
         }
         if (unit.PenaltyStatsDiff.Res < 0)
         {
-            _view.WriteLine($"{unit.Name} obtiene Res-{unit.PenaltyStatsDiff.Res}");
+            _view.WriteLine($"{unit.Name} obtiene Res{unit.PenaltyStatsDiff.Res}");
         }
     }
     

@@ -94,7 +94,7 @@ public class UnitDamageTypeCondition : Condition
         switch (_damageType)
         {
             case DamageType.Physical:
-                return unit.Weapon == "Sword" || unit.Weapon == "Axe" || unit.Weapon == "Lance";
+                return unit.Weapon == "Sword" || unit.Weapon == "Axe" || unit.Weapon == "Lance" || unit.Weapon == "Bow";
             case DamageType.Magical:
                 return unit.Weapon == "Magic";
             default:
@@ -122,7 +122,7 @@ public class OpponentDamageTypeCondition : Condition
         switch (_damageType)
         {
             case DamageType.Physical:
-                return opponent.Weapon == "Sword" || opponent.Weapon == "Axe" || opponent.Weapon == "Lance";
+                return opponent.Weapon == "Sword" || opponent.Weapon == "Axe" || opponent.Weapon == "Lance" || opponent.Weapon == "Bow";
             case DamageType.Magical:
                 return opponent.Weapon == "Magic";
             default:

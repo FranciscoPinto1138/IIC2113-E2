@@ -1,3 +1,5 @@
+using Fire_Emblem;
+
 namespace Fire_Emblem;
 
 public class SkillsFactory
@@ -15,6 +17,8 @@ public class SkillsFactory
     {
         switch (name)
         {
+            case "HP +15":
+                return new HPPlus15(_unit, _opponent);
             case "Fair Fight":
                 return new FairFight(_unit, _opponent);
             case "Will to Win":
@@ -65,6 +69,30 @@ public class SkillsFactory
                 return new BlowStrikeSparrow(_unit, _opponent, [StatType.Spd, StatType.Res], [6, 6]);
             case "Bracing Blow":
                 return new BlowStrikeSparrow(_unit, _opponent, [StatType.Def, StatType.Res], [6, 6]);
+            case "Brazen Atk/Spd":
+                return new Brazen(_unit, _opponent, [StatType.Atk, StatType.Spd], [10, 10]);
+            case "Brazen Atk/Def":
+                return new Brazen(_unit, _opponent, [StatType.Atk, StatType.Def], [10, 10]);
+            case "Brazen Atk/Res":
+                return new Brazen(_unit, _opponent, [StatType.Atk, StatType.Res], [10, 10]);
+            case "Brazen Spd/Def":
+                return new Brazen(_unit, _opponent, [StatType.Spd, StatType.Def], [10, 10]);
+            case "Brazen Spd/Res":
+                return new Brazen(_unit, _opponent, [StatType.Spd, StatType.Res], [10, 10]);
+            case "Brazen Def/Res":
+                return new Brazen(_unit, _opponent, [StatType.Def, StatType.Res], [10, 10]);
+            case "Fire Boost":
+                return new Boost(_unit, _opponent, [StatType.Atk], [6]);
+            case "Wind Boost":
+                return new Boost(_unit, _opponent, [StatType.Spd], [6]);
+            case "Earth Boost":
+                return new Boost(_unit, _opponent, [StatType.Def], [6]);
+            case "Water Boost":
+                return new Boost(_unit, _opponent, [StatType.Res], [6]);
+            case "Chaos Style":
+                return new ChaosStyle(_unit, _opponent);
+            case "Blinding Flash":
+                return new BlindingFlash(_unit, _opponent);
             case "Beorc's Blessing":
                 return new BeorcsBlessing(_unit, _opponent);
             case "Agnea's Arrow":
