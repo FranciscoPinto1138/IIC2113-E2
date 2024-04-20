@@ -1,4 +1,5 @@
 using Fire_Emblem;
+using Fire_Emblem.Hybrids;
 
 namespace Fire_Emblem;
 
@@ -93,10 +94,44 @@ public class SkillsFactory
                 return new ChaosStyle(_unit, _opponent);
             case "Blinding Flash":
                 return new BlindingFlash(_unit, _opponent);
+            case "Not *Quite*":
+                return new NotQuite(_unit, _opponent);
+            case "Stunning Smile":
+                return new StunningSmile(_unit, _opponent);
+            case "Disarming Sigh":
+                return new DisarmingSigh(_unit, _opponent);
             case "Beorc's Blessing":
                 return new BeorcsBlessing(_unit, _opponent);
             case "Agnea's Arrow":
                 return new AgneasArrow(_unit, _opponent);
+            case "Sword Agility":
+                return new AgilityPowerFocus(_unit, _opponent, "Sword", [StatType.Spd], [12], [StatType.Atk], [6]);
+            case "Lance Power":
+                return new AgilityPowerFocus(_unit, _opponent, "Lance", [StatType.Atk], [10], [StatType.Def], [10]);
+            case "Sword Power":
+                return new AgilityPowerFocus(_unit, _opponent, "Sword", [StatType.Atk], [10], [StatType.Def], [10]);
+            case "Bow Focus":
+                return new AgilityPowerFocus(_unit, _opponent, "Bow", [StatType.Atk], [10], [StatType.Res], [10]);
+            case "Lance Agility":
+                return new AgilityPowerFocus(_unit, _opponent, "Lance", [StatType.Spd], [12], [StatType.Atk], [6]);
+            case "Axe Power":
+                return new AgilityPowerFocus(_unit, _opponent, "Axe", [StatType.Atk], [10], [StatType.Def], [10]);
+            case "Bow Agility":
+                return new AgilityPowerFocus(_unit, _opponent, "Bow", [StatType.Spd], [12], [StatType.Atk], [6]);
+            case "Sword Focus":
+                return new AgilityPowerFocus(_unit, _opponent, "Sword", [StatType.Atk], [10], [StatType.Res], [10]);
+            case "Lull Atk/Spd":
+                return new Lull(_unit, _opponent, [StatType.Atk, StatType.Spd], [3, 3], [StatType.Atk, StatType.Spd]);
+            case "Lull Atk/Def":
+                return new Lull(_unit, _opponent, [StatType.Atk, StatType.Def], [3, 3], [StatType.Atk, StatType.Def]);
+            case "Lull Atk/Res":
+                return new Lull(_unit, _opponent, [StatType.Atk, StatType.Res], [3, 3], [StatType.Atk, StatType.Res]);
+            case "Lull Spd/Def":
+                return new Lull(_unit, _opponent, [StatType.Spd, StatType.Def], [3, 3], [StatType.Spd, StatType.Def]);
+            case "Lull Spd/Res":
+                return new Lull(_unit, _opponent, [StatType.Spd, StatType.Res], [3, 3], [StatType.Spd, StatType.Res]);
+            case "Lull Def/Res":
+                return new Lull(_unit, _opponent, [StatType.Def, StatType.Res], [3, 3], [StatType.Def, StatType.Res]);
             default:
                 return null;
         }
