@@ -1,4 +1,4 @@
-namespace Fire_Emblem.Hybrids;
+namespace Fire_Emblem;
 
 public class AgilityPowerFocus : Hybrid
 {

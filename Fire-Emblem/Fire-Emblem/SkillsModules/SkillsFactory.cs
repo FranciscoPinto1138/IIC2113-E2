@@ -1,5 +1,6 @@
 using Fire_Emblem;
 using Fire_Emblem.Hybrids;
+using Fire_Emblem.SkillsModules.Skills.Hybrids;
 
 namespace Fire_Emblem;
 
@@ -100,6 +101,10 @@ public class SkillsFactory
                 return new StunningSmile(_unit, _opponent);
             case "Disarming Sigh":
                 return new DisarmingSigh(_unit, _opponent);
+            case "Charmer":
+                return new Charmer(_unit, _opponent);
+            case "Belief in Love":
+                return new BeliefInLove(_unit, _opponent);
             case "Beorc's Blessing":
                 return new BeorcsBlessing(_unit, _opponent);
             case "Agnea's Arrow":
@@ -120,6 +125,10 @@ public class SkillsFactory
                 return new AgilityPowerFocus(_unit, _opponent, "Bow", [StatType.Spd], [12], [StatType.Atk], [6]);
             case "Sword Focus":
                 return new AgilityPowerFocus(_unit, _opponent, "Sword", [StatType.Atk], [10], [StatType.Res], [10]);
+            case "Close Def":
+                return new CloseDef(_unit, _opponent);
+            case "Distant Def":
+                return new DistantDef(_unit, _opponent);
             case "Lull Atk/Spd":
                 return new Lull(_unit, _opponent, [StatType.Atk, StatType.Spd], [3, 3], [StatType.Atk, StatType.Spd]);
             case "Lull Atk/Def":
@@ -132,6 +141,18 @@ public class SkillsFactory
                 return new Lull(_unit, _opponent, [StatType.Spd, StatType.Res], [3, 3], [StatType.Spd, StatType.Res]);
             case "Lull Def/Res":
                 return new Lull(_unit, _opponent, [StatType.Def, StatType.Res], [3, 3], [StatType.Def, StatType.Res]);
+            case "Fort. Def/Res":
+                return new FortDefRes(_unit, _opponent);
+            case "Life and Death":
+                return new LifeAndDeath(_unit, _opponent);
+            case "Solid Ground":
+                return new SolidGround(_unit, _opponent);
+            case "Still Water":
+                return new StillWater(_unit, _opponent);
+            case "Dragonskin":
+                return new Dragonskin(_unit, _opponent);
+            case "Light and Dark":
+                return new LightAndDark(_unit, _opponent);
             default:
                 return null;
         }
