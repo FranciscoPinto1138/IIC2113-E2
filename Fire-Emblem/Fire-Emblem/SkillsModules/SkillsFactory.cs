@@ -113,6 +113,8 @@ public class SkillsFactory
                 return new BeorcsBlessing(_unit, _opponent);
             case "Agnea's Arrow":
                 return new AgneasArrow(_unit, _opponent);
+            case "Sandstorm":
+                return new Sandstorm(_unit, _opponent);
             case "Sword Agility":
                 return new AgilityPowerFocus(_unit, _opponent, "Sword", [StatType.Spd], [12], [StatType.Atk], [6]);
             case "Lance Power":

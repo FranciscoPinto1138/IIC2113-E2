@@ -67,7 +67,7 @@ public class Unit
     {
         return Convert.ToInt32(Math.Floor((double) (Atk +
                (BonusStatsDiff.Atk + FirstAttackBonusStatsDiff.Atk * IsOnFirstAttack + FollowUpAttackBonusStatsDiff.Atk * IsOnFollowUpAttack) * BonusNeutralizationManager.Atk 
-                   + (PenaltyStatsDiff.Atk + FirstAttackPenaltyStatsDiff.Atk * RivalIsOnFirstAttack + FollowUpAttackPenaltyStatsDiff.Atk * RivalIsOnFollowUpAttack) * PenaltyNeutralizationManager.Atk)));
+                   + (PenaltyStatsDiff.Atk + FirstAttackPenaltyStatsDiff.Atk * RivalIsOnFirstAttack + FollowUpAttackPenaltyStatsDiff.Atk * IsOnFollowUpAttack) * PenaltyNeutralizationManager.Atk)));
     }
     
     public int UnitTotalSpd()
@@ -79,14 +79,14 @@ public class Unit
     {
         return Convert.ToInt32(Math.Floor((double) (Def +
                 (BonusStatsDiff.Def + FirstAttackBonusStatsDiff.Def * IsOnFirstAttack + FollowUpAttackBonusStatsDiff.Def * IsOnFollowUpAttack) * BonusNeutralizationManager.Def 
-                    + (PenaltyStatsDiff.Def + FirstAttackPenaltyStatsDiff.Def * RivalIsOnFirstAttack + FollowUpAttackPenaltyStatsDiff.Def * RivalIsOnFollowUpAttack) * PenaltyNeutralizationManager.Def)));
+                    + (PenaltyStatsDiff.Def + FirstAttackPenaltyStatsDiff.Def * RivalIsOnFirstAttack + FollowUpAttackPenaltyStatsDiff.Def * IsOnFollowUpAttack) * PenaltyNeutralizationManager.Def)));
     }
     
     public int UnitTotalRes()
     {
         return Convert.ToInt32(Math.Floor((double) (Res +
                 (BonusStatsDiff.Res + FirstAttackBonusStatsDiff.Res * IsOnFirstAttack + FollowUpAttackBonusStatsDiff.Res * IsOnFollowUpAttack) * BonusNeutralizationManager.Res 
-                    + (PenaltyStatsDiff.Res + FirstAttackPenaltyStatsDiff.Res * RivalIsOnFirstAttack + FollowUpAttackPenaltyStatsDiff.Res * RivalIsOnFollowUpAttack) * PenaltyNeutralizationManager.Res)));
+                    + (PenaltyStatsDiff.Res + FirstAttackPenaltyStatsDiff.Res * RivalIsOnFirstAttack + FollowUpAttackPenaltyStatsDiff.Res * IsOnFollowUpAttack) * PenaltyNeutralizationManager.Res)));
     }
     
     public void ResetFirstAttackBonusAndPenaltyStatsDiff()
