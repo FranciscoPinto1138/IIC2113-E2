@@ -70,7 +70,11 @@ public class SkillsController
     private void ShowNetStatsEffects(Unit unit)
     {
         ShowBonusStatsEffectsOfUnit(unit);
+        ShowBonusStatsEffectsOnFirstAttackOnUnit(unit);
+        ShowBonusStatsEffectsOnFollowUpOnUnit(unit);
         ShowPenaltyStatsEffectsOfUnit(unit);
+        ShowPenaltyStatsEffectsOnFirstAttackOnUnit(unit);
+        ShowPenaltyStatsEffectsOnFollowUpOnUnit(unit);
     }
 
     private void ShowNeutralizedBonusAndPenalties(Unit unit)
@@ -99,6 +103,38 @@ public class SkillsController
         }
     }
     
+    private void ShowBonusStatsEffectsOnFirstAttackOnUnit(Unit unit)
+    {
+        if (unit.FirstAttackBonusStatsDiff.Atk > 0)
+        {
+            _view.WriteLine($"{unit.Name} obtiene Atk+{unit.FirstAttackBonusStatsDiff.Atk} en su primer ataque");
+        }
+        if (unit.FirstAttackBonusStatsDiff.Def > 0)
+        {
+            _view.WriteLine($"{unit.Name} obtiene Def+{unit.FirstAttackBonusStatsDiff.Def} en su primer ataque");
+        }
+        if (unit.FirstAttackBonusStatsDiff.Res > 0)
+        {
+            _view.WriteLine($"{unit.Name} obtiene Res+{unit.FirstAttackBonusStatsDiff.Res} en su primer ataque");
+        }
+    }
+    
+    private void ShowBonusStatsEffectsOnFollowUpOnUnit(Unit unit)
+    {
+        if (unit.FollowUpAttackBonusStatsDiff.Atk > 0)
+        {
+            _view.WriteLine($"{unit.Name} obtiene Atk+{unit.FollowUpAttackBonusStatsDiff.Atk} en su Follow-Up");
+        }
+        if (unit.FollowUpAttackBonusStatsDiff.Def > 0)
+        {
+            _view.WriteLine($"{unit.Name} obtiene Def+{unit.FollowUpAttackBonusStatsDiff.Def} en su Follow-Up");
+        }
+        if (unit.FollowUpAttackBonusStatsDiff.Res > 0)
+        {
+            _view.WriteLine($"{unit.Name} obtiene Res+{unit.FollowUpAttackBonusStatsDiff.Res} en su Follow-Up");
+        }
+    }
+    
     private void ShowPenaltyStatsEffectsOfUnit(Unit unit)
     {
         if (unit.PenaltyStatsDiff.Atk < 0)
@@ -116,6 +152,38 @@ public class SkillsController
         if (unit.PenaltyStatsDiff.Res < 0)
         {
             _view.WriteLine($"{unit.Name} obtiene Res{unit.PenaltyStatsDiff.Res}");
+        }
+    }
+    
+    private void ShowPenaltyStatsEffectsOnFirstAttackOnUnit(Unit unit)
+    {
+        if (unit.FirstAttackPenaltyStatsDiff.Atk < 0)
+        {
+            _view.WriteLine($"{unit.Name} obtiene Atk{unit.FirstAttackPenaltyStatsDiff.Atk} en su primer ataque");
+        }
+        if (unit.FirstAttackPenaltyStatsDiff.Def < 0)
+        {
+            _view.WriteLine($"{unit.Name} obtiene Def{unit.FirstAttackPenaltyStatsDiff.Def} en su primer ataque");
+        }
+        if (unit.FirstAttackPenaltyStatsDiff.Res < 0)
+        {
+            _view.WriteLine($"{unit.Name} obtiene Res{unit.FirstAttackPenaltyStatsDiff.Res} en su primer ataque");
+        }
+    }
+    
+    private void ShowPenaltyStatsEffectsOnFollowUpOnUnit(Unit unit)
+    {
+        if (unit.FollowUpAttackPenaltyStatsDiff.Atk < 0)
+        {
+            _view.WriteLine($"{unit.Name} obtiene Atk{unit.FollowUpAttackPenaltyStatsDiff.Atk} en su Follow-Up");
+        }
+        if (unit.FollowUpAttackPenaltyStatsDiff.Def < 0)
+        {
+            _view.WriteLine($"{unit.Name} obtiene Def{unit.FollowUpAttackPenaltyStatsDiff.Def} en su Follow-Up");
+        }
+        if (unit.FollowUpAttackPenaltyStatsDiff.Res < 0)
+        {
+            _view.WriteLine($"{unit.Name} obtiene Res{unit.FollowUpAttackPenaltyStatsDiff.Res} en su Follow-Up");
         }
     }
     

@@ -27,6 +27,8 @@ public class SkillsFactory
                 return new WillToWin(_unit, _opponent);
             case "Single-Minded":
                 return new SingleMinded(_unit, _opponent);
+            case "Ignis":
+                return new Ignis(_unit, _opponent);
             case "Perceptive":
                 return new Perceptive(_unit, _opponent);
             case "Tome Precision":
@@ -103,6 +105,8 @@ public class SkillsFactory
                 return new DisarmingSigh(_unit, _opponent);
             case "Charmer":
                 return new Charmer(_unit, _opponent);
+            case "Luna":
+                return new Luna(_unit, _opponent);
             case "Belief in Love":
                 return new BeliefInLove(_unit, _opponent);
             case "Beorc's Blessing":

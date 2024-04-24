@@ -33,6 +33,10 @@ public class Combat
         DefenseUnit.PenaltyStatsDiff = new StatsDiff();
         DefenseUnit.BonusNeutralizationManager = new BonusNeutralizationManager();
         DefenseUnit.PenaltyNeutralizationManager = new PenaltyNeutralizationManager();
+        AttackUnit.ResetFirstAttackBonusAndPenaltyStatsDiff();
+        DefenseUnit.ResetFirstAttackBonusAndPenaltyStatsDiff();
+        AttackUnit.ResetFollowUpAttackBonusAndPenaltyStatsDiff();
+        DefenseUnit.ResetFollowUpAttackBonusAndPenaltyStatsDiff();
     }
     
     private void ApplyDamage(Unit damageMaker, Unit damageReceiver, double damageMakerWTB)
@@ -60,14 +64,42 @@ public class Combat
         ShowCombatResults();
     }
     
+    private void SetUnitsFirstAttackStatus(Unit unit, Unit opponent)
+    {
+        unit.IsOnFirstAttack = 1;
+        opponent.RivalIsOnFirstAttack = 1;
+    }
+    
+    private void UnSetUnitsFirstAttackStatus(Unit unit, Unit opponent)
+    {
+        unit.IsOnFirstAttack = 0;
+        opponent.RivalIsOnFirstAttack = 0;
+    }
+    
+    private void SetUnitsFollowUpStatus(Unit unit, Unit opponent)
+    {
+        unit.IsOnFollowUpAttack = 1;
+        opponent.RivalIsOnFollowUpAttack = 1;
+    }
+    
+    private void UnSetUnitsFollowUpStatus(Unit unit, Unit opponent)
+    {
+        unit.IsOnFollowUpAttack = 0;
+        opponent.RivalIsOnFollowUpAttack = 0;
+    }
+    
     private void Attack(double WTBAttacker)
     {
+        SetUnitsFirstAttackStatus(AttackUnit, DefenseUnit);
         ApplyDamage(AttackUnit, DefenseUnit, WTBAttacker);
+        UnSetUnitsFirstAttackStatus(AttackUnit, DefenseUnit);
     }
 
     private void CounterAttack(double WTBDefender)
     {
+        SetUnitsFirstAttackStatus(DefenseUnit, AttackUnit);
         ApplyDamage(DefenseUnit, AttackUnit, WTBDefender);
+        UnSetUnitsFirstAttackStatus(DefenseUnit, AttackUnit);
     }
     
     private bool AttackUnitCanFollowUp()
@@ -89,13 +121,21 @@ public class Combat
 
     private void FollowUp(double WTBAttacker, double WTBDefender)
     {
+        AttackUnit.ResetFirstAttackBonusAndPenaltyStatsDiff();
+        DefenseUnit.ResetFirstAttackBonusAndPenaltyStatsDiff();
         if (AttackUnitCanFollowUp()) // Atacante hace Follow-Up
         {
+            SetUnitsFollowUpStatus(AttackUnit, DefenseUnit);
             Attack(WTBAttacker);
+            AttackUnit.ResetFollowUpAttackBonusAndPenaltyStatsDiff();
+            UnSetUnitsFollowUpStatus(AttackUnit, DefenseUnit);
         }
         if (DefenseUnitCanFollowUp()) // Defensor hace Follow-Up
         {
+            SetUnitsFollowUpStatus(DefenseUnit, AttackUnit);
             CounterAttack(WTBDefender);
+            DefenseUnit.ResetFollowUpAttackBonusAndPenaltyStatsDiff();
+            UnSetUnitsFollowUpStatus(DefenseUnit, AttackUnit);
         }
         else if (!UnitsCanFollowUp())
         {
