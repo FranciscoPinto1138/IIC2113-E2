@@ -23,27 +23,16 @@ public class Combat
         return opponentUnit.Weapon == "Magic" ? unit.UnitTotalRes() : unit.UnitTotalDef();
     }
     
-    private void ResetBonusAndPenaltyStatsDiff()
+    private void ResetUnitsBonusAndPenaltyStatsDiff()
     {
-        AttackUnit.BonusStatsDiff = new StatsDiff();
-        AttackUnit.PenaltyStatsDiff = new StatsDiff();
-        AttackUnit.BonusNeutralizationManager = new BonusNeutralizationManager();
-        AttackUnit.PenaltyNeutralizationManager = new PenaltyNeutralizationManager();
-        DefenseUnit.BonusStatsDiff = new StatsDiff();
-        DefenseUnit.PenaltyStatsDiff = new StatsDiff();
-        DefenseUnit.BonusNeutralizationManager = new BonusNeutralizationManager();
-        DefenseUnit.PenaltyNeutralizationManager = new PenaltyNeutralizationManager();
-        AttackUnit.ResetFirstAttackBonusAndPenaltyStatsDiff();
-        DefenseUnit.ResetFirstAttackBonusAndPenaltyStatsDiff();
-        AttackUnit.ResetFollowUpAttackBonusAndPenaltyStatsDiff();
-        DefenseUnit.ResetFollowUpAttackBonusAndPenaltyStatsDiff();
+        AttackUnit.ResetAllBonusAndPenaltyStatsDiff();
+        DefenseUnit.ResetAllBonusAndPenaltyStatsDiff();
     }
     
     private void ApplyDamage(Unit damageMaker, Unit damageReceiver, double damageMakerWTB)
     {
         int defOrRes = DetermineResOrDef(damageReceiver, damageMaker);
         int damage = Convert.ToInt32(Math.Max(0, Math.Floor((damageMaker.UnitTotalAtk() * damageMakerWTB) - defOrRes)));
-        //damageReceiverCombatStats.HPCurrent -= damage;
         damageReceiver.HPCurrent -= damage;
         _view.WriteLine($"{damageMaker.Name} ataca a {damageReceiver.Name} con {damage} de daño");
     }
@@ -52,15 +41,21 @@ public class Combat
     {
         bool unitDied = AttackUnit.HPCurrent <= 0 || DefenseUnit.HPCurrent <= 0;
         if (!unitDied) return unitDied;
-        AttackUnit.HPCurrent = Math.Max(0, AttackUnit.HPCurrent);
-        DefenseUnit.HPCurrent = Math.Max(0, DefenseUnit.HPCurrent);
+        SetUnitsHPToMinimumIfNegative();
         WrapUpCombat();
         return unitDied;
+    }
+    
+    private void SetUnitsHPToMinimumIfNegative()
+    {
+        const int minimumHPofUnit = 0;
+        AttackUnit.HPCurrent = Math.Max(minimumHPofUnit, AttackUnit.HPCurrent);
+        DefenseUnit.HPCurrent = Math.Max(minimumHPofUnit, DefenseUnit.HPCurrent);
     }
 
     private void WrapUpCombat()
     {
-        UpdateStatsPostCombat();
+        ResetUnitsBonusAndPenaltyStatsDiff();
         ShowCombatResults();
     }
     
@@ -143,11 +138,6 @@ public class Combat
         }
     }
     
-    private void UpdateStatsPostCombat()
-    {
-        ResetBonusAndPenaltyStatsDiff();
-    }
-    
     private void ShowCombatResults()
     {
         _view.WriteLine($"{AttackUnit.Name} ({AttackUnit.HPCurrent}) : {DefenseUnit.Name} ({DefenseUnit.HPCurrent})");
@@ -158,6 +148,7 @@ public class Combat
         SkillsController skillsController = new SkillsController(AttackUnit, DefenseUnit, _view);
         skillsController.CreateSkills();
         skillsController.ApplySkills();
+        skillsController.ShowAllSkillsNetStatsOfUnitsAfterEffects();
     }
     
     private void SetUnitRoles()

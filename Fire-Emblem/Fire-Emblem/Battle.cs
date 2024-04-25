@@ -27,13 +27,12 @@ public class Battle
     
     private bool BattleHasWinner()
     {
-        const int minAmountOfUnitsToBattle = 1;
-        if (!(Player1Team.Units.Count >= minAmountOfUnitsToBattle))
+        if (!Player1Team.HasEnoughNumberOfUnits())
         {
             _view.WriteLine($"{Player2Team.PlayerName} ganó");
             return true;
         }
-        if (!(Player2Team.Units.Count >= minAmountOfUnitsToBattle))
+        if (!Player2Team.HasEnoughNumberOfUnits())
         {
             _view.WriteLine($"{Player1Team.PlayerName} ganó");
             return true;
@@ -69,8 +68,8 @@ public class Battle
     private Unit SelectUnitOfPlayer(Team team)
     {
         ShowAvailableUnits(team);
-        int playerChoice = Convert.ToInt32(_view.ReadLine());
-        return team.Units[playerChoice];
+        int playerChoice = ReadPlayerSelectedUnit();
+        return GetSelectedUnitOfPlayerUnits(playerChoice, team);
     }
     
     private void SetUnitsLastRivalStats()

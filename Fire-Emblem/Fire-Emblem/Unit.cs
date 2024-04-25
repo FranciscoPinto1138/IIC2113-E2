@@ -89,6 +89,26 @@ public class Unit
                     + (PenaltyStatsDiff.Res + FirstAttackPenaltyStatsDiff.Res * RivalIsOnFirstAttack + FollowUpAttackPenaltyStatsDiff.Res * IsOnFollowUpAttack) * PenaltyNeutralizationManager.Res)));
     }
     
+    public void ResetAllBonusAndPenaltyStatsDiff()
+    {
+        ResetBonusAndPenaltyStatsDiff();
+        ResetBonusAndPenaltyNeutralizationManager();
+        ResetFirstAttackBonusAndPenaltyStatsDiff();
+        ResetFollowUpAttackBonusAndPenaltyStatsDiff();
+    }
+    
+    private void ResetBonusAndPenaltyStatsDiff()
+    {
+        BonusStatsDiff = new StatsDiff();
+        PenaltyStatsDiff = new StatsDiff();
+    }
+    
+    private void ResetBonusAndPenaltyNeutralizationManager()
+    {
+        BonusNeutralizationManager = new BonusNeutralizationManager();
+        PenaltyNeutralizationManager = new PenaltyNeutralizationManager();
+    }
+    
     public void ResetFirstAttackBonusAndPenaltyStatsDiff()
     {
         FirstAttackBonusStatsDiff = new StatsDiff();

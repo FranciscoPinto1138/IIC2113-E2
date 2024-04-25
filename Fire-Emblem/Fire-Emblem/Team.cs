@@ -82,4 +82,10 @@ public class Team
         const int minUnitsPerTeam = 1;
         return (Units.Count <= maxUnitsPerTeam && Units.Count >= minUnitsPerTeam);
     }
+
+    public bool HasEnoughNumberOfUnits()
+    {
+        const int minAmountOfUnitsToBattle = 1;
+        return Units.Count >= minAmountOfUnitsToBattle;
+    }
 }
