@@ -36,8 +36,6 @@ public class IncreaseStat : BonusEffect
     }
 }
 
-// Pendiente de implementar Ignis y "Atk+50 % al primer ataque de la unidad"
-
 // Ignis
 public class IncreaseStatByPercentageOnFirstAttack : BonusEffect
 {

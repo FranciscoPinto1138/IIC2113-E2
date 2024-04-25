@@ -23,6 +23,11 @@ public class Combat
         return opponentUnit.Weapon == "Magic" ? unit.UnitTotalRes() : unit.UnitTotalDef();
     }
     
+    private int DetermineDamage(Unit damageMaker, double damageMakerWTB, int defOrRes)
+    {
+        return Convert.ToInt32(Math.Max(0, Math.Floor((damageMaker.UnitTotalAtk() * damageMakerWTB) - defOrRes)));
+    }
+    
     private void ResetUnitsBonusAndPenaltyStatsDiff()
     {
         AttackUnit.ResetAllBonusAndPenaltyStatsDiff();
@@ -32,18 +37,14 @@ public class Combat
     private void ApplyDamage(Unit damageMaker, Unit damageReceiver, double damageMakerWTB)
     {
         int defOrRes = DetermineResOrDef(damageReceiver, damageMaker);
-        int damage = Convert.ToInt32(Math.Max(0, Math.Floor((damageMaker.UnitTotalAtk() * damageMakerWTB) - defOrRes)));
+        int damage = DetermineDamage(damageMaker, damageMakerWTB, defOrRes);
         damageReceiver.HPCurrent -= damage;
         _view.WriteLine($"{damageMaker.Name} ataca a {damageReceiver.Name} con {damage} de daño");
     }
     
     private bool CheckIfUnitDied()
     {
-        bool unitDied = AttackUnit.HPCurrent <= 0 || DefenseUnit.HPCurrent <= 0;
-        if (!unitDied) return unitDied;
-        SetUnitsHPToMinimumIfNegative();
-        WrapUpCombat();
-        return unitDied;
+        return AttackUnit.HPCurrent <= 0 || DefenseUnit.HPCurrent <= 0;
     }
     
     private void SetUnitsHPToMinimumIfNegative()
@@ -55,6 +56,7 @@ public class Combat
 
     private void WrapUpCombat()
     {
+        SetUnitsHPToMinimumIfNegative();
         ResetUnitsBonusAndPenaltyStatsDiff();
         ShowCombatResults();
     }
@@ -113,24 +115,28 @@ public class Combat
     {
         return AttackUnitCanFollowUp() || DefenseUnitCanFollowUp();
     }
+    
+    private void UpdateUnitsFollowUpData(Unit unit, Unit opponent)
+    {
+        unit.ResetFollowUpAttackBonusAndPenaltyStatsDiff();
+        UnSetUnitsFollowUpStatus(unit, opponent);
+    }
 
     private void FollowUp(double WTBAttacker, double WTBDefender)
     {
         AttackUnit.ResetFirstAttackBonusAndPenaltyStatsDiff();
         DefenseUnit.ResetFirstAttackBonusAndPenaltyStatsDiff();
-        if (AttackUnitCanFollowUp()) // Atacante hace Follow-Up
+        if (AttackUnitCanFollowUp())
         {
             SetUnitsFollowUpStatus(AttackUnit, DefenseUnit);
             Attack(WTBAttacker);
-            AttackUnit.ResetFollowUpAttackBonusAndPenaltyStatsDiff();
-            UnSetUnitsFollowUpStatus(AttackUnit, DefenseUnit);
+            UpdateUnitsFollowUpData(AttackUnit, DefenseUnit);
         }
-        if (DefenseUnitCanFollowUp()) // Defensor hace Follow-Up
+        if (DefenseUnitCanFollowUp())
         {
             SetUnitsFollowUpStatus(DefenseUnit, AttackUnit);
             CounterAttack(WTBDefender);
-            DefenseUnit.ResetFollowUpAttackBonusAndPenaltyStatsDiff();
-            UnSetUnitsFollowUpStatus(DefenseUnit, AttackUnit);
+            UpdateUnitsFollowUpData(DefenseUnit, AttackUnit);
         }
         else if (!UnitsCanFollowUp())
         {
@@ -166,16 +172,19 @@ public class Combat
         Attack(WTBs[0]);
         if (CheckIfUnitDied())
         {
+            WrapUpCombat();
             return [AttackUnit, DefenseUnit];
         }
         CounterAttack(WTBs[1]);
         if (CheckIfUnitDied())
         {
+            WrapUpCombat();
             return [AttackUnit, DefenseUnit];
         }
         FollowUp(WTBs[0], WTBs[1]);
         if (CheckIfUnitDied())
         {
+            WrapUpCombat();
             return [AttackUnit, DefenseUnit];
         }
         WrapUpCombat();

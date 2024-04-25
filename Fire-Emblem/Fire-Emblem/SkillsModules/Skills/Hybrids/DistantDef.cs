@@ -18,11 +18,11 @@ public class DistantDef : Hybrid
         var effectOnUnit = new IncreaseStat(8, StatType.Def);
         var effectOnUnitAdditional = new IncreaseStat(8, StatType.Res);
         var neutralizeStatsOnRivalEffect = new NeutralizeBonusOnStats([StatType.Atk, StatType.Spd, StatType.Def, StatType.Res, StatType.HP]);
-        if (thirdCondition.IsConditionFulfilled(opponent, unit) && (firstCondition.IsConditionFulfilled(opponent, unit) || secondCondition.IsConditionFulfilled(opponent, unit)))
-        {
-            effectOnUnit.ApplyEffect(unit, opponent);
-            effectOnUnitAdditional.ApplyEffect(unit, opponent);
-            neutralizeStatsOnRivalEffect.ApplyEffect(opponent, unit);
-        }
+        if (!thirdCondition.IsConditionFulfilled(opponent, unit) ||
+            (!firstCondition.IsConditionFulfilled(opponent, unit) &&
+             !secondCondition.IsConditionFulfilled(opponent, unit))) return;
+        effectOnUnit.ApplyEffect(unit, opponent);
+        effectOnUnitAdditional.ApplyEffect(unit, opponent);
+        neutralizeStatsOnRivalEffect.ApplyEffect(opponent, unit);
     }
 }

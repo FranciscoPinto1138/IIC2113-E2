@@ -15,8 +15,8 @@ public class HPPlus15 : Bonus
     {
         if (unit.MostRecentRival == "")
         {
-            unit.HPCurrent += 15;
-            unit.HPMax += 15;
+            var effectOnUnit = new IncreaseHPBaseStat(15);
+            effectOnUnit.ApplyEffect(unit, opponent);
         }
     }
 }

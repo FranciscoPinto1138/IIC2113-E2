@@ -57,23 +57,14 @@ public class Team
             .Any(g => g.Count() > allowedNumberOfEqualUnits);
     }
     
+    private bool UnitHasValidSkills(Unit unit)
+    {
+        return unit.UnitHasValidAmountOfSkills() && !unit.UnitHasEqualSkills();
+    }
     
     public bool TeamHasValidSkills()
     {
-        foreach (var unit in Units)
-        {
-            if (!unit.UnitHasValidAmountOfSkills())
-            {
-                return false;
-            }
-
-            if (unit.UnitHasEqualSkills())
-            {
-                return false;
-            }
-        }
-
-        return true;
+        return Units.All(UnitHasValidSkills);
     }
     
     public bool HasValidLength()

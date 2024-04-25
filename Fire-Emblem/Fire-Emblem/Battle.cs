@@ -41,7 +41,6 @@ public class Battle
         return false;
     }
     
-    
     private void ShowAvailableUnits(Team team)
     {
         const int minimumHPofUnit = 0;

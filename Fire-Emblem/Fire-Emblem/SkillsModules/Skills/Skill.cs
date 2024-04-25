@@ -7,8 +7,6 @@ public abstract class Skill
     //public Object[] ConditionEffectFlux;
     public Unit unit;
     public Unit opponent;
-    public Stats unitCombatStats;
-    public Stats opponentCombatStats;
 
     public Skill(Unit unit, Unit opponent)
     {

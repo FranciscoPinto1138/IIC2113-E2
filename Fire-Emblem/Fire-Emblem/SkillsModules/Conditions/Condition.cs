@@ -21,14 +21,6 @@ public class UnitStartsCombatCondition : Condition
     }
 }
 
-public class OpponentStartsCombatCondition : Condition
-{
-    public override bool IsConditionFulfilled(Unit unit, Unit opponent)
-    {
-        return opponent.Role == "Attacker";
-    }
-}
-
 public class OpponentIsMostRecentRivalOfUnitCondition : Condition
 {
     public override bool IsConditionFulfilled(Unit unit, Unit opponent)
@@ -49,21 +41,6 @@ public class UnitHasWeaponTypeCondition : Condition
     public override bool IsConditionFulfilled(Unit unit, Unit opponent)
     {
         return unit.Weapon == _weaponType;
-    }
-}
-
-public class OpponentHasWeaponTypeCondition : Condition
-{
-    private string _weaponType;
-
-    public OpponentHasWeaponTypeCondition(string weaponType)
-    {
-        this._weaponType = weaponType;
-    }
-
-    public override bool IsConditionFulfilled(Unit unit, Unit opponent)
-    {
-        return opponent.Weapon == _weaponType;
     }
 }
 
@@ -97,34 +74,6 @@ public class UnitDamageTypeCondition : Condition
                 return unit.Weapon == "Sword" || unit.Weapon == "Axe" || unit.Weapon == "Lance" || unit.Weapon == "Bow";
             case DamageType.Magical:
                 return unit.Weapon == "Magic";
-            default:
-                return false;
-        }
-    }
-}
-
-public class OpponentDamageTypeCondition : Condition
-{
-    private DamageType _damageType;
-
-    public OpponentDamageTypeCondition(DamageType damageType)
-    {
-        this._damageType = damageType;
-    }
-
-    public override bool IsConditionFulfilled(Unit unit, Unit opponent)
-    {
-        return IsOpponentDamageTypeCorrect(opponent);
-    }
-    
-    private bool IsOpponentDamageTypeCorrect(Unit opponent)
-    {
-        switch (_damageType)
-        {
-            case DamageType.Physical:
-                return opponent.Weapon == "Sword" || opponent.Weapon == "Axe" || opponent.Weapon == "Lance" || opponent.Weapon == "Bow";
-            case DamageType.Magical:
-                return opponent.Weapon == "Magic";
             default:
                 return false;
         }

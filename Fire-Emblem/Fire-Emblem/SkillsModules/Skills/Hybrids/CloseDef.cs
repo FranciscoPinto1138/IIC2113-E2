@@ -19,11 +19,12 @@ public class CloseDef : Hybrid
         var effectOnUnit = new IncreaseStat(8, StatType.Def);
         var effectOnUnitAdditional = new IncreaseStat(8, StatType.Res);
         var neutralizeStatsOnRivalEffect = new NeutralizeBonusOnStats([StatType.Atk, StatType.Spd, StatType.Def, StatType.Res, StatType.HP]);
-        if (fourthCondition.IsConditionFulfilled(opponent, unit) && (firstCondition.IsConditionFulfilled(opponent, unit) || secondCondition.IsConditionFulfilled(opponent, unit) || thirdCondition.IsConditionFulfilled(opponent, unit)))
-        {
-            effectOnUnit.ApplyEffect(unit, opponent);
-            effectOnUnitAdditional.ApplyEffect(unit, opponent);
-            neutralizeStatsOnRivalEffect.ApplyEffect(opponent, unit);
-        }
+        if (!fourthCondition.IsConditionFulfilled(opponent, unit) ||
+            (!firstCondition.IsConditionFulfilled(opponent, unit) &&
+             !secondCondition.IsConditionFulfilled(opponent, unit) &&
+             !thirdCondition.IsConditionFulfilled(opponent, unit))) return;
+        effectOnUnit.ApplyEffect(unit, opponent);
+        effectOnUnitAdditional.ApplyEffect(unit, opponent);
+        neutralizeStatsOnRivalEffect.ApplyEffect(opponent, unit);
     }
 }

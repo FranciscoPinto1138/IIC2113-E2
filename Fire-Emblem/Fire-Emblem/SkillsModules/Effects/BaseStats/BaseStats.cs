@@ -1,10 +1,10 @@
 namespace Fire_Emblem;
 
-public class HPBaseStatPlus15 : Effect
+public class IncreaseHPBaseStat : Effect
 {
     private int _changeFactor;
     
-    public HPBaseStatPlus15(int changeFactor)
+    public IncreaseHPBaseStat(int changeFactor)
     {
         _changeFactor = changeFactor;
     }
