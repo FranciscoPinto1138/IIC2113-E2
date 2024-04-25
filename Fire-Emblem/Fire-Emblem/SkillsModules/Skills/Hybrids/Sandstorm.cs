@@ -12,14 +12,15 @@ public class Sandstorm : Hybrid
     
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)
     {
-        if (unit.Def * 1.5 > unit.Atk)
+        int difference = Convert.ToInt32(Math.Floor(unit.Def * 1.5) - unit.Atk);
+        if (difference > 0)
         {
-            var effectOnUnit = new IncreaseStatOnFollowUp(Convert.ToInt32(Math.Floor(unit.Def * 1.5) - unit.Atk), StatType.Atk);
+            var effectOnUnit = new IncreaseStatOnFollowUp(difference, StatType.Atk);
             effectOnUnit.ApplyEffect(unit, opponent);
         }
-        else
+        else if (difference < 0)
         {
-            var effectOnUnit = new DecreaseStatOnFollowUp(Convert.ToInt32(unit.Atk - Math.Floor(unit.Def * 1.5)), StatType.Atk);
+            var effectOnUnit = new DecreaseStatOnFollowUp(Math.Abs(difference), StatType.Atk);
             effectOnUnit.ApplyEffect(unit, opponent);
         }
     }
