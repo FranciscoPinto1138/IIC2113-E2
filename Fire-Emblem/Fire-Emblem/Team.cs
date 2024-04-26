@@ -72,10 +72,30 @@ public class Team
         return _units.GroupBy(u => u.Name)
             .Any(g => g.Count() > allowedNumberOfEqualUnits);
     }
+
+    private bool UnitHasEqualSkills(Unit unit)
+    {
+        int maxAmountOfSkills = 2;
+        if (unit.Skill.Length == maxAmountOfSkills)
+        {
+            if (unit.Skill[0] == unit.Skill[1])
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool UnitHasValidAmountOfSkills(Unit unit)
+    {
+        int maxAmountOfSkills = 2;
+        return unit.Skill.Length <= maxAmountOfSkills;
+    }
     
     private bool UnitHasValidSkills(Unit unit)
     {
-        return unit.UnitHasValidAmountOfSkills() && !unit.UnitHasEqualSkills();
+        return UnitHasValidAmountOfSkills(unit) && !UnitHasEqualSkills(unit);
     }
     
     public bool TeamHasValidSkills()

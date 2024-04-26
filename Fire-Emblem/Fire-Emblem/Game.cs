@@ -23,10 +23,15 @@ public class Game
         battle.DevelopBattle();
     }
     
-    public void Play()
+    private Team[] GetTeamsFromFolder()
     {
         TeamsLoader teamsLoader = new TeamsLoader(_view, _teamsFolder);
-        Team[] teams = teamsLoader.LoadTeams();
+        return teamsLoader.LoadTeams();
+    }
+    
+    public void Play()
+    {
+        Team[] teams = GetTeamsFromFolder();
         ValidTeamsChecker validTeamsChecker = new ValidTeamsChecker(teams[0], teams[1]);
         if (!validTeamsChecker.IsValidTeam())
         {

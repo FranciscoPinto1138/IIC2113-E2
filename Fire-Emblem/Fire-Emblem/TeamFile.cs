@@ -8,24 +8,34 @@ namespace Fire_Emblem;
 public class TeamFile
 {
     private string[] _fileLines;
-    public string[] Team1Lines;
-    public string[] Team2Lines;
+    private string[] _team1Lines;
+    private string[] _team2Lines;
     
     public TeamFile(string filePath)
     {
         _fileLines = File.ReadAllLines(filePath);
-        Team1Lines = Array.Empty<string>();
-        Team2Lines = Array.Empty<string>();
+        _team1Lines = Array.Empty<string>();
+        _team2Lines = Array.Empty<string>();
         this.SplitTeams();
+    }
+    
+    public string[] GetTeam1Lines()
+    {
+        return _team1Lines;
+    }
+    
+    public string[] GetTeam2Lines()
+    {
+        return _team2Lines;
     }
 
     private void SplitTeams()
     {
         int team1EndIndex = Array.IndexOf(_fileLines, "Player 2 Team");
-        Team1Lines = new string[team1EndIndex - 1];
-        Array.Copy(_fileLines, 1, Team1Lines, 0, team1EndIndex - 1);
+        _team1Lines = new string[team1EndIndex - 1];
+        Array.Copy(_fileLines, 1, _team1Lines, 0, team1EndIndex - 1);
         
-        Team2Lines = new string[_fileLines.Length - team1EndIndex - 1];
-        Array.Copy(_fileLines, team1EndIndex + 1, Team2Lines, 0, _fileLines.Length - team1EndIndex - 1);
+        _team2Lines = new string[_fileLines.Length - team1EndIndex - 1];
+        Array.Copy(_fileLines, team1EndIndex + 1, _team2Lines, 0, _fileLines.Length - team1EndIndex - 1);
     }
 }

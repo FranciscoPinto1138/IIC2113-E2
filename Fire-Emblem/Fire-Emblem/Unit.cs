@@ -27,7 +27,6 @@ public class Unit
     public int IsOnFollowUpAttack = 0;
     public int RivalIsOnFirstAttack = 0;
     public int RivalIsOnFollowUpAttack = 0;
-    private int _maxAmountOfSkills = 2;
 
     public Unit(string name, string weapon, string gender, string deathQuote, string[] skill, int hp, int atk, int spd, int def,
         int res)
@@ -43,81 +42,5 @@ public class Unit
         this.Spd = spd;
         this.Def = def;
         this.Res = res;
-    }
-    
-    public bool UnitHasEqualSkills()
-    {
-        if (Skill.Length == _maxAmountOfSkills)
-        {
-            if (Skill[0] == Skill[1])
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-    
-    public bool UnitHasValidAmountOfSkills()
-    {
-        return Skill.Length <= _maxAmountOfSkills;
-    }
-    
-    public int UnitTotalAtk()
-    {
-        return Convert.ToInt32(Math.Floor((double) (Atk +
-               (BonusStatsDiff.Atk + FirstAttackBonusStatsDiff.Atk * IsOnFirstAttack + FollowUpAttackBonusStatsDiff.Atk * IsOnFollowUpAttack) * BonusNeutralizationManager.Atk 
-                   + (PenaltyStatsDiff.Atk + FirstAttackPenaltyStatsDiff.Atk * RivalIsOnFirstAttack + FollowUpAttackPenaltyStatsDiff.Atk * IsOnFollowUpAttack) * PenaltyNeutralizationManager.Atk)));
-    }
-    
-    public int UnitTotalSpd()
-    {
-        return Spd + BonusStatsDiff.Spd * BonusNeutralizationManager.Spd + PenaltyStatsDiff.Spd * PenaltyNeutralizationManager.Spd;
-    }
-    
-    public int UnitTotalDef()
-    {
-        return Convert.ToInt32(Math.Floor((double) (Def +
-                (BonusStatsDiff.Def + FirstAttackBonusStatsDiff.Def * IsOnFirstAttack + FollowUpAttackBonusStatsDiff.Def * IsOnFollowUpAttack) * BonusNeutralizationManager.Def 
-                    + (PenaltyStatsDiff.Def + FirstAttackPenaltyStatsDiff.Def * RivalIsOnFirstAttack + FollowUpAttackPenaltyStatsDiff.Def * IsOnFollowUpAttack) * PenaltyNeutralizationManager.Def)));
-    }
-    
-    public int UnitTotalRes()
-    {
-        return Convert.ToInt32(Math.Floor((double) (Res +
-                (BonusStatsDiff.Res + FirstAttackBonusStatsDiff.Res * IsOnFirstAttack + FollowUpAttackBonusStatsDiff.Res * IsOnFollowUpAttack) * BonusNeutralizationManager.Res 
-                    + (PenaltyStatsDiff.Res + FirstAttackPenaltyStatsDiff.Res * RivalIsOnFirstAttack + FollowUpAttackPenaltyStatsDiff.Res * IsOnFollowUpAttack) * PenaltyNeutralizationManager.Res)));
-    }
-    
-    public void ResetAllBonusAndPenaltyStatsDiff()
-    {
-        ResetBonusAndPenaltyStatsDiff();
-        ResetBonusAndPenaltyNeutralizationManager();
-        ResetFirstAttackBonusAndPenaltyStatsDiff();
-        ResetFollowUpAttackBonusAndPenaltyStatsDiff();
-    }
-    
-    private void ResetBonusAndPenaltyStatsDiff()
-    {
-        BonusStatsDiff = new StatsDiff();
-        PenaltyStatsDiff = new StatsDiff();
-    }
-    
-    private void ResetBonusAndPenaltyNeutralizationManager()
-    {
-        BonusNeutralizationManager = new BonusNeutralizationManager();
-        PenaltyNeutralizationManager = new PenaltyNeutralizationManager();
-    }
-    
-    public void ResetFirstAttackBonusAndPenaltyStatsDiff()
-    {
-        FirstAttackBonusStatsDiff = new StatsDiff();
-        FirstAttackPenaltyStatsDiff = new StatsDiff();
-    }
-    
-    public void ResetFollowUpAttackBonusAndPenaltyStatsDiff()
-    {
-        FollowUpAttackBonusStatsDiff = new StatsDiff();
-        FollowUpAttackPenaltyStatsDiff = new StatsDiff();
     }
 }

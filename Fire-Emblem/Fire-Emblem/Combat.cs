@@ -8,6 +8,7 @@ public class Combat
     private Unit DefenseUnit { get; }
     private Team DefenderTeam { get; }
     private View _view;
+    private UnitStatsManager _unitStatsManager = new UnitStatsManager();
     
     public Combat(Unit attacker, Unit defender, Team attackerTeam, Team defenderTeam ,View view)
     {
@@ -20,18 +21,18 @@ public class Combat
     
     private int DetermineResOrDef(Unit unit, Unit opponentUnit)
     {
-        return opponentUnit.Weapon == "Magic" ? unit.UnitTotalRes() : unit.UnitTotalDef();
+        return opponentUnit.Weapon == "Magic" ? _unitStatsManager.GetUnitTotalRes(unit) : _unitStatsManager.GetUnitTotalDef(unit);
     }
     
     private int DetermineDamage(Unit damageMaker, double damageMakerWTB, int defOrRes)
     {
-        return Convert.ToInt32(Math.Max(0, Math.Floor((damageMaker.UnitTotalAtk() * damageMakerWTB) - defOrRes)));
+        return Convert.ToInt32(Math.Max(0, Math.Floor((_unitStatsManager.GetUnitTotalAtk(damageMaker) * damageMakerWTB) - defOrRes)));
     }
     
     private void ResetUnitsBonusAndPenaltyStatsDiff()
     {
-        AttackUnit.ResetAllBonusAndPenaltyStatsDiff();
-        DefenseUnit.ResetAllBonusAndPenaltyStatsDiff();
+        _unitStatsManager.ResetAllBonusAndPenaltyStatsDiff(AttackUnit);
+        _unitStatsManager.ResetAllBonusAndPenaltyStatsDiff(DefenseUnit);
     }
     
     private void ApplyDamage(Unit damageMaker, Unit damageReceiver, double damageMakerWTB)
@@ -88,13 +89,13 @@ public class Combat
     private bool AttackUnitCanFollowUp()
     {
         const int minimumSpdDifferenceForFollowUp = 5;
-        return AttackUnit.UnitTotalSpd() - DefenseUnit.UnitTotalSpd() >= minimumSpdDifferenceForFollowUp;
+        return _unitStatsManager.GetUnitTotalSpd(AttackUnit) - _unitStatsManager.GetUnitTotalSpd(DefenseUnit) >= minimumSpdDifferenceForFollowUp;
     }
     
     private bool DefenseUnitCanFollowUp()
     {
         const int minimumSpdDifferenceForFollowUp = 5;
-        return DefenseUnit.UnitTotalSpd() - AttackUnit.UnitTotalSpd() >= minimumSpdDifferenceForFollowUp;
+        return _unitStatsManager.GetUnitTotalSpd(DefenseUnit) - _unitStatsManager.GetUnitTotalSpd(AttackUnit) >= minimumSpdDifferenceForFollowUp;
     }
     
     private bool UnitsCanFollowUp()
@@ -104,7 +105,7 @@ public class Combat
     
     private void UpdateUnitsFollowUpData(Unit unit, Unit opponent)
     {
-        unit.ResetFollowUpAttackBonusAndPenaltyStatsDiff();
+        _unitStatsManager.ResetFirstAttackBonusAndPenaltyStatsDiff(unit);
         UnSetUnitsFollowUpStatus(unit, opponent);
     }
 
@@ -134,8 +135,8 @@ public class Combat
 
     private void ResetFirstAttackBonusAndPenaltyStatsDiffOfUnits()
     {
-        AttackUnit.ResetFirstAttackBonusAndPenaltyStatsDiff();
-        DefenseUnit.ResetFirstAttackBonusAndPenaltyStatsDiff();
+        _unitStatsManager.ResetFirstAttackBonusAndPenaltyStatsDiff(AttackUnit);
+        _unitStatsManager.ResetFirstAttackBonusAndPenaltyStatsDiff(DefenseUnit);
     }
 
     private void ShowCombatResults()
