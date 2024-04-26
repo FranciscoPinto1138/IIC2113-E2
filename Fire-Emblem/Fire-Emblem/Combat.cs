@@ -85,20 +85,6 @@ public class Combat
         opponent.RivalIsOnFollowUpAttack = 0;
     }
     
-    private void Attack(double WTBAttacker)
-    {
-        SetUnitsFirstAttackStatus(AttackUnit, DefenseUnit);
-        ApplyDamage(AttackUnit, DefenseUnit, WTBAttacker);
-        UnSetUnitsFirstAttackStatus(AttackUnit, DefenseUnit);
-    }
-
-    private void CounterAttack(double WTBDefender)
-    {
-        SetUnitsFirstAttackStatus(DefenseUnit, AttackUnit);
-        ApplyDamage(DefenseUnit, AttackUnit, WTBDefender);
-        UnSetUnitsFirstAttackStatus(DefenseUnit, AttackUnit);
-    }
-    
     private bool AttackUnitCanFollowUp()
     {
         const int minimumSpdDifferenceForFollowUp = 5;
@@ -124,19 +110,14 @@ public class Combat
 
     private void FollowUp(double WTBAttacker, double WTBDefender)
     {
-        AttackUnit.ResetFirstAttackBonusAndPenaltyStatsDiff();
-        DefenseUnit.ResetFirstAttackBonusAndPenaltyStatsDiff();
+        ResetFirstAttackBonusAndPenaltyStatsDiffOfUnits();
         if (AttackUnitCanFollowUp())
         {
-            SetUnitsFollowUpStatus(AttackUnit, DefenseUnit);
-            Attack(WTBAttacker);
-            UpdateUnitsFollowUpData(AttackUnit, DefenseUnit);
+            ResolveUnitFollowUp(AttackUnit, DefenseUnit, WTBAttacker);
         }
         if (DefenseUnitCanFollowUp())
         {
-            SetUnitsFollowUpStatus(DefenseUnit, AttackUnit);
-            CounterAttack(WTBDefender);
-            UpdateUnitsFollowUpData(DefenseUnit, AttackUnit);
+            ResolveUnitFollowUp(DefenseUnit, AttackUnit, WTBDefender);
         }
         else if (!UnitsCanFollowUp())
         {
@@ -144,6 +125,19 @@ public class Combat
         }
     }
     
+    private void ResolveUnitFollowUp(Unit attacker, Unit defender, double WTBAttacker)
+    {
+        SetUnitsFollowUpStatus(attacker, defender);
+        AttackOrCounterAttack(attacker, defender, WTBAttacker);
+        UpdateUnitsFollowUpData(attacker, defender);
+    }
+
+    private void ResetFirstAttackBonusAndPenaltyStatsDiffOfUnits()
+    {
+        AttackUnit.ResetFirstAttackBonusAndPenaltyStatsDiff();
+        DefenseUnit.ResetFirstAttackBonusAndPenaltyStatsDiff();
+    }
+
     private void ShowCombatResults()
     {
         _view.WriteLine($"{AttackUnit.Name} ({AttackUnit.HPCurrent}) : {DefenseUnit.Name} ({DefenseUnit.HPCurrent})");
@@ -162,32 +156,40 @@ public class Combat
         AttackUnit.Role = "Attacker";
         DefenseUnit.Role = "Defender";
     }
+    
+    private void AttackOrCounterAttack(Unit attacker, Unit defender, double WTBAttacker)
+    {
+        SetUnitsFirstAttackStatus(attacker, defender);
+        ApplyDamage(attacker, defender, WTBAttacker);
+        UnSetUnitsFirstAttackStatus(attacker, defender);
+    }
 
     public Unit[] ResolveCombat()
     {
-        WeaponTriangle weaponTriangle = new WeaponTriangle(AttackUnit, DefenseUnit, _view);
-        double[] WTBs = weaponTriangle.ResolveWeaponTriangle();
+        var WTBs = SetWTBs();
         SetUnitRoles();
         ResolveSkills();
-        Attack(WTBs[0]);
-        if (CheckIfUnitDied())
-        {
-            WrapUpCombat();
-            return [AttackUnit, DefenseUnit];
-        }
-        CounterAttack(WTBs[1]);
-        if (CheckIfUnitDied())
-        {
-            WrapUpCombat();
-            return [AttackUnit, DefenseUnit];
-        }
+        AttackOrCounterAttack(AttackUnit, DefenseUnit, WTBs[0]);
+        if (CheckIfCombatIsOver()) return [AttackUnit, DefenseUnit];
+        AttackOrCounterAttack(DefenseUnit, AttackUnit, WTBs[1]);
+        if (CheckIfCombatIsOver()) return [AttackUnit, DefenseUnit];
         FollowUp(WTBs[0], WTBs[1]);
-        if (CheckIfUnitDied())
-        {
-            WrapUpCombat();
-            return [AttackUnit, DefenseUnit];
-        }
+        if (CheckIfCombatIsOver()) return [AttackUnit, DefenseUnit];
         WrapUpCombat();
         return [AttackUnit, DefenseUnit];
+    }
+
+    private double[] SetWTBs()
+    {
+        WeaponTriangle weaponTriangle = new WeaponTriangle(AttackUnit, DefenseUnit, _view);
+        double[] WTBs = weaponTriangle.ResolveWeaponTriangle();
+        return WTBs;
+    }
+
+    private bool CheckIfCombatIsOver()
+    {
+        if (!CheckIfUnitDied()) return false;
+        WrapUpCombat();
+        return true;
     }
 }
