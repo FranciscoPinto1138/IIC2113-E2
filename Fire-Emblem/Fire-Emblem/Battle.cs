@@ -3,8 +3,8 @@ namespace Fire_Emblem;
 
 public class Battle
 {
-    private Team Player1Team { get; }
-    private Team Player2Team { get; }
+    private Team _player1Team;
+    private Team _player2Team;
     private View _view;
     private Team _currentPlayerTeam;
     private Team _opponentPlayerTeam;
@@ -17,24 +17,24 @@ public class Battle
     
     public Battle(Team player1Team, Team player2Team ,View view)
     {
-        this.Player1Team = player1Team;
-        this.Player2Team = player2Team;
+        this._player1Team = player1Team;
+        this._player2Team = player2Team;
         this._round = 1;
-        this._firstPlayerOfRoundName = Player1Team.GetPlayerName();
-        this._secondPlayerOfRoundName = Player2Team.GetPlayerName();
+        this._firstPlayerOfRoundName = _player1Team.GetPlayerName();
+        this._secondPlayerOfRoundName = _player2Team.GetPlayerName();
         _view = view;
     }
     
     private bool BattleHasWinner()
     {
-        if (!Player1Team.HasEnoughNumberOfUnits())
+        if (!_player1Team.HasEnoughNumberOfUnits())
         {
-            _view.WriteLine($"{Player2Team.GetPlayerName()} ganó");
+            _view.WriteLine($"{_player2Team.GetPlayerName()} ganó");
             return true;
         }
-        if (!Player2Team.HasEnoughNumberOfUnits())
+        if (!_player2Team.HasEnoughNumberOfUnits())
         {
-            _view.WriteLine($"{Player1Team.GetPlayerName()} ganó");
+            _view.WriteLine($"{_player1Team.GetPlayerName()} ganó");
             return true;
         }
 
@@ -110,8 +110,8 @@ public class Battle
     
     private void AssignPlayersRolesForRound()
     {
-        _currentPlayerTeam = _firstPlayerOfRoundName == Player1Team.GetPlayerName() ? Player1Team : Player2Team;
-        _opponentPlayerTeam = _secondPlayerOfRoundName == Player1Team.GetPlayerName() ? Player1Team : Player2Team;
+        _currentPlayerTeam = _firstPlayerOfRoundName == _player1Team.GetPlayerName() ? _player1Team : _player2Team;
+        _opponentPlayerTeam = _secondPlayerOfRoundName == _player1Team.GetPlayerName() ? _player1Team : _player2Team;
     }
     
     private void SwapPlayersOrderForNextRound()

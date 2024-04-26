@@ -3,19 +3,19 @@ namespace Fire_Emblem;
 
 public class Combat
 {
-    private Unit AttackUnit { get; }
-    private Team AttackerTeam { get; }
-    private Unit DefenseUnit { get; }
-    private Team DefenderTeam { get; }
+    private Unit _attackUnit;
+    private Team _attackerTeam;
+    private Unit _defenseUnit;
+    private Team _defenderTeam;
     private View _view;
     private UnitStatsManager _unitStatsManager = new UnitStatsManager();
     
     public Combat(Unit attacker, Unit defender, Team attackerTeam, Team defenderTeam ,View view)
     {
-        AttackUnit = attacker;
-        DefenseUnit = defender;
-        AttackerTeam = attackerTeam;
-        DefenderTeam = defenderTeam;
+        _attackUnit = attacker;
+        _defenseUnit = defender;
+        _attackerTeam = attackerTeam;
+        _defenderTeam = defenderTeam;
         _view = view;
     }
     
@@ -31,8 +31,8 @@ public class Combat
     
     private void ResetUnitsBonusAndPenaltyStatsDiff()
     {
-        _unitStatsManager.ResetAllBonusAndPenaltyStatsDiff(AttackUnit);
-        _unitStatsManager.ResetAllBonusAndPenaltyStatsDiff(DefenseUnit);
+        _unitStatsManager.ResetAllBonusAndPenaltyStatsDiff(_attackUnit);
+        _unitStatsManager.ResetAllBonusAndPenaltyStatsDiff(_defenseUnit);
     }
     
     private void ApplyDamage(Unit damageMaker, Unit damageReceiver, double damageMakerWTB)
@@ -45,14 +45,14 @@ public class Combat
     
     private bool CheckIfUnitDied()
     {
-        return AttackUnit.HPCurrent <= 0 || DefenseUnit.HPCurrent <= 0;
+        return _attackUnit.HPCurrent <= 0 || _defenseUnit.HPCurrent <= 0;
     }
     
     private void SetUnitsHPToMinimumIfNegative()
     {
         const int minimumHPofUnit = 0;
-        AttackUnit.HPCurrent = Math.Max(minimumHPofUnit, AttackUnit.HPCurrent);
-        DefenseUnit.HPCurrent = Math.Max(minimumHPofUnit, DefenseUnit.HPCurrent);
+        _attackUnit.HPCurrent = Math.Max(minimumHPofUnit, _attackUnit.HPCurrent);
+        _defenseUnit.HPCurrent = Math.Max(minimumHPofUnit, _defenseUnit.HPCurrent);
     }
 
     private void WrapUpCombat()
@@ -89,13 +89,13 @@ public class Combat
     private bool AttackUnitCanFollowUp()
     {
         const int minimumSpdDifferenceForFollowUp = 5;
-        return _unitStatsManager.GetUnitTotalSpd(AttackUnit) - _unitStatsManager.GetUnitTotalSpd(DefenseUnit) >= minimumSpdDifferenceForFollowUp;
+        return _unitStatsManager.GetUnitTotalSpd(_attackUnit) - _unitStatsManager.GetUnitTotalSpd(_defenseUnit) >= minimumSpdDifferenceForFollowUp;
     }
     
     private bool DefenseUnitCanFollowUp()
     {
         const int minimumSpdDifferenceForFollowUp = 5;
-        return _unitStatsManager.GetUnitTotalSpd(DefenseUnit) - _unitStatsManager.GetUnitTotalSpd(AttackUnit) >= minimumSpdDifferenceForFollowUp;
+        return _unitStatsManager.GetUnitTotalSpd(_defenseUnit) - _unitStatsManager.GetUnitTotalSpd(_attackUnit) >= minimumSpdDifferenceForFollowUp;
     }
     
     private bool UnitsCanFollowUp()
@@ -114,11 +114,11 @@ public class Combat
         ResetFirstAttackBonusAndPenaltyStatsDiffOfUnits();
         if (AttackUnitCanFollowUp())
         {
-            ResolveUnitFollowUp(AttackUnit, DefenseUnit, WTBAttacker);
+            ResolveUnitFollowUp(_attackUnit, _defenseUnit, WTBAttacker);
         }
         if (DefenseUnitCanFollowUp())
         {
-            ResolveUnitFollowUp(DefenseUnit, AttackUnit, WTBDefender);
+            ResolveUnitFollowUp(_defenseUnit, _attackUnit, WTBDefender);
         }
         else if (!UnitsCanFollowUp())
         {
@@ -135,18 +135,18 @@ public class Combat
 
     private void ResetFirstAttackBonusAndPenaltyStatsDiffOfUnits()
     {
-        _unitStatsManager.ResetFirstAttackBonusAndPenaltyStatsDiff(AttackUnit);
-        _unitStatsManager.ResetFirstAttackBonusAndPenaltyStatsDiff(DefenseUnit);
+        _unitStatsManager.ResetFirstAttackBonusAndPenaltyStatsDiff(_attackUnit);
+        _unitStatsManager.ResetFirstAttackBonusAndPenaltyStatsDiff(_defenseUnit);
     }
 
     private void ShowCombatResults()
     {
-        _view.WriteLine($"{AttackUnit.Name} ({AttackUnit.HPCurrent}) : {DefenseUnit.Name} ({DefenseUnit.HPCurrent})");
+        _view.WriteLine($"{_attackUnit.Name} ({_attackUnit.HPCurrent}) : {_defenseUnit.Name} ({_defenseUnit.HPCurrent})");
     }
     
     private void ResolveSkills()
     {
-        SkillsController skillsController = new SkillsController(AttackUnit, DefenseUnit, _view);
+        SkillsController skillsController = new SkillsController(_attackUnit, _defenseUnit, _view);
         skillsController.CreateSkills();
         skillsController.ApplySkills();
         skillsController.ShowAllSkillsNetStatsOfUnitsAfterEffects();
@@ -154,8 +154,8 @@ public class Combat
     
     private void SetUnitRoles()
     {
-        AttackUnit.Role = "Attacker";
-        DefenseUnit.Role = "Defender";
+        _attackUnit.Role = "Attacker";
+        _defenseUnit.Role = "Defender";
     }
     
     private void AttackOrCounterAttack(Unit attacker, Unit defender, double WTBAttacker)
@@ -170,19 +170,19 @@ public class Combat
         var WTBs = SetWTBs();
         SetUnitRoles();
         ResolveSkills();
-        AttackOrCounterAttack(AttackUnit, DefenseUnit, WTBs[0]);
-        if (CheckIfCombatIsOver()) return [AttackUnit, DefenseUnit];
-        AttackOrCounterAttack(DefenseUnit, AttackUnit, WTBs[1]);
-        if (CheckIfCombatIsOver()) return [AttackUnit, DefenseUnit];
+        AttackOrCounterAttack(_attackUnit, _defenseUnit, WTBs[0]);
+        if (CheckIfCombatIsOver()) return [_attackUnit, _defenseUnit];
+        AttackOrCounterAttack(_defenseUnit, _attackUnit, WTBs[1]);
+        if (CheckIfCombatIsOver()) return [_attackUnit, _defenseUnit];
         FollowUp(WTBs[0], WTBs[1]);
-        if (CheckIfCombatIsOver()) return [AttackUnit, DefenseUnit];
+        if (CheckIfCombatIsOver()) return [_attackUnit, _defenseUnit];
         WrapUpCombat();
-        return [AttackUnit, DefenseUnit];
+        return [_attackUnit, _defenseUnit];
     }
 
     private double[] SetWTBs()
     {
-        WeaponTriangle weaponTriangle = new WeaponTriangle(AttackUnit, DefenseUnit, _view);
+        WeaponTriangle weaponTriangle = new WeaponTriangle(_attackUnit, _defenseUnit, _view);
         double[] WTBs = weaponTriangle.ResolveWeaponTriangle();
         return WTBs;
     }
