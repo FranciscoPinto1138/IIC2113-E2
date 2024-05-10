@@ -26,7 +26,8 @@ public class Combat
     
     private int DetermineDamage(Unit damageMaker, double damageMakerWTB, int defOrRes)
     {
-        return Convert.ToInt32(Math.Max(0, Math.Floor((_unitStatsManager.GetUnitTotalAtk(damageMaker) * damageMakerWTB) - defOrRes)));
+        int initialDamage = Convert.ToInt32(Math.Max(0, Math.Floor((_unitStatsManager.GetUnitTotalAtk(damageMaker) * damageMakerWTB) - defOrRes)));
+        return initialDamage + damageMaker.DamageEffectsManager.ExtraDamagePermanent;
     }
     
     private void ResetUnitsBonusAndPenaltyStatsDiff()

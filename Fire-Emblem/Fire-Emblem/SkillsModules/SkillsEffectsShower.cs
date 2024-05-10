@@ -19,8 +19,10 @@ public class SkillsEffectsShower
     {
         ShowNetStatsEffects(_attackUnit);
         ShowNeutralizedBonusAndPenalties(_attackUnit);
+        ShowExtraDamagePermanentEffects(_attackUnit);
         ShowNetStatsEffects(_defenseUnit);
         ShowNeutralizedBonusAndPenalties(_defenseUnit);
+        ShowExtraDamagePermanentEffects(_defenseUnit);
     }
     
     private void ShowNetStatsEffects(Unit unit)
@@ -190,6 +192,14 @@ public class SkillsEffectsShower
         if (unit.PenaltyNeutralizationManager.Res == 0)
         {
             _view.WriteLine($"Los penalty de Res de {unit.Name} fueron neutralizados");
+        }
+    }
+    
+    private void ShowExtraDamagePermanentEffects(Unit unit)
+    {
+        if (unit.DamageEffectsManager.ExtraDamagePermanent > 0)
+        {
+            _view.WriteLine($"{unit.Name} realizará +{unit.DamageEffectsManager.ExtraDamagePermanent} daño extra en cada ataque");
         }
     }
 }

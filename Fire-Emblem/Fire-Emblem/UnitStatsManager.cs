@@ -28,6 +28,26 @@ public class UnitStatsManager
                                                     + (unit.PenaltyStatsDiff.Res + unit.FirstAttackPenaltyStatsDiff.Res * unit.RivalIsOnFirstAttack + unit.FollowUpAttackPenaltyStatsDiff.Res * unit.IsOnFollowUpAttack) * unit.PenaltyNeutralizationManager.Res)));
     }
     
+    public int GetUnitNonSpecificTotalAtk(Unit unit)
+    {
+        return unit.Atk + unit.BonusStatsDiff.Atk * unit.BonusNeutralizationManager.Atk + unit.PenaltyStatsDiff.Atk * unit.PenaltyNeutralizationManager.Atk;
+    }
+    
+    public int GetUnitNonSpecificTotalSpd(Unit unit)
+    {
+        return unit.Spd + unit.BonusStatsDiff.Spd * unit.BonusNeutralizationManager.Spd + unit.PenaltyStatsDiff.Spd * unit.PenaltyNeutralizationManager.Spd;
+    }
+    
+    public int GetUnitNonSpecificTotalDef(Unit unit)
+    {
+        return unit.Def + unit.BonusStatsDiff.Def * unit.BonusNeutralizationManager.Def + unit.PenaltyStatsDiff.Def * unit.PenaltyNeutralizationManager.Def;
+    }
+    
+    public int GetUnitNonSpecificTotalRes(Unit unit)
+    {
+        return unit.Res + unit.BonusStatsDiff.Res * unit.BonusNeutralizationManager.Res + unit.PenaltyStatsDiff.Res * unit.PenaltyNeutralizationManager.Res;
+    }
+    
     public void ResetAllBonusAndPenaltyStatsDiff(Unit unit)
     {
         ResetBonusAndPenaltyStatsDiff(unit);

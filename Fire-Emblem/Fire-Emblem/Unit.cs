@@ -23,6 +23,7 @@ public class Unit
     public StatsDiff FollowUpAttackPenaltyStatsDiff = new StatsDiff();
     public BonusNeutralizationManager BonusNeutralizationManager = new BonusNeutralizationManager();
     public PenaltyNeutralizationManager PenaltyNeutralizationManager = new PenaltyNeutralizationManager();
+    public DamageEffectsManager DamageEffectsManager = new DamageEffectsManager();
     public int IsOnFirstAttack = 0;
     public int IsOnFollowUpAttack = 0;
     public int RivalIsOnFirstAttack = 0;
