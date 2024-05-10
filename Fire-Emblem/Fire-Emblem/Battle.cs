@@ -13,6 +13,7 @@ public class Battle
     private string _firstPlayerOfRoundName;
     private string _secondPlayerOfRoundName;
     private Unit[] _postCombatUnits;
+    private UnitSelectionManager _unitSelectionManager;
     private int _round;
     
     public Battle(Team player1Team, Team player2Team ,View view)
@@ -23,6 +24,7 @@ public class Battle
         this._firstPlayerOfRoundName = _player1Team.GetPlayerName();
         this._secondPlayerOfRoundName = _player2Team.GetPlayerName();
         _view = view;
+        _unitSelectionManager = new UnitSelectionManager(_view);
     }
     
     private bool BattleHasWinner()
@@ -41,36 +43,6 @@ public class Battle
         return false;
     }
     
-    private void ShowAvailableUnits(Team team)
-    {
-        const int minimumHPofUnit = 0;
-        _view.WriteLine($"{team.GetPlayerName()} selecciona una opción");
-        for (int i = 0; i < team.GetUnits().Count; i++)
-        {
-            if (team.GetUnits()[i].HPCurrent > minimumHPofUnit)
-            {
-                _view.WriteLine($"{i}: {team.GetUnits()[i].Name}");
-            }
-        }
-    }
-
-    private int ReadPlayerSelectedUnit()
-    {
-        return Convert.ToInt32(_view.ReadLine());
-    }
-    
-    private Unit GetSelectedUnitOfPlayerUnits(int playerChoice, Team team)
-    {
-        return team.GetUnits()[playerChoice];
-    }
-    
-    private Unit SelectUnitOfPlayer(Team team)
-    {
-        ShowAvailableUnits(team);
-        int playerChoice = ReadPlayerSelectedUnit();
-        return GetSelectedUnitOfPlayerUnits(playerChoice, team);
-    }
-    
     private void SetUnitsLastRivalStats()
     {
         _currentPlayerSelectedUnit.MostRecentRival = _opponentSelectedUnit.Name;
@@ -85,8 +57,8 @@ public class Battle
     
     private void AssignSelectedUnits()
     {
-        _currentPlayerSelectedUnit = SelectUnitOfPlayer(_currentPlayerTeam);
-        _opponentSelectedUnit = SelectUnitOfPlayer(_opponentPlayerTeam);
+        _currentPlayerSelectedUnit = _unitSelectionManager.SelectUnitOfPlayer(_currentPlayerTeam);
+        _opponentSelectedUnit = _unitSelectionManager.SelectUnitOfPlayer(_opponentPlayerTeam);
     }
     
     private void ShowRoundStart()

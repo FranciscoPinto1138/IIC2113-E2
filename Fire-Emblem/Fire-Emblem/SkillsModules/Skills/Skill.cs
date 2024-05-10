@@ -2,8 +2,8 @@ namespace Fire_Emblem;
 
 public abstract class Skill
 {
-    public string Name { get; set; }
-    public string Description { get; set; }
+    protected string Name { get; set; }
+    protected string Description { get; set; }
     public Unit unit;
     public Unit opponent;
 

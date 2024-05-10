@@ -53,8 +53,8 @@ public class UnitStatsManager
         unit.FirstAttackBonusStatsDiff = new StatsDiff();
         unit.FirstAttackPenaltyStatsDiff = new StatsDiff();
     }
-    
-    public void ResetFollowUpAttackBonusAndPenaltyStatsDiff(Unit unit)
+
+    private void ResetFollowUpAttackBonusAndPenaltyStatsDiff(Unit unit)
     {
         unit.FollowUpAttackBonusStatsDiff = new StatsDiff();
         unit.FollowUpAttackPenaltyStatsDiff = new StatsDiff();
