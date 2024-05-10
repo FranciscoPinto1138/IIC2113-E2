@@ -4,7 +4,6 @@ public abstract class Skill
 {
     public string Name { get; set; }
     public string Description { get; set; }
-    //public Object[] ConditionEffectFlux;
     public Unit unit;
     public Unit opponent;
 
