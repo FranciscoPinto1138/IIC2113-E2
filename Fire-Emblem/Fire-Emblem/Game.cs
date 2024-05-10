@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System . Text . Json ;
 
-// Entrega 2
+// Entrega 3
 namespace Fire_Emblem;
 
 public class Game

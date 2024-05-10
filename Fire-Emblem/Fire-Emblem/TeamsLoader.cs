@@ -25,6 +25,7 @@ public class TeamsLoader
     private string GetSelectedTeamsFilePath()
     {
         string[] teamFiles = Directory.GetFiles(_teamsFolder, "*.txt");
+        Array.Sort(teamFiles);
         ShowAvailableTeamFiles(teamFiles);
         int selectedTeam = Convert.ToInt32(_view.ReadLine());
         return teamFiles[selectedTeam];
