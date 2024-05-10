@@ -6,12 +6,10 @@ public class Lull : Hybrid
     private List<StatType> _rivalNeutralizedStatsList;
     private List<int> _changeDecreaseFactorsList;
     
-    public Lull(Unit unit, Unit opponent, List<StatType> rivalDecreasedStatsList, List<int> changeDecreaseFactorsList, List<StatType> rivalNeutralizedStatsList) : base(unit, opponent)
+    public Lull(List<StatType> rivalDecreasedStatsList, List<int> changeDecreaseFactorsList, List<StatType> rivalNeutralizedStatsList)
     {
         this.Name = "Lull";
         this.Description = "Varias habilidades en que se penaliza stats del rival y se neutralizan bonus de otras stats";
-        this.unit = unit;
-        this.opponent = opponent;
         this._rivalNeutralizedStatsList = rivalDecreasedStatsList;
         this._rivalDecreasedStatsList = rivalNeutralizedStatsList;
         this._changeDecreaseFactorsList = changeDecreaseFactorsList;

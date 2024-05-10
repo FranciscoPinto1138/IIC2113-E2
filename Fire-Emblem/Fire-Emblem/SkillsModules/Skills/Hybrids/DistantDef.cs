@@ -2,12 +2,10 @@ namespace Fire_Emblem;
 
 public class DistantDef : Hybrid
 {
-    public DistantDef(Unit unit, Unit opponent) : base(unit, opponent)
+    public DistantDef()
     {
         this.Name = "Distant Def";
         this.Description = "Si el rival inicia el combate usando magia o arco, otorga Def/Res+8 y neutraliza los bonus del rival durante el combate.";
-        this.unit = unit;
-        this.opponent = opponent;
     }
     
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)

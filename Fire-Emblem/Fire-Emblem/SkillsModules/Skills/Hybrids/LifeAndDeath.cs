@@ -4,12 +4,10 @@ namespace Fire_Emblem.SkillsModules.Skills.Hybrids;
 
 public class LifeAndDeath : Hybrid
 {
-    public LifeAndDeath(Unit unit, Unit opponent) : base(unit, opponent)
+    public LifeAndDeath()
     {
         this.Name = "Life and Death";
         this.Description = "Otorga Atk/Spd+6. Inflige Def/Res-5.";
-        this.unit = unit;
-        this.opponent = opponent;
     }
     
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)

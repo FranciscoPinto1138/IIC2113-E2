@@ -2,12 +2,10 @@ namespace Fire_Emblem.SkillsModules.Skills.Hybrids;
 
 public class FortDefRes : Hybrid
 {
-    public FortDefRes(Unit unit, Unit opponent) : base(unit, opponent)
+    public FortDefRes()
     {
         this.Name = "Fort. Def/Res";
         this.Description = "Otorga Def/Res+6. Inflige Atk-2.";
-        this.unit = unit;
-        this.opponent = opponent;
     }
     
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)

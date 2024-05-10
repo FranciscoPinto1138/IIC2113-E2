@@ -2,12 +2,10 @@ namespace Fire_Emblem;
 
 public class Perceptive : Bonus
 {
-    public Perceptive(Unit unit, Unit opponent) : base(unit, opponent)
+    public Perceptive()
     {
         this.Name = "Perceptive";
         this.Description = "Si la unidad inicia el combate, otorga Spd+12 a la unidad durante el combate, y por cada cuatro puntos de Spd (sin contar bonus), la unidad gana Spd+1 adicional.";
-        this.unit = unit;
-        this.opponent = opponent;
     }
     
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)

@@ -2,12 +2,10 @@ namespace Fire_Emblem;
 
 public class StunningSmile : Penalty
 {
-    public StunningSmile(Unit unit, Unit opponent) : base(unit, opponent)
+    public StunningSmile()
     {
         this.Name = "Stunning Smile";
         this.Description = "Si el rival es hombre, inflige Spd-8 en ese rival durante el combate.";
-        this.unit = unit;
-        this.opponent = opponent;
     }
 
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)

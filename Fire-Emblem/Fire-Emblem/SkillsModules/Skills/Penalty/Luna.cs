@@ -2,12 +2,10 @@ namespace Fire_Emblem;
 
 public class Luna : Penalty
 {
-    public Luna(Unit unit, Unit opponent) : base(unit, opponent)
+    public Luna()
     {
         this.Name = "Luna";
         this.Description = "Durante el primer ataque de la unidad, ignora la mitad de Def y Res base del rival. (Considere esta reduccion como un Penalty).";
-        this.unit = unit;
-        this.opponent = opponent;
     }
 
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)

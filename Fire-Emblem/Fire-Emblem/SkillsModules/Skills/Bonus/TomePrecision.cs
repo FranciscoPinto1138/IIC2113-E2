@@ -2,12 +2,10 @@ namespace Fire_Emblem;
 
 public class TomePrecision : Bonus
 {
-    public TomePrecision(Unit unit, Unit opponent) : base(unit, opponent)
+    public TomePrecision()
     {
         this.Name = "Tome Precision";
         this.Description = "Otorga Atk/Spd+6 al usar magia.";
-        this.unit = unit;
-        this.opponent = opponent;
     }
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)
     {

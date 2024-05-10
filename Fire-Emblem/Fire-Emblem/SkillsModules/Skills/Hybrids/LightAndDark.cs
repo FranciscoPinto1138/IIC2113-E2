@@ -2,12 +2,10 @@ namespace Fire_Emblem.SkillsModules.Skills.Hybrids;
 
 public class LightAndDark : Hybrid
 {
-    public LightAndDark(Unit unit, Unit opponent) : base(unit, opponent)
+    public LightAndDark()
     {
         this.Name = "Light and Dark";
         this.Description = "Inflige Atk/Spd/Def/Res-5 en el rival, neutraliza los penaltis de la unidad y los bonus del rival.";
-        this.unit = unit;
-        this.opponent = opponent;
     }
     
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)

@@ -20,19 +20,19 @@ public class SkillsFactory
         switch (name)
         {
             case "HP +15":
-                return new HPPlus15(_unit, _opponent);
+                return new HPPlus15();
             case "Fair Fight":
-                return new FairFight(_unit, _opponent);
+                return new FairFight();
             case "Will to Win":
-                return new WillToWin(_unit, _opponent);
+                return new WillToWin();
             case "Single-Minded":
-                return new SingleMinded(_unit, _opponent);
+                return new SingleMinded();
             case "Ignis":
-                return new Ignis(_unit, _opponent);
+                return new Ignis();
             case "Perceptive":
-                return new Perceptive(_unit, _opponent);
+                return new Perceptive();
             case "Tome Precision":
-                return new TomePrecision(_unit, _opponent);
+                return new TomePrecision();
             case "Attack +6":
                 return new StatBuffer(_unit, _opponent, [StatType.Atk], [6]);
             case "Speed +5":
@@ -40,9 +40,9 @@ public class SkillsFactory
             case "Defense +5":
                 return new StatBuffer(_unit, _opponent, [StatType.Def], [5]);
             case "Wrath":
-                return new Wrath(_unit, _opponent);
+                return new Wrath();
             case "Resolve":
-                return new Resolve(_unit, _opponent);
+                return new Resolve();
             case "Resistance +5":
                 return new StatBuffer(_unit, _opponent, [StatType.Res], [5]);
             case "Atk/Def +5":
@@ -52,115 +52,115 @@ public class SkillsFactory
             case "Spd/Res +5":
                 return new StatBuffer(_unit, _opponent, [StatType.Spd, StatType.Res], [5, 5]);
             case "Deadly Blade":
-                return new DeadlyBlade(_unit, _opponent);
+                return new DeadlyBlade();
             case "Death Blow":
-                return new BlowStrikeSparrow(_unit, _opponent, [StatType.Atk], [8]);
+                return new BlowStrikeSparrow([StatType.Atk], [8]);
             case "Armored Blow":
-                return new BlowStrikeSparrow(_unit, _opponent, [StatType.Def], [8]);
+                return new BlowStrikeSparrow([StatType.Def], [8]);
             case "Darting Blow":
-                return new BlowStrikeSparrow(_unit, _opponent, [StatType.Spd], [8]);
+                return new BlowStrikeSparrow([StatType.Spd], [8]);
             case "Warding Blow":
-                return new BlowStrikeSparrow(_unit, _opponent, [StatType.Res], [8]);
+                return new BlowStrikeSparrow([StatType.Res], [8]);
             case "Swift Sparrow":
-                return new BlowStrikeSparrow(_unit, _opponent, [StatType.Atk, StatType.Spd], [6, 6]);
+                return new BlowStrikeSparrow([StatType.Atk, StatType.Spd], [6, 6]);
             case "Sturdy Blow":
-                return new BlowStrikeSparrow(_unit, _opponent, [StatType.Atk, StatType.Def], [6, 6]);
+                return new BlowStrikeSparrow([StatType.Atk, StatType.Def], [6, 6]);
             case "Mirror Strike":
-                return new BlowStrikeSparrow(_unit, _opponent, [StatType.Atk, StatType.Res], [6, 6]);
+                return new BlowStrikeSparrow([StatType.Atk, StatType.Res], [6, 6]);
             case "Steady Blow":
-                return new BlowStrikeSparrow(_unit, _opponent, [StatType.Spd, StatType.Def], [6, 6]);
+                return new BlowStrikeSparrow([StatType.Spd, StatType.Def], [6, 6]);
             case "Swift Strike":
-                return new BlowStrikeSparrow(_unit, _opponent, [StatType.Spd, StatType.Res], [6, 6]);
+                return new BlowStrikeSparrow([StatType.Spd, StatType.Res], [6, 6]);
             case "Bracing Blow":
-                return new BlowStrikeSparrow(_unit, _opponent, [StatType.Def, StatType.Res], [6, 6]);
+                return new BlowStrikeSparrow([StatType.Def, StatType.Res], [6, 6]);
             case "Brazen Atk/Spd":
-                return new Brazen(_unit, _opponent, [StatType.Atk, StatType.Spd], [10, 10]);
+                return new Brazen([StatType.Atk, StatType.Spd], [10, 10]);
             case "Brazen Atk/Def":
-                return new Brazen(_unit, _opponent, [StatType.Atk, StatType.Def], [10, 10]);
+                return new Brazen([StatType.Atk, StatType.Def], [10, 10]);
             case "Brazen Atk/Res":
-                return new Brazen(_unit, _opponent, [StatType.Atk, StatType.Res], [10, 10]);
+                return new Brazen([StatType.Atk, StatType.Res], [10, 10]);
             case "Brazen Spd/Def":
-                return new Brazen(_unit, _opponent, [StatType.Spd, StatType.Def], [10, 10]);
+                return new Brazen([StatType.Spd, StatType.Def], [10, 10]);
             case "Brazen Spd/Res":
-                return new Brazen(_unit, _opponent, [StatType.Spd, StatType.Res], [10, 10]);
+                return new Brazen([StatType.Spd, StatType.Res], [10, 10]);
             case "Brazen Def/Res":
-                return new Brazen(_unit, _opponent, [StatType.Def, StatType.Res], [10, 10]);
+                return new Brazen([StatType.Def, StatType.Res], [10, 10]);
             case "Fire Boost":
-                return new Boost(_unit, _opponent, [StatType.Atk], [6]);
+                return new Boost([StatType.Atk], [6]);
             case "Wind Boost":
-                return new Boost(_unit, _opponent, [StatType.Spd], [6]);
+                return new Boost([StatType.Spd], [6]);
             case "Earth Boost":
-                return new Boost(_unit, _opponent, [StatType.Def], [6]);
+                return new Boost([StatType.Def], [6]);
             case "Water Boost":
-                return new Boost(_unit, _opponent, [StatType.Res], [6]);
+                return new Boost([StatType.Res], [6]);
             case "Chaos Style":
-                return new ChaosStyle(_unit, _opponent);
+                return new ChaosStyle();
             case "Blinding Flash":
-                return new BlindingFlash(_unit, _opponent);
+                return new BlindingFlash();
             case "Not *Quite*":
-                return new NotQuite(_unit, _opponent);
+                return new NotQuite();
             case "Stunning Smile":
-                return new StunningSmile(_unit, _opponent);
+                return new StunningSmile();
             case "Disarming Sigh":
-                return new DisarmingSigh(_unit, _opponent);
+                return new DisarmingSigh();
             case "Charmer":
-                return new Charmer(_unit, _opponent);
+                return new Charmer();
             case "Luna":
-                return new Luna(_unit, _opponent);
+                return new Luna();
             case "Belief in Love":
-                return new BeliefInLove(_unit, _opponent);
+                return new BeliefInLove();
             case "Beorc's Blessing":
-                return new BeorcsBlessing(_unit, _opponent);
+                return new BeorcsBlessing();
             case "Agnea's Arrow":
-                return new AgneasArrow(_unit, _opponent);
+                return new AgneasArrow();
             case "Soulblade":
-                return new Soulblade(_unit, _opponent);
+                return new Soulblade();
             case "Sandstorm":
-                return new Sandstorm(_unit, _opponent);
+                return new Sandstorm();
             case "Sword Agility":
-                return new AgilityPowerFocus(_unit, _opponent, "Sword", [StatType.Spd], [12], [StatType.Atk], [6]);
+                return new AgilityPowerFocus("Sword", [StatType.Spd], [12], [StatType.Atk], [6]);
             case "Lance Power":
-                return new AgilityPowerFocus(_unit, _opponent, "Lance", [StatType.Atk], [10], [StatType.Def], [10]);
+                return new AgilityPowerFocus("Lance", [StatType.Atk], [10], [StatType.Def], [10]);
             case "Sword Power":
-                return new AgilityPowerFocus(_unit, _opponent, "Sword", [StatType.Atk], [10], [StatType.Def], [10]);
+                return new AgilityPowerFocus("Sword", [StatType.Atk], [10], [StatType.Def], [10]);
             case "Bow Focus":
-                return new AgilityPowerFocus(_unit, _opponent, "Bow", [StatType.Atk], [10], [StatType.Res], [10]);
+                return new AgilityPowerFocus("Bow", [StatType.Atk], [10], [StatType.Res], [10]);
             case "Lance Agility":
-                return new AgilityPowerFocus(_unit, _opponent, "Lance", [StatType.Spd], [12], [StatType.Atk], [6]);
+                return new AgilityPowerFocus("Lance", [StatType.Spd], [12], [StatType.Atk], [6]);
             case "Axe Power":
-                return new AgilityPowerFocus(_unit, _opponent, "Axe", [StatType.Atk], [10], [StatType.Def], [10]);
+                return new AgilityPowerFocus("Axe", [StatType.Atk], [10], [StatType.Def], [10]);
             case "Bow Agility":
-                return new AgilityPowerFocus(_unit, _opponent, "Bow", [StatType.Spd], [12], [StatType.Atk], [6]);
+                return new AgilityPowerFocus("Bow", [StatType.Spd], [12], [StatType.Atk], [6]);
             case "Sword Focus":
-                return new AgilityPowerFocus(_unit, _opponent, "Sword", [StatType.Atk], [10], [StatType.Res], [10]);
+                return new AgilityPowerFocus("Sword", [StatType.Atk], [10], [StatType.Res], [10]);
             case "Close Def":
-                return new CloseDef(_unit, _opponent);
+                return new CloseDef();
             case "Distant Def":
-                return new DistantDef(_unit, _opponent);
+                return new DistantDef();
             case "Lull Atk/Spd":
-                return new Lull(_unit, _opponent, [StatType.Atk, StatType.Spd], [3, 3], [StatType.Atk, StatType.Spd]);
+                return new Lull([StatType.Atk, StatType.Spd], [3, 3], [StatType.Atk, StatType.Spd]);
             case "Lull Atk/Def":
-                return new Lull(_unit, _opponent, [StatType.Atk, StatType.Def], [3, 3], [StatType.Atk, StatType.Def]);
+                return new Lull([StatType.Atk, StatType.Def], [3, 3], [StatType.Atk, StatType.Def]);
             case "Lull Atk/Res":
-                return new Lull(_unit, _opponent, [StatType.Atk, StatType.Res], [3, 3], [StatType.Atk, StatType.Res]);
+                return new Lull([StatType.Atk, StatType.Res], [3, 3], [StatType.Atk, StatType.Res]);
             case "Lull Spd/Def":
-                return new Lull(_unit, _opponent, [StatType.Spd, StatType.Def], [3, 3], [StatType.Spd, StatType.Def]);
+                return new Lull([StatType.Spd, StatType.Def], [3, 3], [StatType.Spd, StatType.Def]);
             case "Lull Spd/Res":
-                return new Lull(_unit, _opponent, [StatType.Spd, StatType.Res], [3, 3], [StatType.Spd, StatType.Res]);
+                return new Lull([StatType.Spd, StatType.Res], [3, 3], [StatType.Spd, StatType.Res]);
             case "Lull Def/Res":
-                return new Lull(_unit, _opponent, [StatType.Def, StatType.Res], [3, 3], [StatType.Def, StatType.Res]);
+                return new Lull([StatType.Def, StatType.Res], [3, 3], [StatType.Def, StatType.Res]);
             case "Fort. Def/Res":
-                return new FortDefRes(_unit, _opponent);
+                return new FortDefRes();
             case "Life and Death":
-                return new LifeAndDeath(_unit, _opponent);
+                return new LifeAndDeath();
             case "Solid Ground":
-                return new SolidGround(_unit, _opponent);
+                return new SolidGround();
             case "Still Water":
-                return new StillWater(_unit, _opponent);
+                return new StillWater();
             case "Dragonskin":
-                return new Dragonskin(_unit, _opponent);
+                return new Dragonskin();
             case "Light and Dark":
-                return new LightAndDark(_unit, _opponent);
+                return new LightAndDark();
             default:
                 return null;
         }

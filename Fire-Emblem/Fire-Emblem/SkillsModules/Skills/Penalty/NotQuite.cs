@@ -2,12 +2,10 @@ namespace Fire_Emblem;
 
 public class NotQuite : Penalty
 {
-    public NotQuite(Unit unit, Unit opponent) : base(unit, opponent)
+    public NotQuite()
     {
         this.Name = "Not *Quite*";
         this.Description = "Si el rival inicia el combate, inflige Atk-4 en ese rival durante el combate";
-        this.unit = unit;
-        this.opponent = opponent;
     }
 
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)

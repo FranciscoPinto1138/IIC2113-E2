@@ -2,12 +2,10 @@ namespace Fire_Emblem;
 
 public class WillToWin : Bonus
 {
-    public WillToWin(Unit unit, Unit opponent) : base(unit, opponent)
+    public WillToWin()
     {
         this.Name = "Will to Win";
         this.Description = "Si el HP de la unidad está al 50% o menos al inicio del combate, otorga Atk+8 a la unidad durante el combate.";
-        this.unit = unit;
-        this.opponent = opponent;
     }
 
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)

@@ -2,12 +2,10 @@ namespace Fire_Emblem;
 
 public class BlindingFlash : Penalty
 {
-    public BlindingFlash(Unit unit, Unit opponent) : base(unit, opponent)
+    public BlindingFlash()
     {
         this.Name = "Blinding Flash";
         this.Description = "Si la unidad inicia el combate, inflige Spd-4 en el rival durante el combate.";
-        this.unit = unit;
-        this.opponent = opponent;
     }
 
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)

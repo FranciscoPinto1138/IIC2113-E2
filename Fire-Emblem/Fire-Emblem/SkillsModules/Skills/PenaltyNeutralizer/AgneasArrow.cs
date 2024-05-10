@@ -2,12 +2,10 @@ namespace Fire_Emblem;
 
 public class AgneasArrow : PenaltyNeutralizer
 {
-    public AgneasArrow(Unit unit, Unit opponent) : base(unit, opponent)
+    public AgneasArrow()
     {
         this.Name = "Agnea's Arrow";
         this.Description = "Neutraliza los penaltis de la unidad.";
-        this.unit = unit;
-        this.opponent = opponent;
     }
 
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)

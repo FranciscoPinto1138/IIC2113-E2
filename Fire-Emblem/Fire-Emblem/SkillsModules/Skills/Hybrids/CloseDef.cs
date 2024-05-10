@@ -2,12 +2,10 @@ namespace Fire_Emblem.Hybrids;
 
 public class CloseDef : Hybrid
 {
-    public CloseDef(Unit unit, Unit opponent) : base(unit, opponent)
+    public CloseDef()
     {
         this.Name = "Close Def";
         this.Description = "Si el rival inicia el combate usando espada, lanza o hacha, otorga Def/Res+8 y neutraliza los bonus del rival durante el combate.";
-        this.unit = unit;
-        this.opponent = opponent;
     }
     
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)

@@ -2,12 +2,10 @@ namespace Fire_Emblem;
 
 public class BeorcsBlessing : BonusNeutralizer
 {
-    public BeorcsBlessing(Unit unit, Unit opponent) : base(unit, opponent)
+    public BeorcsBlessing()
     {
         this.Name = "Beorc's Blessing";
         this.Description = "Neutraliza los bonus del rival durante el combate.";
-        this.unit = unit;
-        this.opponent = opponent;
     }
 
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)

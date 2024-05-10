@@ -2,12 +2,10 @@ namespace Fire_Emblem.SkillsModules.Skills.Hybrids;
 
 public class StillWater : Hybrid
 {
-    public StillWater(Unit unit, Unit opponent) : base(unit, opponent)
+    public StillWater()
     {
         this.Name = "Still Water";
         this.Description = "Otorga Atk/Res+6. Inflige Def-5.";
-        this.unit = unit;
-        this.opponent = opponent;
     }
     
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)

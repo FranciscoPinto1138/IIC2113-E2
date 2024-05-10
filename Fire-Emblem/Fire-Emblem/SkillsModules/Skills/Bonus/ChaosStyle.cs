@@ -2,12 +2,10 @@ namespace Fire_Emblem;
 
 public class ChaosStyle : Bonus
 {
-    public ChaosStyle(Unit unit, Unit opponent) : base(unit, opponent)
+    public ChaosStyle()
     {
         this.Name = "Chaos Style";
         this.Description = "Si la unidad inicia el combate con un ataque físico contra un rival armado con magia, o viceversa, otorga Spd+3 durante el combate.";
-        this.unit = unit;
-        this.opponent = opponent;
     }
 
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)
@@ -16,13 +14,13 @@ public class ChaosStyle : Bonus
         var physicalWeaponTypeCondition = new UnitDamageTypeCondition(DamageType.Physical);
         var magicalWeaponTypeCondition = new UnitDamageTypeCondition(DamageType.Magical);
         var effectOnUnit = new IncreaseStat(3, StatType.Spd);
-        if (baseCondition.IsConditionFulfilled(unit, opponent) && (DoUnitsHaveOppositeWeaponTypes(physicalWeaponTypeCondition, magicalWeaponTypeCondition)))
+        if (baseCondition.IsConditionFulfilled(unit, opponent) && (DoUnitsHaveOppositeWeaponTypes(unit, opponent, physicalWeaponTypeCondition, magicalWeaponTypeCondition)))
         {
             effectOnUnit.ApplyEffect(unit, opponent);
         }
     }
 
-    private bool DoUnitsHaveOppositeWeaponTypes(Condition physicalWeaponTypeCondition, Condition magicalWeaponTypeCondition)
+    private bool DoUnitsHaveOppositeWeaponTypes(Unit unit, Unit opponent, Condition physicalWeaponTypeCondition, Condition magicalWeaponTypeCondition)
     {
         return ((physicalWeaponTypeCondition.IsConditionFulfilled(unit, opponent) && magicalWeaponTypeCondition.IsConditionFulfilled(opponent, unit)) ||
                 (magicalWeaponTypeCondition.IsConditionFulfilled(unit, opponent) && physicalWeaponTypeCondition.IsConditionFulfilled(opponent, unit)));

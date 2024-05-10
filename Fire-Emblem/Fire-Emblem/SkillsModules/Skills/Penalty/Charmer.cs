@@ -2,12 +2,10 @@ namespace Fire_Emblem;
 
 public class Charmer : Penalty
 {
-    public Charmer(Unit unit, Unit opponent) : base(unit, opponent)
+    public Charmer()
     {
         this.Name = "Charmer";
         this.Description = "En un combate contra un rival que también es el oponente más reciente de la unidad, inflige Atk/Spd-3 en ese rival durante el combate.";
-        this.unit = unit;
-        this.opponent = opponent;
     }
 
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)

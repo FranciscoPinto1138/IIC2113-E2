@@ -2,12 +2,10 @@ namespace Fire_Emblem.SkillsModules.Skills.Hybrids;
 
 public class SolidGround : Hybrid
 {
-    public SolidGround(Unit unit, Unit opponent) : base(unit, opponent)
+    public SolidGround()
     {
         this.Name = "Solid Ground";
         this.Description = "Otorga Atk/Def+6. Inflige Res-5.";
-        this.unit = unit;
-        this.opponent = opponent;
     }
     
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)

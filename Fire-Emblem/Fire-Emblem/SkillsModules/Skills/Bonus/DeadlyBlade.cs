@@ -4,12 +4,10 @@ namespace Fire_Emblem;
 
 public class DeadlyBlade : Bonus
 {
-    public DeadlyBlade(Unit unit, Unit opponent) : base(unit, opponent)
+    public DeadlyBlade()
     {
         this.Name = "Deadly Blade";
         this.Description = "Si la unidad inicia el combate con una espada, otorga Atk/Spd+8 durante el combate";
-        this.unit = unit;
-        this.opponent = opponent;
     }
 
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)

@@ -2,12 +2,10 @@ namespace Fire_Emblem;
 
 public class Bravery : ExtraDamage
 {
-    public Bravery(Unit unit, Unit opponent) : base(unit, opponent)
+    public Bravery()
     {
         this.Name = "Bravery";
         this.Description = "La unidad inflige +5 de daño en cada ataque.";
-        this.unit = unit;
-        this.opponent = opponent;
     }
     
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)
