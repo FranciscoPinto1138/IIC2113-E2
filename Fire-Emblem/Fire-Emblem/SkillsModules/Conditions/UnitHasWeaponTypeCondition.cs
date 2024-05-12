@@ -7,6 +7,7 @@ public class UnitHasWeaponTypeCondition : Condition
     public UnitHasWeaponTypeCondition(string weaponType)
     {
         this._weaponType = weaponType;
+        SetPriority(1);
     }
 
     public override bool IsConditionFulfilled(Unit unit, Unit opponent)

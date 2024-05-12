@@ -7,6 +7,7 @@ public class UnitDamageTypeCondition : Condition
     public UnitDamageTypeCondition(DamageType damageType)
     {
         this._damageType = damageType;
+        SetPriority(1);
     }
 
     public override bool IsConditionFulfilled(Unit unit, Unit opponent)

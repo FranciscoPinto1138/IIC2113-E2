@@ -1,6 +1,8 @@
+using System.Net.Mail;
+
 namespace Fire_Emblem;
 
-public class IncreaseExtraDamage
+public class IncreaseExtraDamage : ExtraDamageEffect
 {
     private int _changeFactor;
     

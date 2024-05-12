@@ -1,6 +1,16 @@
 namespace Fire_Emblem;
 
-public interface Effect
+public abstract class Effect
 {
-    void ApplyEffect(Unit unit, Unit opponent);
+    private int _priority;
+    public abstract void ApplyEffect(Unit unit, Unit opponent);
+    public int GetPriority()
+    {
+        return _priority;
+    }
+
+    protected void SetPriority(int priority)
+    {
+        _priority = priority;
+    }
 }

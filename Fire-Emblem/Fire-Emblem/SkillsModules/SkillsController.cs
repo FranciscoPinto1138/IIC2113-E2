@@ -8,6 +8,8 @@ public class SkillsController
     private Unit _defenseUnit;
     private List<Skill> _attackUnitSkills;
     private List<Skill> _defenseUnitSkills;
+    private ConditionEffectPairList _attackUnitConditionEffectPairList;
+    private ConditionEffectPairList _defenseUnitConditionEffectPairList;
     private View _view;
     
     public SkillsController(Unit attackUnit, Unit defenseUnit, View view)

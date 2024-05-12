@@ -7,9 +7,10 @@ public class NeutralizeBonusOnStats : Effect
     public NeutralizeBonusOnStats(List< StatType> statsToNeutralize)
     {
         _statsToNeutralize = statsToNeutralize;
+        this.SetPriority(1);
     }
 
-    public void ApplyEffect(Unit unit, Unit opponent)
+    public override void ApplyEffect(Unit unit, Unit opponent)
     {
         foreach (var stat in _statsToNeutralize)
         {

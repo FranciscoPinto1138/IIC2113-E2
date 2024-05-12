@@ -1,10 +1,10 @@
 namespace Fire_Emblem;
 
-public abstract class PenaltyEffect : Effect
+public class ExtraDamageEffect : Effect
 {
-    protected PenaltyEffect()
+    protected ExtraDamageEffect()
     {
-        SetPriority(1);
+        SetPriority(2);
     }
     public override void ApplyEffect(Unit unit, Unit opponent)
     {
