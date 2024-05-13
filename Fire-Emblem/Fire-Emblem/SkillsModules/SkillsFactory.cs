@@ -187,6 +187,8 @@ public class SkillsFactory
                 return new LunarBrace();
             case "Back at You":
                 return new BackAtYou();
+            case "Bushido":
+                return new Bushido();
             default:
                 return null;
         }
