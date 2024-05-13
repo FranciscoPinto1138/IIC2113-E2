@@ -35,6 +35,12 @@ public class Combat
         _unitStatsManager.ResetAllBonusAndPenaltyStatsDiff(_attackUnit);
         _unitStatsManager.ResetAllBonusAndPenaltyStatsDiff(_defenseUnit);
     }
+
+    private void ResetUnitsExtraDamage()
+    {
+        _attackUnit.DamageEffectsManager = new DamageEffectsManager();
+        _defenseUnit.DamageEffectsManager = new DamageEffectsManager();
+    }
     
     private void ApplyDamage(Unit damageMaker, Unit damageReceiver, double damageMakerWTB)
     {
@@ -60,6 +66,7 @@ public class Combat
     {
         SetUnitsHPToMinimumIfNegative();
         ResetUnitsBonusAndPenaltyStatsDiff();
+        ResetUnitsExtraDamage();
         ShowCombatResults();
     }
     
@@ -150,7 +157,7 @@ public class Combat
         SkillsController skillsController = new SkillsController(_attackUnit, _defenseUnit, _view);
         skillsController.CreateSkills();
         skillsController.ApplyUnitsSkillsEffectsIfConditionsAreSatisfiedByPriority(1);
-        // skillsController.ApplyUnitsSkillsEffectsIfConditionsAreSatisfiedByPriority(2);
+        skillsController.ApplyUnitsSkillsEffectsIfConditionsAreSatisfiedByPriority(2);
         skillsController.ShowAllSkillsNetStatsOfUnitsAfterEffects();
     }
     

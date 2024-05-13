@@ -12,7 +12,7 @@ public class IncreaseExtraDamage : ExtraDamageEffect
         this.SetPriority(2);
 }
     
-    public void ApplyEffect(Unit unit, Unit opponent)
+    public override void ApplyEffect(Unit unit, Unit opponent)
     {
         unit.DamageEffectsManager.ExtraDamagePermanent += _changeFactor;
     }
