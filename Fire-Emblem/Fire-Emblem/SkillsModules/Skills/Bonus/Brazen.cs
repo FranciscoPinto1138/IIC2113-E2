@@ -16,7 +16,7 @@ public class Brazen : Bonus
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)
     {
         var condition = new UnitHPCondition(80, ThresholdType.Percentage, ComparisonType.LowerThanOrEqual);
-        var effectOnUnit = new StatBuffer(unit, opponent, _bufferedStatsList, _changeFactorsList);
+        var effectOnUnit = new StatBuffer(_bufferedStatsList, _changeFactorsList);
         if (condition.IsConditionFulfilled(unit, opponent))
         {
             effectOnUnit.ApplyEffectsIfConditionsAreSatisfied(unit, opponent);

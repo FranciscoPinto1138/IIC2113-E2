@@ -7,7 +7,7 @@ public class DamageEffectsManager
     public int ExtraDamageFollowUp = 0;
     public double DamagePercentageReductionPermanent = 0;
     public double DamagePercentageReductionFirstAttack = 0;
-    public int DamagePercentageReductionFollowUp = 0;
+    public double DamagePercentageReductionFollowUp = 0;
     public int DamageAbsoluteReductionPermanent = 0;
 }
 

@@ -34,23 +34,23 @@ public class SkillsFactory
             case "Tome Precision":
                 return new TomePrecision();
             case "Attack +6":
-                return new StatBuffer(_unit, _opponent, [StatType.Atk], [6]);
+                return new StatBuffer([StatType.Atk], [6]);
             case "Speed +5":
-                return new StatBuffer(_unit, _opponent, [StatType.Spd], [5]);
+                return new StatBuffer([StatType.Spd], [5]);
             case "Defense +5":
-                return new StatBuffer(_unit, _opponent, [StatType.Def], [5]);
+                return new StatBuffer([StatType.Def], [5]);
             case "Wrath":
                 return new Wrath();
             case "Resolve":
                 return new Resolve();
             case "Resistance +5":
-                return new StatBuffer(_unit, _opponent, [StatType.Res], [5]);
+                return new StatBuffer([StatType.Res], [5]);
             case "Atk/Def +5":
-                return new StatBuffer(_unit, _opponent, [StatType.Atk, StatType.Def], [5, 5]);
+                return new StatBuffer([StatType.Atk, StatType.Def], [5, 5]);
             case "Atk/Res +5":
-                return new StatBuffer(_unit, _opponent, [StatType.Atk, StatType.Res], [5, 5]);
+                return new StatBuffer([StatType.Atk, StatType.Res], [5, 5]);
             case "Spd/Res +5":
-                return new StatBuffer(_unit, _opponent, [StatType.Spd, StatType.Res], [5, 5]);
+                return new StatBuffer([StatType.Spd, StatType.Res], [5, 5]);
             case "Deadly Blade":
                 return new DeadlyBlade();
             case "Death Blow":
@@ -189,6 +189,30 @@ public class SkillsFactory
                 return new BackAtYou();
             case "Bushido":
                 return new Bushido();
+            case "Moon-Twin Wing":
+                return new MoonTwinWing();
+            case "Blue Skies":
+                return new BlueSkies();
+            case "Fierce Stance":
+                return new Stance([StatType.Atk], [8]);
+            case "Darting Stance":
+                return new Stance([StatType.Spd], [8]);
+            case "Steady Stance":
+                return new Stance([StatType.Def], [8]);
+            case "Warding Stance":
+                return new Stance([StatType.Res], [8]);
+            case "Kestrel Stance":
+                return new Stance([StatType.Atk, StatType.Spd], [6, 6]);
+            case "Sturdy Stance":
+                return new Stance([StatType.Atk, StatType.Def], [6, 6]);
+            case "Mirror Stance":
+                return new Stance([StatType.Atk, StatType.Res], [6, 6]);
+            case "Steady Posture":
+                return new Stance([StatType.Spd, StatType.Def], [6, 6]);
+            case "Swift Stance":
+                return new Stance([StatType.Spd, StatType.Res], [6, 6]);
+            case "Bracing Stance":
+                return new Stance([StatType.Def, StatType.Res], [6, 6]);
             default:
                 return null;
         }

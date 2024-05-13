@@ -22,7 +22,7 @@ public class AgilityPowerFocus : Hybrid
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)
     {
         var condition = new UnitHasWeaponTypeCondition(_weaponType);
-        var effectOnUnit = new StatBuffer(unit, opponent, _bufferedStatsList, _changeBuffFactorsList);
+        var effectOnUnit = new StatBuffer(_bufferedStatsList, _changeBuffFactorsList);
         var effectOnUnitAdditional =  new DecreaseStat(_changeDecreaseFactorsList[0], _decreasedStatsList[0]);
         if (condition.IsConditionFulfilled(unit, opponent))
         {

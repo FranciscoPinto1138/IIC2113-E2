@@ -56,6 +56,7 @@ public class SkillsEffectsShower
         ShowExtraDamagePermanentEffects(unit);
         ShowPercentagePermanentReducedDamage(unit);
         ShowPercentageOpponentFirstAttackReducedDamage(unit);
+        ShowPercentageOpponentFollowUpReducedDamage(unit);
         ShowAbsolutePermanentReducedDamage(unit);
     }
     
@@ -224,6 +225,14 @@ public class SkillsEffectsShower
         if (unit.DamageEffectsManager.DamagePercentageReductionFirstAttack > 0)
         {
             _view.WriteLine($"{unit.Name} reducirá el daño del primer ataque del rival en un {Convert.ToInt32(unit.DamageEffectsManager.DamagePercentageReductionFirstAttack * 100)}%");
+        }  
+    }
+    
+    private void ShowPercentageOpponentFollowUpReducedDamage(Unit unit)
+    {
+        if (unit.DamageEffectsManager.DamagePercentageReductionFollowUp > 0)
+        {
+            _view.WriteLine($"{unit.Name} reducirá el daño del Follow-Up del rival en un {Convert.ToInt32(unit.DamageEffectsManager.DamagePercentageReductionFollowUp * 100)}%");
         }  
     }
 

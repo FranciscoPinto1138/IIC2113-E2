@@ -16,7 +16,7 @@ public class Boost : Bonus
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)
     {
         var condition = new UnitHPVsOpponentCondition(3);
-        var effectOnUnit = new StatBuffer(unit, opponent, _bufferedStatsList, _changeFactorsList);
+        var effectOnUnit = new StatBuffer(_bufferedStatsList, _changeFactorsList);
         if (condition.IsConditionFulfilled(unit, opponent))
         {
             effectOnUnit.ApplyEffectsIfConditionsAreSatisfied(unit, opponent);
