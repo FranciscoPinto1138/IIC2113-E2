@@ -17,4 +17,11 @@ public class HPPlus15 : Bonus
             effectOnUnit.ApplyEffect(unit, opponent);
         }
     }
+
+    public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
+    {
+        var condition = new UnitIsInFirstCombat();
+        var effect = new IncreaseHPBaseStat(15);
+        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effect) };
+    }
 }

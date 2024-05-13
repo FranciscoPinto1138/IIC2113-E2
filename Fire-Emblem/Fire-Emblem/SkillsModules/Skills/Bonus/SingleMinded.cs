@@ -17,4 +17,11 @@ public class SingleMinded : Bonus
             effectOnUnit.ApplyEffect(unit, opponent);
         }
     }
+    
+    public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
+    {
+        var condition = new OpponentIsMostRecentRivalOfUnitCondition();
+        var effectOnUnit = new IncreaseStat(8, StatType.Atk);
+        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnUnit) };
+    }
 }

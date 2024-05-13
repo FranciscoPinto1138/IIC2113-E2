@@ -22,4 +22,13 @@ public class DeadlyBlade : Bonus
             effectOnUnitAdditional.ApplyEffect(unit, opponent);
         }
     }
+    
+    public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
+    {
+        var firstCondition = new UnitStartsCombatCondition();
+        var secondCondition = new UnitHasWeaponTypeCondition("Sword");
+        var combinedAndCondition = new AndPairCondition(firstCondition, secondCondition);
+        var effect = new IncreaseStats([StatType.Atk, StatType.Spd], [8, 8]);
+        return new ConditionEffectPair[] { new ConditionEffectPair(combinedAndCondition, effect) };
+    }
 }

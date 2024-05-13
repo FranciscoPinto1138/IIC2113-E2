@@ -27,4 +27,15 @@ public class LightAndDark : Hybrid
             neutralizeBonusStatsOnRivalEffect.ApplyEffect(opponent, unit);
         }
     }
+    
+    public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
+    {
+        var condition = new NoCondition();
+        var effectOnOpponent = new DecreaseOpponentStats([StatType.Atk, StatType.Spd, StatType.Def, StatType.Res], [5, 5, 5, 5]);
+        var effectOnOpponentAdditional = new NeutralizePenaltyOnStats([StatType.Atk, StatType.Spd, StatType.Def, StatType.Res, StatType.HP]);
+        var effectOnOpponentAdditional2 = new NeutralizeOpponentBonusStats([StatType.Atk, StatType.Spd, StatType.Def, StatType.Res, StatType.HP]);
+        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnOpponent),
+            new ConditionEffectPair(condition, effectOnOpponentAdditional),
+            new ConditionEffectPair(condition, effectOnOpponentAdditional2)};
+    }
 }

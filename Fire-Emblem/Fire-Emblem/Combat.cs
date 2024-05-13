@@ -149,7 +149,8 @@ public class Combat
     {
         SkillsController skillsController = new SkillsController(_attackUnit, _defenseUnit, _view);
         skillsController.CreateSkills();
-        skillsController.ApplySkills();
+        skillsController.ApplyUnitsSkillsEffectsIfConditionsAreSatisfiedByPriority(1);
+        // skillsController.ApplyUnitsSkillsEffectsIfConditionsAreSatisfiedByPriority(2);
         skillsController.ShowAllSkillsNetStatsOfUnitsAfterEffects();
     }
     

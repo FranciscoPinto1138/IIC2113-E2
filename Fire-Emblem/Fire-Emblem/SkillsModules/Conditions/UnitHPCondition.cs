@@ -6,11 +6,12 @@ public class UnitHPCondition : Condition
     private ThresholdType _thresholdType;
     private ComparisonType _comparisonType;
 
-    public UnitHPCondition(int threshold, ThresholdType thresholdType = ThresholdType.Absolute, ComparisonType comparisonType = ComparisonType.GreaterThanOrEqual)
+    public UnitHPCondition(int threshold, ThresholdType thresholdType, ComparisonType comparisonType)
     {
         this._threshold = threshold;
         this._thresholdType = thresholdType;
         this._comparisonType = comparisonType;
+        this.SetPriority(1);
     }
 
     public override bool IsConditionFulfilled(Unit unit, Unit opponent)

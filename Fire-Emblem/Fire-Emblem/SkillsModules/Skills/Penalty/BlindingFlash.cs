@@ -17,4 +17,11 @@ public class BlindingFlash : Penalty
             effectOnUnit.ApplyEffect(opponent, unit);
         }
     }
+    
+    public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
+    {
+        var condition = new UnitStartsCombatCondition();
+        var effectOnOpponent = new DecreaseOpponentStats([StatType.Spd], [4]);
+        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnOpponent) };
+    }
 }

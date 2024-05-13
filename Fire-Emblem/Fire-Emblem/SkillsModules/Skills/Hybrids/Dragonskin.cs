@@ -20,4 +20,12 @@ public class Dragonskin : Hybrid
             neutralizeStatsOnRivalEffect.ApplyEffect(opponent, unit);
         }
     }
+    
+    public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
+    {
+        var combinedOrCondition = new DragonskinCondition();
+        var effectOnUnit = new IncreaseStats([StatType.Atk, StatType.Spd, StatType.Def, StatType.Res], [6, 6, 6, 6]);
+        var effectOnOpponent = new NeutralizeOpponentBonusStats([StatType.Atk, StatType.Spd, StatType.Def, StatType.Res, StatType.HP]);
+        return new ConditionEffectPair[] { new ConditionEffectPair(combinedOrCondition, effectOnUnit), new ConditionEffectPair(combinedOrCondition, effectOnOpponent) };
+    }
 }

@@ -21,4 +21,13 @@ public class FairFight : Bonus
             effectOnOpponent.ApplyEffect(opponent, unit);
         }
     }
+
+    public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
+    {
+        var condition = new UnitStartsCombatCondition();
+        var effectOnUnit = new IncreaseStats([StatType.Atk], [6]);
+        var effectOnOpponent = new IncreaseOpponentStats([StatType.Atk], [6]);
+        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnUnit), 
+            new ConditionEffectPair(condition, effectOnOpponent)};
+    }
 }

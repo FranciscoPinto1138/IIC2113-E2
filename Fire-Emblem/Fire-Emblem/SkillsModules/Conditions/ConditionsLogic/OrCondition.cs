@@ -7,6 +7,7 @@ public class OrCondition : Condition
     public OrCondition(ConditionList conditions)
     {
         _conditions = conditions;
+        SetPriority(1);
     }
 
     public override bool IsConditionFulfilled(Unit unit, Unit opponent)

@@ -17,4 +17,11 @@ public class DisarmingSigh : Penalty
             effectOnUnit.ApplyEffect(opponent, unit);
         }
     }
+
+    public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
+    {
+        var condition = new OpponentIsMale();
+        var effectOnOpponent = new DecreaseOpponentStats([StatType.Atk], [8]);
+        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnOpponent) };
+    }
 }

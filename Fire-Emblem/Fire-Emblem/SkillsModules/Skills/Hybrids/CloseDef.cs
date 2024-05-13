@@ -25,4 +25,18 @@ public class CloseDef : Hybrid
         effectOnUnitAdditional.ApplyEffect(unit, opponent);
         neutralizeStatsOnRivalEffect.ApplyEffect(opponent, unit);
     }
+
+    public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
+    {
+        var unitStartsCombatCondition = new OpponentStartsCombatCondition();
+        var swordOpponentCondition = new OpponentHasWeaponTypeCondition("Sword");
+        var lanceOpponentCondition = new OpponentHasWeaponTypeCondition("Lance");
+        var axeOpponentCondition = new OpponentHasWeaponTypeCondition("Axe");
+        var firstCombinedOrCondition = new OrPairCondition(swordOpponentCondition, lanceOpponentCondition);
+        var secondCombinedOrCondition = new OrPairCondition(firstCombinedOrCondition, axeOpponentCondition);
+        var combinedAndCondition = new AndPairCondition(unitStartsCombatCondition, secondCombinedOrCondition);
+        var effectOnUnit = new IncreaseStats([StatType.Def, StatType.Res], [8, 8]);
+        var effectOnOpponent = new NeutralizeOpponentBonusStats([StatType.Atk, StatType.Spd, StatType.Def, StatType.Res, StatType.HP]);
+        return new ConditionEffectPair[] { new ConditionEffectPair(combinedAndCondition, effectOnUnit), new ConditionEffectPair(combinedAndCondition, effectOnOpponent) };
+    }
 }

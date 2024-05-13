@@ -6,6 +6,7 @@ public class UnitHPVsOpponentCondition : Condition
     public UnitHPVsOpponentCondition(int expectedHPDifference)
     {
         this._expectedHpDifference = expectedHPDifference;
+        this.SetPriority(1);
     }
     public override bool IsConditionFulfilled(Unit unit, Unit opponent)
     {

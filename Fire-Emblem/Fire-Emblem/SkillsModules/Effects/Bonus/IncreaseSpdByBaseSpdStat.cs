@@ -7,6 +7,7 @@ public class IncreaseSpdByBaseSpdStat : BonusEffect
     public IncreaseSpdByBaseSpdStat(int changeFactor)
     {
         _changeFactor = changeFactor;
+        this.SetPriority(1);
     }
     
     public override void ApplyEffect(Unit unit, Unit opponent)

@@ -19,4 +19,13 @@ public class Luna : Penalty
             effectOnUnitAdditional.ApplyEffect(opponent, unit);
         }
     }
+    
+    public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
+    {
+        var condition = new NoCondition();
+        var effectOnOpponent = new DecreaseOpponentStatByPercentageOnFirstAttack(50, StatType.Def);
+        var effectOnOpponentAdditional = new DecreaseOpponentStatByPercentageOnFirstAttack(50, StatType.Res);
+        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnOpponent),
+            new ConditionEffectPair(condition, effectOnOpponentAdditional) };
+    }
 }

@@ -18,4 +18,11 @@ public class TomePrecision : Bonus
             effectOnUnitAdditional.ApplyEffect(unit, opponent);
         }
     }
+    
+    public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
+    {
+        var condition = new UnitHasWeaponTypeCondition("Magic");
+        var effectOnUnit = new IncreaseStats([StatType.Atk, StatType.Spd], [6, 6]);
+        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnUnit) };
+    }
 }

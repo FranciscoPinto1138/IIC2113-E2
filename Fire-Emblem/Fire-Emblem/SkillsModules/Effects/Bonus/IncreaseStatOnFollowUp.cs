@@ -10,6 +10,7 @@ public class IncreaseStatOnFollowUp : BonusEffect
     {
         _changeFactor = changeFactor;
         _statType = statType;
+        this.SetPriority(1);
     }
     
     public override void ApplyEffect(Unit unit, Unit opponent)

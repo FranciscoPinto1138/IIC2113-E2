@@ -161,6 +161,8 @@ public class SkillsFactory
                 return new Dragonskin();
             case "Light and Dark":
                 return new LightAndDark();
+            case "Bravery":
+                return new Bravery();
             default:
                 return null;
         }

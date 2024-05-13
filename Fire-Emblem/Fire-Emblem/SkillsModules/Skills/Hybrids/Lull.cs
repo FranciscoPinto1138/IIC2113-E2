@@ -28,4 +28,13 @@ public class Lull : Hybrid
             decreaseStatOnRivalEffectAdditional.ApplyEffect(opponent, unit);
         }
     }
+    
+    public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
+    {
+        var condition = new NoCondition();
+        var neutralizeStatsOnRivalEffect = new NeutralizeOpponentBonusStats(_rivalNeutralizedStatsList);
+        var decreaseStatsOnRivalEffect = new DecreaseOpponentStats(_rivalDecreasedStatsList, _changeDecreaseFactorsList);
+        return new ConditionEffectPair[] { new ConditionEffectPair(condition, neutralizeStatsOnRivalEffect),
+            new ConditionEffectPair(condition, decreaseStatsOnRivalEffect)};
+    }
 }

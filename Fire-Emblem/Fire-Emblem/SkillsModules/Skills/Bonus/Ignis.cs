@@ -17,4 +17,11 @@ public class Ignis : Bonus
             effectOnUnit.ApplyEffect(unit, opponent);
         }
     }
+    
+    public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
+    {
+        var condition = new NoCondition();
+        var effectOnUnit = new IncreaseStatByPercentageOnFirstAttack(50, StatType.Atk);
+        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnUnit) };
+    }
 }

@@ -24,4 +24,12 @@ public class StatBuffer : Bonus
             }
         }
     }
+
+    public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
+    {
+        var condition = new NoCondition();
+        var effectOnUnit = new IncreaseStats(_bufferedStatsList, _changeFactorsList);
+        var conditionEffectPair = new ConditionEffectPair(condition, effectOnUnit);
+        return new ConditionEffectPair[] { conditionEffectPair };
+    }
 }

@@ -9,10 +9,16 @@ public class OrPairCondition : Condition
     {
         _firstCondition = firstCondition;
         _secondCondition = secondCondition;
+        SetTotalPriority();
     }
 
     public override bool IsConditionFulfilled(Unit unit, Unit opponent)
     {
         return _firstCondition.IsConditionFulfilled(unit, opponent) || _secondCondition.IsConditionFulfilled(unit, opponent);
+    }
+    
+    private void SetTotalPriority()
+    {
+        SetPriority(Math.Max(_firstCondition.GetPriority(), _secondCondition.GetPriority()));
     }
 }

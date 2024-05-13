@@ -19,4 +19,11 @@ public class Charmer : Penalty
             effectOnOpponentAdditional.ApplyEffect(opponent, unit);
         }
     }
+    
+    public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
+    {
+        var condition = new OpponentIsMostRecentRivalOfUnitCondition();
+        var effectOnOpponent = new DecreaseOpponentStats([StatType.Spd, StatType.Atk], [3, 3]);
+        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnOpponent) };
+    }
 }

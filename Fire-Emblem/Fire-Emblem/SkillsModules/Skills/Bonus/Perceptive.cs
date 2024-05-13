@@ -19,4 +19,13 @@ public class Perceptive : Bonus
             effectOnUnitAdditional.ApplyEffect(unit, opponent);
         }
     }
+    
+    public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
+    {
+        var condition = new UnitStartsCombatCondition();
+        var effectOnUnit = new IncreaseStat(12, StatType.Spd);
+        var effectOnUnitAdditional = new IncreaseSpdByBaseSpdStat(4);
+        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnUnit), 
+            new ConditionEffectPair(condition, effectOnUnitAdditional)};
+    }
 }

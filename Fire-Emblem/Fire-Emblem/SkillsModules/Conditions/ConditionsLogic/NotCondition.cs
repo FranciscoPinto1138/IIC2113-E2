@@ -7,6 +7,7 @@ public class NotCondition : Condition
     public NotCondition(Condition condition)
     {
         _condition = condition;
+        SetPriority(_condition.GetPriority());
     }
 
     public override bool IsConditionFulfilled(Unit unit, Unit opponent)

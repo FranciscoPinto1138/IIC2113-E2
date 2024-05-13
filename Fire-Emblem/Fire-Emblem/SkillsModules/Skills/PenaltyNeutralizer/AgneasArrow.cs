@@ -17,4 +17,11 @@ public class AgneasArrow : PenaltyNeutralizer
             effectOnOpponent.ApplyEffect(unit, opponent);
         }
     }
+    
+    public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
+    {
+        var condition = new NoCondition();
+        var effectOnUnit = new NeutralizePenaltyOnStats([StatType.Atk, StatType.Spd, StatType.Def, StatType.Res, StatType.HP]);
+        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnUnit) };
+    }
 }

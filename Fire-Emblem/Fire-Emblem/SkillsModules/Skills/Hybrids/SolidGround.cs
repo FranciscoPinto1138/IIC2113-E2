@@ -21,4 +21,13 @@ public class SolidGround : Hybrid
             effectOnUnitAdditional2.ApplyEffect(unit, opponent);
         }
     }
+    
+    public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
+    {
+        var condition = new NoCondition();
+        var effectOnUnit = new IncreaseStats([StatType.Atk, StatType.Def], [6, 6]);
+        var effectOnUnitAdditional = new DecreaseStats([StatType.Res], [5]);
+        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnUnit),
+            new ConditionEffectPair(condition, effectOnUnitAdditional) };
+    }
 }

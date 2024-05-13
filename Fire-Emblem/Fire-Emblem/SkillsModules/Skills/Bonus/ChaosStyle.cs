@@ -25,4 +25,13 @@ public class ChaosStyle : Bonus
         return ((physicalWeaponTypeCondition.IsConditionFulfilled(unit, opponent) && magicalWeaponTypeCondition.IsConditionFulfilled(opponent, unit)) ||
                 (magicalWeaponTypeCondition.IsConditionFulfilled(unit, opponent) && physicalWeaponTypeCondition.IsConditionFulfilled(opponent, unit)));
     }
+    
+    public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
+    {
+        var baseCondition = new UnitStartsCombatCondition();
+        var oppositeWeaponTypesCondition = new UnitsHaveOppositeDamageTypes();
+        var combinedAndCondition = new AndPairCondition(baseCondition, oppositeWeaponTypesCondition);
+        var effect = new IncreaseStat(3, StatType.Spd);
+        return new ConditionEffectPair[] { new ConditionEffectPair(combinedAndCondition, effect) };
+    }
 }

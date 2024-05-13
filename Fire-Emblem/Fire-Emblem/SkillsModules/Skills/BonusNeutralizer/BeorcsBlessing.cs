@@ -17,4 +17,11 @@ public class BeorcsBlessing : BonusNeutralizer
             effectOnOpponent.ApplyEffect(opponent, unit);
         }
     }
+    
+    public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
+    {
+        var condition = new NoCondition();
+        var effectOnOpponent = new NeutralizeOpponentBonusStats([StatType.Atk, StatType.Spd, StatType.Def, StatType.Res, StatType.HP]);
+        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnOpponent) };
+    }
 }

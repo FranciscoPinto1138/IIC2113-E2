@@ -17,4 +17,11 @@ public class Bravery : ExtraDamage
             effectOnUnit.ApplyEffect(unit, opponent);
         }
     }
+    
+    public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
+    {
+        var condition = new NoCondition();
+        var effectOnUnit = new IncreaseExtraDamage(5);
+        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnUnit) };
+    }
 }

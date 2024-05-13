@@ -8,8 +8,8 @@ public class SkillsController
     private Unit _defenseUnit;
     private List<Skill> _attackUnitSkills;
     private List<Skill> _defenseUnitSkills;
-    private ConditionEffectPairList _attackUnitConditionEffectPairList;
-    private ConditionEffectPairList _defenseUnitConditionEffectPairList;
+    private List<ConditionEffectPair> _attackUnitConditionEffectPairList;
+    private List<ConditionEffectPair> _defenseUnitConditionEffectPairList;
     private View _view;
     
     public SkillsController(Unit attackUnit, Unit defenseUnit, View view)
@@ -18,6 +18,8 @@ public class SkillsController
         this._defenseUnit = defenseUnit;
         this._attackUnitSkills = new List<Skill>();
         this._defenseUnitSkills = new List<Skill>();
+        this._attackUnitConditionEffectPairList = new List<ConditionEffectPair>();
+        this._defenseUnitConditionEffectPairList = new List<ConditionEffectPair>();
         this._view = view;
     }
     
@@ -27,6 +29,7 @@ public class SkillsController
         SkillsFactory defendersSkillsFactory = new SkillsFactory(_defenseUnit, _attackUnit);
         CreateSkillsOfUnit(_attackUnit, _attackUnitSkills, attackersSkillsFactory);
         CreateSkillsOfUnit(_defenseUnit, _defenseUnitSkills, defendersSkillsFactory);
+        AddSkillsConditionEffectPairsOfUnits();
     }
     
     private void CreateSkillsOfUnit(Unit unit, List<Skill> skillsList, SkillsFactory factory)
@@ -40,22 +43,44 @@ public class SkillsController
                 skillsList.Add(skill);
             }
         }
-    } 
-    
-    public void ApplySkills()
+    }
+
+    private void AddSkillsConditionEffectPairsOfUnits()
     {
-        if (_attackUnitSkills.Count > 0)
+        AddSkillsConditionEffectPairs(_attackUnit, _defenseUnit, _attackUnitSkills, _attackUnitConditionEffectPairList);
+        AddSkillsConditionEffectPairs(_defenseUnit, _attackUnit, _defenseUnitSkills, _defenseUnitConditionEffectPairList);
+    }
+
+    private void AddSkillsConditionEffectPairs(Unit unit, Unit opponent, List<Skill> skills, List<ConditionEffectPair> unitConditionEffectPairsList)
+    {
+        if (skills.Count > 0)
         {
-            foreach (Skill skill in _attackUnitSkills)
+            foreach (Skill skill in skills)
             {
-                skill.ApplyEffectsIfConditionsAreSatisfied(_attackUnit, _defenseUnit);
+                foreach (ConditionEffectPair conditionEffectPair in skill.GetConditionEffectPairs(unit, opponent))
+                {
+                    unitConditionEffectPairsList.Add(conditionEffectPair);
+                }
             }
         }
-        if (_defenseUnitSkills.Count > 0)
+    }
+
+    public void ApplyUnitsSkillsEffectsIfConditionsAreSatisfiedByPriority(int priority)
+    {
+        ApplyUnitSkillsEffectsIfConditionsAreSatisfiedByPriority(_attackUnit, _defenseUnit, _attackUnitConditionEffectPairList, priority);
+        ApplyUnitSkillsEffectsIfConditionsAreSatisfiedByPriority(_defenseUnit, _attackUnit, _defenseUnitConditionEffectPairList, priority);
+    }
+    
+    private void ApplyUnitSkillsEffectsIfConditionsAreSatisfiedByPriority(Unit attackUnit, Unit defenseUnit, List<ConditionEffectPair> unitConditionEffectPairsList, int priority)
+    {
+        if (unitConditionEffectPairsList.Count > 0)
         {
-            foreach (Skill skill in _defenseUnitSkills)
+            foreach (ConditionEffectPair conditionEffectPair in unitConditionEffectPairsList)
             {
-                skill.ApplyEffectsIfConditionsAreSatisfied(_defenseUnit, _attackUnit);
+                if (conditionEffectPair.GetPriority() == priority)
+                {
+                    conditionEffectPair.ApplyEffectIfConditionIsSatisfied(attackUnit, defenseUnit);
+                }
             }
         }
     }

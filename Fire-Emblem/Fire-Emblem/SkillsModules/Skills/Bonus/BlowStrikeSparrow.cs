@@ -22,4 +22,11 @@ public class BlowStrikeSparrow : Bonus
             effectOnUnit.ApplyEffectsIfConditionsAreSatisfied(unit, opponent);
         }
     }
+    
+    public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
+    {
+        var condition = new UnitStartsCombatCondition();
+        var effect = new IncreaseStats(_bufferedStatsList, _changeFactorsList);
+        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effect) };
+    }
 }

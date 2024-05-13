@@ -40,4 +40,35 @@ public class Soulblade : Hybrid
             effectOnOpponent.ApplyEffect(opponent, unit);
         }
     }
+    
+    public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
+    {
+        var condition = new UnitHasWeaponTypeCondition("Sword");
+        int averageDefResOfRival = CalculateAverageDefRes(opponent);
+        int differenceDef = averageDefResOfRival - opponent.Def;
+        int differenceRes = averageDefResOfRival - opponent.Res;
+        if (differenceDef != 0)
+        {
+            Effect effectOnOpponent = differenceDef >= 0 ?
+                new IncreaseOpponentStats([StatType.Def], [differenceDef]) :
+                new DecreaseOpponentStats([StatType.Def], [Math.Abs(differenceDef)]);
+            if (differenceRes == 0)
+            {
+                return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnOpponent) };
+            }
+            Effect effectOnOpponentAdditional = differenceRes >= 0 ?
+                new IncreaseOpponentStats([StatType.Res], [differenceRes]) :
+                new DecreaseOpponentStats([StatType.Res], [Math.Abs(differenceRes)]);
+            return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnOpponent),
+                new ConditionEffectPair(condition, effectOnOpponentAdditional) };
+        }
+        if (differenceRes != 0)
+        {
+            Effect effectOnOpponent = differenceRes >= 0 ?
+                new IncreaseOpponentStats([StatType.Res], [differenceRes]) :
+                new DecreaseOpponentStats([StatType.Res], [Math.Abs(differenceRes)]);
+            return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnOpponent) };
+        }
+        return new ConditionEffectPair[] { };
+    }
 }
