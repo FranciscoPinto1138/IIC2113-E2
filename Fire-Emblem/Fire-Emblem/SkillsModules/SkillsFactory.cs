@@ -161,8 +161,32 @@ public class SkillsFactory
                 return new Dragonskin();
             case "Light and Dark":
                 return new LightAndDark();
+            case "Dragon Wall":
+                return new DragonWall();
+            case "Dodge":
+                return new Dodge();
+            case "Golden Lotus":
+                return new GoldenLotus();
+            case "Gentility":
+                return new Gentility();
+            case "Bow Guard":
+                return new Guard("Bow");
+            case "Arms Shield":
+                return new ArmsShield();
+            case "Axe Guard":
+                return new Guard("Axe");
+            case "Magic Guard":
+                return new Guard("Magic");
+            case "Lance Guard":
+                return new Guard("Lance");
+            case "Sympathetic":
+                return new Sympathetic();
             case "Bravery":
                 return new Bravery();
+            case "Lunar Brace":
+                return new LunarBrace();
+            case "Back at You":
+                return new BackAtYou();
             default:
                 return null;
         }

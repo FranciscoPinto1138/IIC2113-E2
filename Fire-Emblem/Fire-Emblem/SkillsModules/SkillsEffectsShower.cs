@@ -19,10 +19,10 @@ public class SkillsEffectsShower
     {
         ShowNetStatsEffects(_attackUnit);
         ShowNeutralizedBonusAndPenalties(_attackUnit);
-        ShowExtraDamagePermanentEffects(_attackUnit);
+        ShowDamageRelatedEffects(_attackUnit);
         ShowNetStatsEffects(_defenseUnit);
         ShowNeutralizedBonusAndPenalties(_defenseUnit);
-        ShowExtraDamagePermanentEffects(_defenseUnit);
+        ShowDamageRelatedEffects(_defenseUnit);
     }
     
     private void ShowNetStatsEffects(Unit unit)
@@ -49,6 +49,14 @@ public class SkillsEffectsShower
     {
         ShowNeutralizedBonusByStats(unit);
         ShowNeutralizedPenaltyByStats(unit);
+    }
+
+    private void ShowDamageRelatedEffects(Unit unit)
+    {
+        ShowExtraDamagePermanentEffects(unit);
+        ShowPercentagePermanentReducedDamage(unit);
+        ShowPercentageOpponentFirstAttackReducedDamage(unit);
+        ShowAbsolutePermanentReducedDamage(unit);
     }
     
     private void ShowBonusStatsEffectsOfUnit(Unit unit)
@@ -201,5 +209,29 @@ public class SkillsEffectsShower
         {
             _view.WriteLine($"{unit.Name} realizará +{unit.DamageEffectsManager.ExtraDamagePermanent} daño extra en cada ataque");
         }
+    }
+
+    private void ShowPercentagePermanentReducedDamage(Unit unit)
+    {
+        if (unit.DamageEffectsManager.DamagePercentageReductionPermanent > 0)
+        {
+            _view.WriteLine($"{unit.Name} reducirá el daño de los ataques del rival en un {Convert.ToInt32(unit.DamageEffectsManager.DamagePercentageReductionPermanent * 100)}%");
+        }
+    }
+
+    private void ShowPercentageOpponentFirstAttackReducedDamage(Unit unit)
+    {
+        if (unit.DamageEffectsManager.DamagePercentageReductionFirstAttack > 0)
+        {
+            _view.WriteLine($"{unit.Name} reducirá el daño del primer ataque del rival en un {Convert.ToInt32(unit.DamageEffectsManager.DamagePercentageReductionFirstAttack * 100)}%");
+        }  
+    }
+
+    private void ShowAbsolutePermanentReducedDamage(Unit unit)
+    {
+        if (unit.DamageEffectsManager.DamageAbsoluteReductionPermanent > 0)
+        {
+            _view.WriteLine($"{unit.Name} recibirá -{unit.DamageEffectsManager.DamageAbsoluteReductionPermanent} daño en cada ataque");
+        }  
     }
 }

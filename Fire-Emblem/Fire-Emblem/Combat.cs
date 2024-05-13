@@ -24,10 +24,34 @@ public class Combat
         return opponentUnit.Weapon == "Magic" ? _unitStatsManager.GetUnitTotalRes(unit) : _unitStatsManager.GetUnitTotalDef(unit);
     }
     
-    private int DetermineDamage(Unit damageMaker, double damageMakerWTB, int defOrRes)
+    private int DetermineDamage(Unit damageMaker, Unit damageReceiver, double damageMakerWTB, int defOrRes)
     {
         int initialDamage = Convert.ToInt32(Math.Max(0, Math.Floor((_unitStatsManager.GetUnitTotalAtk(damageMaker) * damageMakerWTB) - defOrRes)));
-        return initialDamage + damageMaker.DamageEffectsManager.ExtraDamagePermanent;
+        int initialDamagePlusExtraDamage = initialDamage + DetermineBaseExtraDamage(damageMaker);
+        int percentageReducedDamage = DeterminePercentageReducedDamage(damageMaker, damageReceiver, initialDamagePlusExtraDamage);
+        int absoluteReducedDamage = DetermineAbsoluteReducedDamage(damageReceiver, percentageReducedDamage);
+        return Math.Max(absoluteReducedDamage, 0);
+    }
+
+    private int DetermineBaseExtraDamage(Unit damageMaker)
+    {
+        return damageMaker.DamageEffectsManager.ExtraDamagePermanent
+               + damageMaker.DamageEffectsManager.ExtraDamageFirstAttack * damageMaker.IsOnFirstAttack
+               + damageMaker.DamageEffectsManager.ExtraDamageFollowUp * damageMaker.IsOnFollowUpAttack;
+    }
+
+    private int DeterminePercentageReducedDamage(Unit damageMaker, Unit damageReceiver, int baseDamage)
+    {
+        double percentageReducedDamage =
+            baseDamage * (1 - damageReceiver.DamageEffectsManager.DamagePercentageReductionPermanent)
+            * (1 - damageReceiver.DamageEffectsManager.DamagePercentageReductionFirstAttack * damageReceiver.RivalIsOnFirstAttack)
+            * (1 - damageReceiver.DamageEffectsManager.DamagePercentageReductionFollowUp * damageReceiver.RivalIsOnFollowUpAttack);
+        return Convert.ToInt32(Math.Floor(Math.Round(percentageReducedDamage, 9)));
+    }
+
+    private int DetermineAbsoluteReducedDamage(Unit damageReceiver, int percentageReducedDamage)
+    {
+        return percentageReducedDamage - damageReceiver.DamageEffectsManager.DamageAbsoluteReductionPermanent;
     }
     
     private void ResetUnitsBonusAndPenaltyStatsDiff()
@@ -45,7 +69,7 @@ public class Combat
     private void ApplyDamage(Unit damageMaker, Unit damageReceiver, double damageMakerWTB)
     {
         int defOrRes = DetermineResOrDef(damageReceiver, damageMaker);
-        int damage = DetermineDamage(damageMaker, damageMakerWTB, defOrRes);
+        int damage = DetermineDamage(damageMaker, damageReceiver, damageMakerWTB, defOrRes);
         damageReceiver.HPCurrent -= damage;
         _view.WriteLine($"{damageMaker.Name} ataca a {damageReceiver.Name} con {damage} de daño");
     }
@@ -111,12 +135,6 @@ public class Combat
         return AttackUnitCanFollowUp() || DefenseUnitCanFollowUp();
     }
     
-    private void UpdateUnitsFollowUpData(Unit unit, Unit opponent)
-    {
-        _unitStatsManager.ResetFirstAttackBonusAndPenaltyStatsDiff(unit);
-        UnSetUnitsFollowUpStatus(unit, opponent);
-    }
-
     private void FollowUp(double WTBAttacker, double WTBDefender)
     {
         ResetFirstAttackBonusAndPenaltyStatsDiffOfUnits();
@@ -137,8 +155,8 @@ public class Combat
     private void ResolveUnitFollowUp(Unit attacker, Unit defender, double WTBAttacker)
     {
         SetUnitsFollowUpStatus(attacker, defender);
-        AttackOrCounterAttack(attacker, defender, WTBAttacker);
-        UpdateUnitsFollowUpData(attacker, defender);
+        ApplyDamage(attacker, defender, WTBAttacker);
+        UnSetUnitsFollowUpStatus(attacker, defender);
     }
 
     private void ResetFirstAttackBonusAndPenaltyStatsDiffOfUnits()
@@ -158,6 +176,8 @@ public class Combat
         skillsController.CreateSkills();
         skillsController.ApplyUnitsSkillsEffectsIfConditionsAreSatisfiedByPriority(1);
         skillsController.ApplyUnitsSkillsEffectsIfConditionsAreSatisfiedByPriority(2);
+        skillsController.ApplyUnitsSkillsEffectsIfConditionsAreSatisfiedByPriority(3);
+        skillsController.ApplyUnitsSkillsEffectsIfConditionsAreSatisfiedByPriority(4);
         skillsController.ShowAllSkillsNetStatsOfUnitsAfterEffects();
     }
     

@@ -47,28 +47,25 @@ public class Soulblade : Hybrid
         int averageDefResOfRival = CalculateAverageDefRes(opponent);
         int differenceDef = averageDefResOfRival - opponent.Def;
         int differenceRes = averageDefResOfRival - opponent.Res;
+    
+        List<ConditionEffectPair> pairs = new List<ConditionEffectPair>();
+    
         if (differenceDef != 0)
         {
-            Effect effectOnOpponent = differenceDef >= 0 ?
+            Effect effectOnOpponentDef = differenceDef >= 0 ?
                 new IncreaseOpponentStats([StatType.Def], [differenceDef]) :
                 new DecreaseOpponentStats([StatType.Def], [Math.Abs(differenceDef)]);
-            if (differenceRes == 0)
-            {
-                return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnOpponent) };
-            }
-            Effect effectOnOpponentAdditional = differenceRes >= 0 ?
-                new IncreaseOpponentStats([StatType.Res], [differenceRes]) :
-                new DecreaseOpponentStats([StatType.Res], [Math.Abs(differenceRes)]);
-            return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnOpponent),
-                new ConditionEffectPair(condition, effectOnOpponentAdditional) };
+            pairs.Add(new ConditionEffectPair(condition, effectOnOpponentDef));
         }
+    
         if (differenceRes != 0)
         {
-            Effect effectOnOpponent = differenceRes >= 0 ?
+            Effect effectOnOpponentRes = differenceRes >= 0 ?
                 new IncreaseOpponentStats([StatType.Res], [differenceRes]) :
                 new DecreaseOpponentStats([StatType.Res], [Math.Abs(differenceRes)]);
-            return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnOpponent) };
+            pairs.Add(new ConditionEffectPair(condition, effectOnOpponentRes));
         }
-        return new ConditionEffectPair[] { };
+    
+        return pairs.ToArray();
     }
 }
