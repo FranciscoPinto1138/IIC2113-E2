@@ -193,6 +193,14 @@ public class SkillsFactory
                 return new MoonTwinWing();
             case "Blue Skies":
                 return new BlueSkies();
+            case "Aegis Shield":
+                return new AegisShield();
+            case "Remote Sparrow":
+                return new Remote([StatType.Atk, StatType.Spd], [7, 7]);
+            case "Remote Mirror":
+                return new Remote([StatType.Atk, StatType.Res], [7, 10]);
+            case "Remote Sturdy":
+                return new Remote([StatType.Atk, StatType.Def], [7, 10]);
             case "Fierce Stance":
                 return new Stance([StatType.Atk], [8]);
             case "Darting Stance":
