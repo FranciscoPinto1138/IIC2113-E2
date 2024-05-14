@@ -227,6 +227,12 @@ public class SkillsFactory
                 return new LaguzFriend();
             case "Chivalry":
                 return new Chivalry();
+            case "Dragon's Wrath":
+                return new DragonsWrath();
+            case "Prescience":
+                return new Prescience();
+            case "Extra Chivalry":
+                return new ExtraChivalry();
             default:
                 return null;
         }

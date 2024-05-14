@@ -16,6 +16,7 @@ public class MoonTwinWing : Hybrid
                 new DecreaseOpponentStats([StatType.Atk, StatType.Spd], [5, 5])),
             new ConditionEffectPair(
                 new UnitHasHigherStatThanOpponentCondition(StatType.Spd), 
-                new ReduceReceivedPermanentDamageByPercentageFourTimesStatDiff(StatType.Spd)) };
+                new ReduceReceivedPermanentDamageByPercentageFourTimesStatDiff(StatType.Spd))
+        };
     }
 }

@@ -53,11 +53,23 @@ public class SkillsEffectsShower
 
     private void ShowDamageRelatedEffects(Unit unit)
     {
+        ShowExtraDamageEffects(unit);
+        ShowPercentageReducedDamage(unit);
+        ShowAbsolutePermanentReducedDamage(unit);
+    }
+
+    private void ShowExtraDamageEffects(Unit unit)
+    {
         ShowExtraDamagePermanentEffects(unit);
+        ShowExtraDamageFirstAttackEffects(unit);
+        ShowExtraDamageFollowUpEffects(unit);
+    }
+
+    private void ShowPercentageReducedDamage(Unit unit)
+    {
         ShowPercentagePermanentReducedDamage(unit);
         ShowPercentageOpponentFirstAttackReducedDamage(unit);
         ShowPercentageOpponentFollowUpReducedDamage(unit);
-        ShowAbsolutePermanentReducedDamage(unit);
     }
     
     private void ShowBonusStatsEffectsOfUnit(Unit unit)
@@ -209,6 +221,22 @@ public class SkillsEffectsShower
         if (unit.DamageEffectsManager.ExtraDamagePermanent > 0)
         {
             _view.WriteLine($"{unit.Name} realizará +{unit.DamageEffectsManager.ExtraDamagePermanent} daño extra en cada ataque");
+        }
+    }
+    
+    private void ShowExtraDamageFirstAttackEffects(Unit unit)
+    {
+        if (unit.DamageEffectsManager.ExtraDamageFirstAttack > 0)
+        {
+            _view.WriteLine($"{unit.Name} realizará +{unit.DamageEffectsManager.ExtraDamageFirstAttack} daño extra en su primer ataque");
+        }
+    }
+    
+    private void ShowExtraDamageFollowUpEffects(Unit unit)
+    {
+        if (unit.DamageEffectsManager.ExtraDamageFollowUp > 0)
+        {
+            _view.WriteLine($"{unit.Name} realizará +{unit.DamageEffectsManager.ExtraDamageFollowUp} daño extra  en su Follow-Up");
         }
     }
 
