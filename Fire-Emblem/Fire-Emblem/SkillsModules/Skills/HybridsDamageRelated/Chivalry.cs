@@ -19,6 +19,7 @@ public class Chivalry : Hybrid
             new ConditionEffectPair(new AndPairCondition(
                     new UnitStartsCombatCondition(),
                     new OpponentHPCondition(100, ThresholdType.Percentage, ComparisonType.Equal)),
-                new ReduceReceivedDamageByAbsoluteValue(2)) };
+                new ReduceReceivedDamageByAbsoluteValue(2))
+        };
     }
 }

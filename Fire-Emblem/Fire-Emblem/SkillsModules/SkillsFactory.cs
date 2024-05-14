@@ -233,6 +233,8 @@ public class SkillsFactory
                 return new Prescience();
             case "Extra Chivalry":
                 return new ExtraChivalry();
+            case "Guard Bearing":
+                return new GuardBearing();
             default:
                 return null;
         }

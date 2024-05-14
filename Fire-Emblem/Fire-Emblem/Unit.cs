@@ -28,7 +28,8 @@ public class Unit
     public int IsOnFollowUpAttack = 0;
     public int RivalIsOnFirstAttack = 0;
     public int RivalIsOnFollowUpAttack = 0;
-
+    public int NumberOfTimesStartingCombat = 0;
+    public int NumberOfTimesRivalStartsCombat = 0;
     public Unit(string name, string weapon, string gender, string deathQuote, string[] skill, int hp, int atk, int spd, int def,
         int res)
     {

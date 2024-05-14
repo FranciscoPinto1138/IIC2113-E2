@@ -118,6 +118,12 @@ public class Combat
         opponent.RivalIsOnFollowUpAttack = 0;
     }
     
+    private void IncreaseStartingCombatUnitsStats()
+    {
+        _attackUnit.NumberOfTimesStartingCombat++;
+        _defenseUnit.NumberOfTimesRivalStartsCombat++;
+    }
+    
     private bool AttackUnitCanFollowUp()
     {
         const int minimumSpdDifferenceForFollowUp = 5;
@@ -198,6 +204,7 @@ public class Combat
     {
         var WTBs = SetWTBs();
         SetUnitRoles();
+        IncreaseStartingCombatUnitsStats();
         ResolveSkills();
         AttackOrCounterAttack(_attackUnit, _defenseUnit, WTBs[0]);
         if (CheckIfCombatIsOver()) return [_attackUnit, _defenseUnit];
