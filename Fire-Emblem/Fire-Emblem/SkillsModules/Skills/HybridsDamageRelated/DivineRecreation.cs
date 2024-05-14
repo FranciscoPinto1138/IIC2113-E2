@@ -10,14 +10,33 @@ public class DivineRecreation : Hybrid
 
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
-        UnitStatsManager unitStatsManager = new UnitStatsManager();
-        return new ConditionEffectPair[] { 
-            new ConditionEffectPair(
-                new OpponentHPCondition(50, ThresholdType.Percentage, ComparisonType.GreaterThanOrEqual), 
-                new DecreaseOpponentStats([StatType.Atk, StatType.Spd, StatType.Def, StatType.Res], [4, 4, 4, 4])),
-            new ConditionEffectPair(
-                new OpponentHPCondition(50, ThresholdType.Percentage, ComparisonType.GreaterThanOrEqual), 
-                new ReduceReceivedPermanentDamageByPercentageOnOpponentFirstAttack(0.3))
-        };
+        if (unit.Role == "Attacker")
+        {
+            return new ConditionEffectPair[] { 
+                new ConditionEffectPair(
+                    new OpponentHPCondition(50, ThresholdType.Percentage, ComparisonType.GreaterThanOrEqual), 
+                    new DecreaseOpponentStats([StatType.Atk, StatType.Spd, StatType.Def, StatType.Res], [4, 4, 4, 4])),
+                new ConditionEffectPair(
+                    new OpponentHPCondition(50, ThresholdType.Percentage, ComparisonType.GreaterThanOrEqual), 
+                    new ReduceReceivedPermanentDamageByPercentageOnOpponentFirstAttack(0.3)),
+                new ConditionEffectPair(
+                    new OpponentHPCondition(50, ThresholdType.Percentage, ComparisonType.GreaterThanOrEqual), 
+                    new IncreaseExtraDamageOnFollowUpByPreviouslyReducedDamage())
+            };
+        }
+        else
+        {
+            return new ConditionEffectPair[] { 
+                new ConditionEffectPair(
+                    new OpponentHPCondition(50, ThresholdType.Percentage, ComparisonType.GreaterThanOrEqual), 
+                    new DecreaseOpponentStats([StatType.Atk, StatType.Spd, StatType.Def, StatType.Res], [4, 4, 4, 4])),
+                new ConditionEffectPair(
+                    new OpponentHPCondition(50, ThresholdType.Percentage, ComparisonType.GreaterThanOrEqual), 
+                    new ReduceReceivedPermanentDamageByPercentageOnOpponentFirstAttack(0.3)),
+                new ConditionEffectPair(
+                    new OpponentHPCondition(50, ThresholdType.Percentage, ComparisonType.GreaterThanOrEqual), 
+                    new IncreaseExtraDamageOnFirstAttackByPreviouslyReducedDamage())
+            };;
+        }
     }
 }

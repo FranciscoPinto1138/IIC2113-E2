@@ -235,6 +235,8 @@ public class SkillsFactory
                 return new ExtraChivalry();
             case "Guard Bearing":
                 return new GuardBearing();
+            case "Divine Recreation":
+                return new DivineRecreation();
             default:
                 return null;
         }

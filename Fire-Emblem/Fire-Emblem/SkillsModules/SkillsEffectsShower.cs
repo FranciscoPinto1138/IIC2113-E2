@@ -236,7 +236,7 @@ public class SkillsEffectsShower
     {
         if (unit.DamageEffectsManager.ExtraDamageFollowUp > 0)
         {
-            _view.WriteLine($"{unit.Name} realizará +{unit.DamageEffectsManager.ExtraDamageFollowUp} daño extra  en su Follow-Up");
+            _view.WriteLine($"{unit.Name} realizará +{unit.DamageEffectsManager.ExtraDamageFollowUp} daño extra en su Follow-Up");
         }
     }
 
