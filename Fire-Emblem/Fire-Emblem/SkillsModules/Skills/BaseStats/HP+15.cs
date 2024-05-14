@@ -9,15 +9,6 @@ public class HPPlus15 : Bonus
         this.Description = "Otorga max HP+15";
     }
 
-    public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)
-    {
-        if (unit.MostRecentRival == "")
-        {
-            var effectOnUnit = new IncreaseHPBaseStat(15);
-            effectOnUnit.ApplyEffect(unit, opponent);
-        }
-    }
-
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
         var condition = new UnitIsInFirstCombatCondition();

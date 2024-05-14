@@ -8,20 +8,6 @@ public class SolidGround : Hybrid
         this.Description = "Otorga Atk/Def+6. Inflige Res-5.";
     }
     
-    public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)
-    {
-        var firstCondition = new NoCondition();
-        var effectOnUnit = new DecreaseStat(5, StatType.Res);
-        var effectOnUnitAdditional = new IncreaseStat(6, StatType.Atk);
-        var effectOnUnitAdditional2 = new IncreaseStat(6, StatType.Def);
-        if (firstCondition.IsConditionFulfilled(opponent, unit))
-        {
-            effectOnUnit.ApplyEffect(unit, opponent);
-            effectOnUnitAdditional.ApplyEffect(unit, opponent);
-            effectOnUnitAdditional2.ApplyEffect(unit, opponent);
-        }
-    }
-    
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
         var condition = new NoCondition();

@@ -9,19 +9,6 @@ public class DeadlyBlade : Bonus
         this.Name = "Deadly Blade";
         this.Description = "Si la unidad inicia el combate con una espada, otorga Atk/Spd+8 durante el combate";
     }
-
-    public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)
-    {
-        var firstCondition = new UnitStartsCombatCondition();
-        var secondCondition = new UnitHasWeaponTypeCondition("Sword");
-        var effectOnUnit = new IncreaseStat(8, StatType.Atk);
-        var effectOnUnitAdditional = new IncreaseStat(8, StatType.Spd);
-        if (firstCondition.IsConditionFulfilled(unit, opponent) && secondCondition.IsConditionFulfilled(unit, opponent))
-        {
-            effectOnUnit.ApplyEffect(unit, opponent);
-            effectOnUnitAdditional.ApplyEffect(unit, opponent);
-        }
-    }
     
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {

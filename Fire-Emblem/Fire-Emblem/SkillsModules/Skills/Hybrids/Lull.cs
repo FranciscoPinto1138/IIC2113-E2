@@ -15,20 +15,6 @@ public class Lull : Hybrid
         this._changeDecreaseFactorsList = changeDecreaseFactorsList;
     }
 
-    public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)
-    {
-        var condition = new NoCondition();
-        var neutralizeStatsOnRivalEffect = new NeutralizeBonusOnStats(_rivalNeutralizedStatsList);
-        var decreaseStatOnRivalEffect = new DecreaseStat(_changeDecreaseFactorsList[0], _rivalDecreasedStatsList[0]);
-        var decreaseStatOnRivalEffectAdditional =  new DecreaseStat(_changeDecreaseFactorsList[1], _rivalDecreasedStatsList[1]);
-        if (condition.IsConditionFulfilled(unit, opponent))
-        {
-            neutralizeStatsOnRivalEffect.ApplyEffect(opponent, unit);
-            decreaseStatOnRivalEffect.ApplyEffect(opponent, unit);
-            decreaseStatOnRivalEffectAdditional.ApplyEffect(opponent, unit);
-        }
-    }
-    
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
         var condition = new NoCondition();

@@ -12,16 +12,6 @@ public class BlowStrikeSparrow : Bonus
         this._bufferedStatsList = bufferedStatsList;
         this._changeFactorsList = changeFactorsList;
     }
-
-    public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)
-    {
-        var condition = new UnitStartsCombatCondition();
-        var effectOnUnit = new StatBuffer(_bufferedStatsList, _changeFactorsList);
-        if (condition.IsConditionFulfilled(unit, opponent))
-        {
-            effectOnUnit.ApplyEffectsIfConditionsAreSatisfied(unit, opponent);
-        }
-    }
     
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {

@@ -11,19 +11,6 @@ public class StatBuffer : Bonus
         this._bufferedStatsList = bufferedStatsList;
         this._changeFactorsList = changeFactorsList;
     }
-    
-    public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)
-    {
-        var condition = new NoCondition();
-        for (int i = 0; i < _bufferedStatsList.Count; i++)
-        {
-            var effectOnUnit = new IncreaseStat(_changeFactorsList[i], _bufferedStatsList[i]);
-            if (condition.IsConditionFulfilled(unit, opponent))
-            {
-                effectOnUnit.ApplyEffect(unit, opponent);
-            }
-        }
-    }
 
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {

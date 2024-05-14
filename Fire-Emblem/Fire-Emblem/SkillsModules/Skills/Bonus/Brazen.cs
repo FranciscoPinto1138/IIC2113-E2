@@ -13,16 +13,6 @@ public class Brazen : Bonus
         this._changeFactorsList = changeFactorsList;
     }
 
-    public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)
-    {
-        var condition = new UnitHPCondition(80, ThresholdType.Percentage, ComparisonType.LowerThanOrEqual);
-        var effectOnUnit = new StatBuffer(_bufferedStatsList, _changeFactorsList);
-        if (condition.IsConditionFulfilled(unit, opponent))
-        {
-            effectOnUnit.ApplyEffectsIfConditionsAreSatisfied(unit, opponent);
-        }
-    }
-    
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
         var condition = new UnitHPCondition(80, ThresholdType.Percentage, ComparisonType.LowerThanOrEqual);
