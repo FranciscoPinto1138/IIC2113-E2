@@ -23,10 +23,10 @@ public class BeliefInLove : Penalty
     
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
-        var condition = new OpponentStartsCombatCondition();
-        var conditionAdditional = new OpponentHPCondition(100, ThresholdType.Percentage, ComparisonType.Equal);
-        var combinedOrCondition = new OrPairCondition(condition, conditionAdditional);
-        var effectOnOpponent = new DecreaseOpponentStats([StatType.Atk, StatType.Def], [5, 5]);
-        return new ConditionEffectPair[] { new ConditionEffectPair(combinedOrCondition, effectOnOpponent) };
+        return new ConditionEffectPair[] { new ConditionEffectPair(
+                new OrPairCondition(
+                    new OpponentHPCondition(100, ThresholdType.Percentage, ComparisonType.Equal),
+                    new OpponentStartsCombatCondition()), 
+                new DecreaseOpponentStats([StatType.Atk, StatType.Def], [5, 5])) };
     }
 }

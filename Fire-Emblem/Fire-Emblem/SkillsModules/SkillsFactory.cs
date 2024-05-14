@@ -221,6 +221,12 @@ public class SkillsFactory
                 return new Stance([StatType.Spd, StatType.Res], [6, 6]);
             case "Bracing Stance":
                 return new Stance([StatType.Def, StatType.Res], [6, 6]);
+            case "Poetic Justice":
+                return new PoeticJustice();
+            case "Laguz Friend":
+                return new LaguzFriend();
+            case "Chivalry":
+                return new Chivalry();
             default:
                 return null;
         }

@@ -1,8 +1,8 @@
 namespace Fire_Emblem;
 
-public class UnitIsInFirstCombat : Condition
+public class UnitIsInFirstCombatCondition : Condition
 {
-    public UnitIsInFirstCombat()
+    public UnitIsInFirstCombatCondition()
     {
         SetPriority(1);
     }

@@ -20,7 +20,7 @@ public class HPPlus15 : Bonus
 
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
-        var condition = new UnitIsInFirstCombat();
+        var condition = new UnitIsInFirstCombatCondition();
         var effect = new IncreaseHPBaseStat(15);
         return new ConditionEffectPair[] { new ConditionEffectPair(condition, effect) };
     }

@@ -1,8 +1,8 @@
 namespace Fire_Emblem;
 
-public class UnitHasWeaponAdvantage : Condition
+public class UnitHasWeaponAdvantageCondition : Condition
 {
-    public UnitHasWeaponAdvantage()
+    public UnitHasWeaponAdvantageCondition()
     {
         SetPriority(1);
     }

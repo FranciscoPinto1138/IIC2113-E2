@@ -10,7 +10,7 @@ public class ArmsShield : AbsoluteDamageReduction
 
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
-        var condition = new UnitHasWeaponAdvantage();
+        var condition = new UnitHasWeaponAdvantageCondition();
         var effectOnUnit = new ReduceReceivedDamageByAbsoluteValue(7);
         return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnUnit) };
     }

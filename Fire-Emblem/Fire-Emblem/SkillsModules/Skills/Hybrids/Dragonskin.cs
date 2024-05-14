@@ -23,9 +23,18 @@ public class Dragonskin : Hybrid
     
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
-        var combinedOrCondition = new DragonskinCondition();
-        var effectOnUnit = new IncreaseStats([StatType.Atk, StatType.Spd, StatType.Def, StatType.Res], [6, 6, 6, 6]);
-        var effectOnOpponent = new NeutralizeOpponentBonusStats([StatType.Atk, StatType.Spd, StatType.Def, StatType.Res, StatType.HP]);
-        return new ConditionEffectPair[] { new ConditionEffectPair(combinedOrCondition, effectOnUnit), new ConditionEffectPair(combinedOrCondition, effectOnOpponent) };
+        return new ConditionEffectPair[]
+        {
+            new ConditionEffectPair(
+                new OrPairCondition(
+                    new OpponentStartsCombatCondition(), 
+                    new OpponentHPCondition(75, ThresholdType.Percentage, ComparisonType.GreaterThanOrEqual)),
+                new IncreaseStats([StatType.Atk, StatType.Spd, StatType.Def, StatType.Res], [6, 6, 6, 6])), 
+            new ConditionEffectPair(
+                new OrPairCondition(
+                    new OpponentStartsCombatCondition(), 
+                    new OpponentHPCondition(75, ThresholdType.Percentage, ComparisonType.GreaterThanOrEqual)), 
+                new NeutralizeOpponentBonusStats([StatType.Atk, StatType.Spd, StatType.Def, StatType.Res, StatType.HP]))
+        };
     }
 }

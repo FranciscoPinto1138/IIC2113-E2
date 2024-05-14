@@ -1,8 +1,8 @@
 namespace Fire_Emblem;
 
-public class OpponentIsMale : Condition
+public class OpponentIsMaleCondition : Condition
 {
-    public OpponentIsMale()
+    public OpponentIsMaleCondition()
     {
         SetPriority(1);
     }

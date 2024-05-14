@@ -10,11 +10,12 @@ public class MoonTwinWing : Hybrid
 
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
-        var firstCondition = new UnitHPCondition(25, ThresholdType.Percentage, ComparisonType.GreaterThanOrEqual);
-        var secondCondition = new UnitHasHigherStatThanOpponentCondition(StatType.Spd);
-        var firstEffectOnUnit = new DecreaseOpponentStats([StatType.Atk, StatType.Spd], [5, 5]);
-        var secondEffectOnUnit = new ReduceReceivedPermanentDamageByPercentageFourTimesStatDiff(StatType.Spd);
-        return new ConditionEffectPair[] { new ConditionEffectPair(firstCondition, firstEffectOnUnit),
-            new ConditionEffectPair(secondCondition, secondEffectOnUnit) };
+        return new ConditionEffectPair[] { 
+            new ConditionEffectPair(
+                new UnitHPCondition(25, ThresholdType.Percentage, ComparisonType.GreaterThanOrEqual), 
+                new DecreaseOpponentStats([StatType.Atk, StatType.Spd], [5, 5])),
+            new ConditionEffectPair(
+                new UnitHasHigherStatThanOpponentCondition(StatType.Spd), 
+                new ReduceReceivedPermanentDamageByPercentageFourTimesStatDiff(StatType.Spd)) };
     }
 }

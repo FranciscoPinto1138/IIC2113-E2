@@ -10,7 +10,7 @@ public class DisarmingSigh : Penalty
 
     public override void ApplyEffectsIfConditionsAreSatisfied(Unit unit, Unit opponent)
     {
-        var condition = new OpponentIsMale();
+        var condition = new OpponentIsMaleCondition();
         var effectOnUnit = new DecreaseStat(8, StatType.Atk);
         if (condition.IsConditionFulfilled(unit, opponent))
         {
@@ -20,7 +20,7 @@ public class DisarmingSigh : Penalty
 
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
-        var condition = new OpponentIsMale();
+        var condition = new OpponentIsMaleCondition();
         var effectOnOpponent = new DecreaseOpponentStats([StatType.Atk], [8]);
         return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnOpponent) };
     }

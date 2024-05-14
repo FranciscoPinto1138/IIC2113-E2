@@ -13,7 +13,7 @@ public class LunarBrace : ExtraDamage
         var firstCondition = new UnitDamageTypeCondition(DamageType.Physical);
         var secondCondition = new UnitStartsCombatCondition();
         var andCombinedCondition = new AndPairCondition(firstCondition, secondCondition);
-        var effectOnUnit = new IncreaseExtraDamageByOpponentTotalDefStat();
+        var effectOnUnit = new IncreaseExtraDamageByOpponentThirtyPercentTotalDefStat();
         return new ConditionEffectPair[] { new ConditionEffectPair(andCombinedCondition, effectOnUnit) };
     }
 }

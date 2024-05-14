@@ -1,8 +1,8 @@
 namespace Fire_Emblem;
 
-public class IncreaseExtraDamageByOpponentTotalDefStat : ExtraDamageEffect
+public class IncreaseExtraDamageByOpponentThirtyPercentTotalDefStat : ExtraDamageEffect
 {
-    public IncreaseExtraDamageByOpponentTotalDefStat()
+    public IncreaseExtraDamageByOpponentThirtyPercentTotalDefStat()
     {
         this.SetPriority(2);
     }
