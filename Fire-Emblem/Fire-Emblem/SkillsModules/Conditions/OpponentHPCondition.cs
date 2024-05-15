@@ -2,7 +2,7 @@ namespace Fire_Emblem;
 
 public class OpponentHPCondition : Condition
 {
-    private int _threshold;
+    private double _threshold;
     private ThresholdType _thresholdType;
     private ComparisonType _comparisonType;
 
@@ -25,7 +25,7 @@ public class OpponentHPCondition : Condition
     {
         if (_thresholdType == ThresholdType.Percentage)
         {
-            _threshold = (int)(opponent.HPMax * (_threshold / 100.0));
+            _threshold = (opponent.HPMax * (_threshold / 100.0));
         }
     }
 
