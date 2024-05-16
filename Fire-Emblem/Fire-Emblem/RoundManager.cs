@@ -44,7 +44,7 @@ public class RoundManager
 
     private void StartCombat()
     {
-        Combat combat = new Combat(_currentPlayerSelectedUnit, _opponentSelectedUnit, _currentPlayerTeam, _opponentPlayerTeam, _view);
+        Combat combat = new Combat(_currentPlayerSelectedUnit, _opponentSelectedUnit, _view);
         _postCombatUnits = combat.ResolveCombat();
     }
 

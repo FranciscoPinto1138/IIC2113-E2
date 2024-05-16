@@ -6,17 +6,15 @@ public class DamageManager
 {
     private Unit _damageMaker;
     private Unit _damageReceiver;
-    private double _damageMakerWTB;
     private int _defOrRes;
     private int _initialDamage;
     private int _totalDamage;
     private UnitStatsManager _unitStatsManager = new UnitStatsManager();
     
-    public DamageManager(Unit damageMaker, Unit damageReceiver, double damageMakerWtb)
+    public DamageManager(Unit damageMaker, Unit damageReceiver)
     {
         this._damageMaker = damageMaker;
         this._damageReceiver = damageReceiver;
-        this._damageMakerWTB = damageMakerWtb;
     }
     
     public void ApplyDamage()
@@ -33,7 +31,7 @@ public class DamageManager
     
     private int DetermineDamage()
     {
-        _initialDamage = Convert.ToInt32(Math.Max(0, Math.Floor((_unitStatsManager.GetUnitTotalAtk(_damageMaker) * _damageMakerWTB) - _defOrRes)));
+        _initialDamage = Convert.ToInt32(Math.Max(0, Math.Floor((_unitStatsManager.GetUnitTotalAtk(_damageMaker) * _damageMaker.CurrentWTB) - _defOrRes)));
         int initialDamagePlusExtraDamage = _initialDamage + DetermineBaseExtraDamage();
         int percentageReducedDamage = DeterminePercentageReducedDamage(initialDamagePlusExtraDamage);
         int absoluteReducedDamage = DetermineAbsoluteReducedDamage(percentageReducedDamage);
@@ -60,22 +58,14 @@ public class DamageManager
     {
         return percentageReducedDamage - _damageReceiver.DamageEffectsManager.DamageAbsoluteReductionPermanent;
     }
-
-    public int GetReducedDamageOnFollowUp()
-    {
-        return _damageReceiver.DamageEffectsManager.DamageAbsoluteReductionPermanent 
-               + Convert.ToInt32(Math.Floor(Math.Round((Convert.ToInt32(Math.Max(0, Math.Floor((_unitStatsManager.GetUnitTotalAtk(_damageMaker) * _damageMakerWTB) - _defOrRes))) + DetermineBaseExtraDamage()) 
-                                                       * (1 - _damageReceiver.DamageEffectsManager.DamagePercentageReductionPermanent)
-                                                       * (1 - _damageReceiver.DamageEffectsManager.DamagePercentageReductionFollowUp))));
-    }
     
     public int GetReducedDamageOnFirstAttack()
     {
         SetResOrDef();
-        return Convert.ToInt32(Convert.ToInt32(Math.Max(0, Math.Floor((_unitStatsManager.GetUnitTotalAtk(_damageMaker) * _damageMakerWTB) - _defOrRes))) 
+        return Convert.ToInt32(Convert.ToInt32(Math.Max(0, Math.Floor((_unitStatsManager.GetUnitTotalAtk(_damageMaker) * _damageMaker.CurrentWTB) - _defOrRes))) 
                                + _damageMaker.DamageEffectsManager.ExtraDamagePermanent
                                + _damageMaker.DamageEffectsManager.ExtraDamageFirstAttack
-                               - (Math.Floor((Convert.ToInt32(Math.Max(0, Math.Floor((_unitStatsManager.GetUnitTotalAtk(_damageMaker) * _damageMakerWTB) - _defOrRes)))
+                               - (Math.Floor((Convert.ToInt32(Math.Max(0, Math.Floor((_unitStatsManager.GetUnitTotalAtk(_damageMaker) * _damageMaker.CurrentWTB) - _defOrRes)))
                                    + _damageMaker.DamageEffectsManager.ExtraDamagePermanent
                                    + _damageMaker.DamageEffectsManager.ExtraDamageFirstAttack) 
                                   * (1 - _damageReceiver.DamageEffectsManager.DamagePercentageReductionPermanent)

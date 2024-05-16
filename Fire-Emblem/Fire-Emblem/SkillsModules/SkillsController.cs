@@ -53,34 +53,39 @@ public class SkillsController
 
     private void AddSkillsConditionEffectPairs(Unit unit, Unit opponent, List<Skill> skills, List<ConditionEffectPair> unitConditionEffectPairsList)
     {
-        if (skills.Count > 0)
+        if (skills.Count <= 0) return;
+        foreach (Skill skill in skills)
         {
-            foreach (Skill skill in skills)
-            {
-                foreach (ConditionEffectPair conditionEffectPair in skill.GetConditionEffectPairs(unit, opponent))
-                {
-                    unitConditionEffectPairsList.Add(conditionEffectPair);
-                }
-            }
+            AddConditionEffectPairsOfSkill(unit, opponent, skill, unitConditionEffectPairsList);
         }
     }
 
-    public void ApplyUnitsSkillsEffectsIfConditionsAreSatisfiedByPriority(int priority)
+    private void AddConditionEffectPairsOfSkill(Unit unit, Unit opponent, Skill skill, List<ConditionEffectPair> unitConditionEffectPairsList)
     {
-        ApplyUnitSkillsEffectsIfConditionsAreSatisfiedByPriority(_attackUnit, _defenseUnit, _attackUnitConditionEffectPairList, priority);
-        ApplyUnitSkillsEffectsIfConditionsAreSatisfiedByPriority(_defenseUnit, _attackUnit, _defenseUnitConditionEffectPairList, priority);
+        foreach (ConditionEffectPair conditionEffectPair in skill.GetConditionEffectPairs(unit, opponent))
+        {
+            unitConditionEffectPairsList.Add(conditionEffectPair);
+        } 
+    }
+    
+    public void ApplyUnitsSkillsEffectsIfConditionsAreSatisfiedByPriority()
+    {
+        const int numberOfPriorities = 6;
+        for (int priority = 1; priority < numberOfPriorities + 1; priority++)
+        {
+            ApplyUnitSkillsEffectsIfConditionsAreSatisfiedByPriority(_attackUnit, _defenseUnit, _attackUnitConditionEffectPairList, priority);
+            ApplyUnitSkillsEffectsIfConditionsAreSatisfiedByPriority(_defenseUnit, _attackUnit, _defenseUnitConditionEffectPairList, priority);
+        }
     }
     
     private void ApplyUnitSkillsEffectsIfConditionsAreSatisfiedByPriority(Unit attackUnit, Unit defenseUnit, List<ConditionEffectPair> unitConditionEffectPairsList, int priority)
     {
-        if (unitConditionEffectPairsList.Count > 0)
+        if (unitConditionEffectPairsList.Count <= 0) return;
+        foreach (ConditionEffectPair conditionEffectPair in unitConditionEffectPairsList)
         {
-            foreach (ConditionEffectPair conditionEffectPair in unitConditionEffectPairsList)
+            if (conditionEffectPair.GetPriority() == priority)
             {
-                if (conditionEffectPair.GetPriority() == priority)
-                {
-                    conditionEffectPair.ApplyEffectIfConditionIsSatisfied(attackUnit, defenseUnit);
-                }
+                conditionEffectPair.ApplyEffectIfConditionIsSatisfied(attackUnit, defenseUnit);
             }
         }
     }
