@@ -17,18 +17,6 @@ public class Game
         _teamsFolder = teamsFolder;
     }
 
-    private void StartBattle(Team[] teams)
-    {
-        Battle battle = new Battle(teams[0], teams[1], _view);
-        battle.DevelopBattle();
-    }
-    
-    private Team[] GetTeamsFromFolder()
-    {
-        TeamsLoader teamsLoader = new TeamsLoader(_view, _teamsFolder);
-        return teamsLoader.LoadTeams();
-    }
-    
     public void Play()
     {
         Team[] teams = GetTeamsFromFolder();
@@ -41,5 +29,17 @@ public class Game
         {
             StartBattle(teams);
         }
+    }
+    
+    private Team[] GetTeamsFromFolder()
+    {
+        TeamsLoader teamsLoader = new TeamsLoader(_view, _teamsFolder);
+        return teamsLoader.LoadTeams();
+    }
+    
+    private void StartBattle(Team[] teams)
+    {
+        Battle battle = new Battle(teams[0], teams[1], _view);
+        battle.DevelopBattle();
     }
 }

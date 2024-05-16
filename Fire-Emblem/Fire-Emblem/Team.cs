@@ -27,36 +27,40 @@ public class Team
     {
         foreach (var line in teamLines)
         {
-            _units.Add(CreateUnitFromLine(line, characters));
+            _units.Add(new UnitConstructorFromLine(line, characters).CreateUnitFromLine());
         }
     }
     
-    private Unit CreateUnitFromLine(string line, List<Character> characters)
+    public bool TeamHasValidSkills()
     {
-        var unitName = GetSkillsAndUnitNameFromLine(line, out var skills);
-        Character character = characters.FirstOrDefault(c => c.Name.Trim() == unitName.Trim());
-        return new Unit(
-            character.Name,
-            character.Weapon,
-            character.Gender,
-            character.DeathQuote,
-            skills.Select(s => s.Trim()).ToArray(), // Trim each skill
-            Convert.ToInt32(character.HP),
-            Convert.ToInt32(character.Atk),
-            Convert.ToInt32(character.Spd),
-            Convert.ToInt32(character.Def),
-            Convert.ToInt32(character.Res)
-        );
+        return _units.All(UnitHasValidSkills);
     }
-
-    private static string GetSkillsAndUnitNameFromLine(string line, out string[] skills)
+    
+    private bool UnitHasValidSkills(Unit unit)
     {
-        string[] partsUnitLine = line.Split(new[] { " (" }, StringSplitOptions.RemoveEmptyEntries);
-        string unitName = partsUnitLine[0].Trim();
-        skills = partsUnitLine.Length > 1 ? partsUnitLine[1].Replace(")", "").Split(',') : Array.Empty<string>();
-        return unitName;
+        return UnitHasValidAmountOfSkills(unit) && !UnitHasEqualSkills(unit);
     }
+    
+    private bool UnitHasEqualSkills(Unit unit)
+    {
+        const int maxAmountOfSkills = 2;
+        if (unit.Skill.Length == maxAmountOfSkills)
+        {
+            if (unit.Skill[0] == unit.Skill[1])
+            {
+                return true;
+            }
+        }
 
+        return false;
+    }
+    
+    private bool UnitHasValidAmountOfSkills(Unit unit)
+    {
+        const int maxAmountOfSkills = 2;
+        return unit.Skill.Length <= maxAmountOfSkills;
+    }
+    
     public void RemoveDeadUnits(Unit unitPostCombat)
     {
         const int minimumHPofUnit = 0;
@@ -71,36 +75,6 @@ public class Team
         const int allowedNumberOfEqualUnits = 1;
         return _units.GroupBy(u => u.Name)
             .Any(g => g.Count() > allowedNumberOfEqualUnits);
-    }
-
-    private bool UnitHasEqualSkills(Unit unit)
-    {
-        int maxAmountOfSkills = 2;
-        if (unit.Skill.Length == maxAmountOfSkills)
-        {
-            if (unit.Skill[0] == unit.Skill[1])
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private bool UnitHasValidAmountOfSkills(Unit unit)
-    {
-        int maxAmountOfSkills = 2;
-        return unit.Skill.Length <= maxAmountOfSkills;
-    }
-    
-    private bool UnitHasValidSkills(Unit unit)
-    {
-        return UnitHasValidAmountOfSkills(unit) && !UnitHasEqualSkills(unit);
-    }
-    
-    public bool TeamHasValidSkills()
-    {
-        return _units.All(UnitHasValidSkills);
     }
     
     public bool HasValidLength()

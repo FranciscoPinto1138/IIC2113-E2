@@ -11,6 +11,11 @@ public class ValidTeamsChecker
         _player2Team = team2;
     }
     
+    public bool IsValidTeam()
+    {
+        return !(!HasValidTeamLengths() || !TeamsHaveValidSkills() || TeamsHaveEqualUnits());
+    }
+    
     private bool HasValidTeamLengths()
     {
         return (_player1Team.HasValidLength() && _player2Team.HasValidLength());
@@ -24,10 +29,5 @@ public class ValidTeamsChecker
     private bool TeamsHaveEqualUnits()
     {
         return _player1Team.HasEqualUnits() || _player2Team.HasEqualUnits();
-    }
-    
-    public bool IsValidTeam()
-    {
-        return !(!HasValidTeamLengths() || !TeamsHaveValidSkills() || TeamsHaveEqualUnits());
     }
 }

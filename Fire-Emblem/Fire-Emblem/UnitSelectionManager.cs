@@ -13,7 +13,7 @@ public class UnitSelectionManager
     {
         ShowAvailableUnits(team);
         int playerChoice = ReadPlayerSelectedUnit();
-        return GetSelectedUnitOfPlayerUnits(playerChoice, team);
+        return GetSelectedUnitOfPlayerTeam(playerChoice, team);
     }
     
     private void ShowAvailableUnits(Team team)
@@ -34,7 +34,7 @@ public class UnitSelectionManager
         return Convert.ToInt32(_view.ReadLine());
     }
     
-    private Unit GetSelectedUnitOfPlayerUnits(int playerChoice, Team team)
+    private Unit GetSelectedUnitOfPlayerTeam(int playerChoice, Team team)
     {
         return team.GetUnits()[playerChoice];
     }

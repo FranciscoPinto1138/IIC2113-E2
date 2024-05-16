@@ -13,15 +13,20 @@ public class TeamsLoader
         _teamsFolder = teamsFolder;
     }
     
-    private void ShowAvailableTeamFiles(string[] teamFiles)
+    public Team[] LoadTeams()
     {
-        _view.WriteLine("Elige un archivo para cargar los equipos");
-        for (int i = 0; i < teamFiles.Length; i++)
-        {
-            _view.WriteLine($"{i}: {Path.GetFileName(teamFiles[i])}");
-        }
+        List<Character> characters = ProcessCharactersJson();
+        TeamFile teamFile = new TeamFile(GetSelectedTeamsFilePath());
+        return ConstructTeams(teamFile, characters);
     }
-
+    
+    private List<Character> ProcessCharactersJson()
+    {
+        string myJson = File.ReadAllText("characters.json");
+        List<Character> characters =  JsonSerializer . Deserialize<List<Character>>(myJson);
+        return characters;
+    }
+    
     private string GetSelectedTeamsFilePath()
     {
         string[] teamFiles = Directory.GetFiles(_teamsFolder, "*.txt");
@@ -31,11 +36,13 @@ public class TeamsLoader
         return teamFiles[selectedTeam];
     }
     
-    private List<Character> ProcessCharactersJson()
+    private void ShowAvailableTeamFiles(string[] teamFiles)
     {
-        string myJson = File.ReadAllText("characters.json");
-        List<Character> characters =  JsonSerializer . Deserialize<List<Character>>(myJson);
-        return characters;
+        _view.WriteLine("Elige un archivo para cargar los equipos");
+        for (int i = 0; i < teamFiles.Length; i++)
+        {
+            _view.WriteLine($"{i}: {Path.GetFileName(teamFiles[i])}");
+        }
     }
     
     private Team[] ConstructTeams(TeamFile teamFile, List<Character> characters)
@@ -47,12 +54,5 @@ public class TeamsLoader
         player2.ConstructTeamFromFileLines(teamFile.GetTeam2Lines(), characters);
 
         return new Team[] { player1, player2 };
-    }
-    
-    public Team[] LoadTeams()
-    {
-        List<Character> characters = ProcessCharactersJson();
-        TeamFile teamFile = new TeamFile(GetSelectedTeamsFilePath());
-        return ConstructTeams(teamFile, characters);
     }
 }

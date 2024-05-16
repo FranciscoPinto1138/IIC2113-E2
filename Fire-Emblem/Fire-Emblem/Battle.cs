@@ -8,11 +8,8 @@ public class Battle
     private View _view;
     private Team _currentPlayerTeam;
     private Team _opponentPlayerTeam;
-    private Unit _currentPlayerSelectedUnit;
-    private Unit _opponentSelectedUnit;
     private string _firstPlayerOfRoundName;
     private string _secondPlayerOfRoundName;
-    private Unit[] _postCombatUnits;
     private UnitSelectionManager _unitSelectionManager;
     private int _round;
     
@@ -25,6 +22,17 @@ public class Battle
         this._secondPlayerOfRoundName = _player2Team.GetPlayerName();
         _view = view;
         _unitSelectionManager = new UnitSelectionManager(_view);
+    }
+    
+    public void DevelopBattle()
+    {
+        while (!BattleHasWinner())
+        {
+            AssignPlayersRolesForRound();
+            DevelopRound();
+            SwapPlayersOrderForNextRound();
+            AdvanceToNextRound();
+        }
     }
     
     private bool BattleHasWinner()
@@ -43,47 +51,15 @@ public class Battle
         return false;
     }
     
-    private void SetUnitsLastRivalStats()
-    {
-        _currentPlayerSelectedUnit.MostRecentRival = _opponentSelectedUnit.Name;
-        _opponentSelectedUnit.MostRecentRival = _currentPlayerSelectedUnit.Name;
-    }
-    
-    private void RemoveDeadUnitsFromTeams(Unit[] postCombatUnits)
-    {
-        _currentPlayerTeam.RemoveDeadUnits(postCombatUnits[0]);
-        _opponentPlayerTeam.RemoveDeadUnits(postCombatUnits[1]);
-    }
-    
-    private void AssignSelectedUnits()
-    {
-        _currentPlayerSelectedUnit = _unitSelectionManager.SelectUnitOfPlayer(_currentPlayerTeam);
-        _opponentSelectedUnit = _unitSelectionManager.SelectUnitOfPlayer(_opponentPlayerTeam);
-    }
-    
-    private void ShowRoundStart()
-    {
-        _view.WriteLine($"Round {_round}: {_currentPlayerSelectedUnit.Name} ({_currentPlayerTeam.GetPlayerName()}) comienza");
-    }
-    
-    private void StartCombat()
-    {
-        Combat combat = new Combat(_currentPlayerSelectedUnit, _opponentSelectedUnit, _currentPlayerTeam, _opponentPlayerTeam, _view);
-        _postCombatUnits = combat.ResolveCombat();
-    }
-    
-    private void DevelopRound()
-    {
-        AssignSelectedUnits();
-        ShowRoundStart();
-        StartCombat();
-        RemoveDeadUnitsFromTeams(_postCombatUnits);
-    }
-    
     private void AssignPlayersRolesForRound()
     {
         _currentPlayerTeam = _firstPlayerOfRoundName == _player1Team.GetPlayerName() ? _player1Team : _player2Team;
         _opponentPlayerTeam = _secondPlayerOfRoundName == _player1Team.GetPlayerName() ? _player1Team : _player2Team;
+    }
+    
+    private void DevelopRound()
+    {
+        new RoundManager(_view, _currentPlayerTeam, _opponentPlayerTeam, _round).DevelopRound();
     }
     
     private void SwapPlayersOrderForNextRound()
@@ -94,17 +70,5 @@ public class Battle
     private void AdvanceToNextRound()
     {
         _round++;
-    }
-    
-    public void DevelopBattle()
-    {
-        while (!BattleHasWinner())
-        {
-            AssignPlayersRolesForRound();
-            DevelopRound();
-            SetUnitsLastRivalStats();
-            SwapPlayersOrderForNextRound();
-            AdvanceToNextRound();
-        }
     }
 }
