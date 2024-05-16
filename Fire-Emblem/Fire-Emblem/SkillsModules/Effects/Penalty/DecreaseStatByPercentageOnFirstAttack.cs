@@ -1,6 +1,5 @@
 namespace Fire_Emblem;
 
-// Luna
 public class DecreaseStatByPercentageOnFirstAttack : PenaltyEffect
 {
     private double _changeFactor;

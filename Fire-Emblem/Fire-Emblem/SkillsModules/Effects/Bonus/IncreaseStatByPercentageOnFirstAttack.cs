@@ -1,6 +1,5 @@
 namespace Fire_Emblem;
 
-// Ignis
 public class IncreaseStatByPercentageOnFirstAttack : BonusEffect
 {
     private double _changeFactor;

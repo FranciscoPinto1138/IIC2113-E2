@@ -1,6 +1,5 @@
 namespace Fire_Emblem;
 
-// Sandstorm
 public class DecreaseStatOnFollowUp : PenaltyEffect
 {
     private int _changeFactor;

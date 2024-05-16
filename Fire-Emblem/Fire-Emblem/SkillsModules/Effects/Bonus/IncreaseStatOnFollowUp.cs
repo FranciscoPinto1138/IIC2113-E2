@@ -1,6 +1,5 @@
 namespace Fire_Emblem;
 
-// Sandstorm
 public class IncreaseStatOnFollowUp : BonusEffect
 {
     private int _changeFactor;

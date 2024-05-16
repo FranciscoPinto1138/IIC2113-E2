@@ -1,6 +1,5 @@
 namespace Fire_Emblem;
 
-// Wrath
 public class IncreaseAtkSpdByLostHP : BonusEffect
 {
     private int _originalBonus;
