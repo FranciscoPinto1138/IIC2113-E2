@@ -21,9 +21,9 @@ public class ConditionEffectPair
         }
     }
     
-    public int GetPriority()
+    public bool HasPriority(int priority)
     {
-        return _priority;
+        return _priority == priority;
     }
     
     private void SetPriority()

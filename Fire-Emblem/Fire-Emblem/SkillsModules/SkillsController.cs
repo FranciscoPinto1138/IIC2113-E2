@@ -83,7 +83,7 @@ public class SkillsController
         if (unitConditionEffectPairsList.Count <= 0) return;
         foreach (ConditionEffectPair conditionEffectPair in unitConditionEffectPairsList)
         {
-            if (conditionEffectPair.GetPriority() == priority)
+            if (conditionEffectPair.HasPriority(priority))
             {
                 conditionEffectPair.ApplyEffectIfConditionIsSatisfied(attackUnit, defenseUnit);
             }

@@ -34,7 +34,7 @@ public class Game
     private Team[] GetTeamsFromFolder()
     {
         TeamsLoader teamsLoader = new TeamsLoader(_view, _teamsFolder);
-        return teamsLoader.LoadSelectedTeamsFromFile();
+        return teamsLoader.GetSelectedTeamsFromFile();
     }
     
     private void StartBattle(Team[] teams)
