@@ -6,15 +6,6 @@ namespace Fire_Emblem;
 
 public class SkillsFactory
 {
-    private Unit _unit;
-    private Unit _opponent;
-    
-    public SkillsFactory(Unit unit, Unit opponent)
-    {
-        this._unit = unit;
-        this._opponent = opponent;
-    }
-    
     public Skill CreateSkill(string name)
     {
         switch (name)
@@ -238,7 +229,7 @@ public class SkillsFactory
             case "Divine Recreation":
                 return new DivineRecreation();
             default:
-                return null;
+                return new EmptySkill();
         }
     }
 }

@@ -10,6 +10,7 @@ public class SkillsController
     private List<Skill> _defenseUnitSkills;
     private List<ConditionEffectPair> _attackUnitConditionEffectPairList;
     private List<ConditionEffectPair> _defenseUnitConditionEffectPairList;
+    private SkillsFactory _skillsFactory = new SkillsFactory();
     private View _view;
     
     public SkillsController(Unit attackUnit, Unit defenseUnit, View view)
@@ -25,23 +26,18 @@ public class SkillsController
     
     public void CreateSkills()
     {
-        SkillsFactory attackersSkillsFactory = new SkillsFactory(_attackUnit, _defenseUnit);
-        SkillsFactory defendersSkillsFactory = new SkillsFactory(_defenseUnit, _attackUnit);
-        CreateSkillsOfUnit(_attackUnit, _attackUnitSkills, attackersSkillsFactory);
-        CreateSkillsOfUnit(_defenseUnit, _defenseUnitSkills, defendersSkillsFactory);
+        CreateSkillsOfUnit(_attackUnit, _attackUnitSkills);
+        CreateSkillsOfUnit(_defenseUnit, _defenseUnitSkills);
         AddSkillsConditionEffectPairsOfUnits();
     }
     
-    private void CreateSkillsOfUnit(Unit unit, List<Skill> skillsList, SkillsFactory factory)
+    private void CreateSkillsOfUnit(Unit unit, List<Skill> skillsList)
     {
         if (unit.Skill.Length == 0) return;
         foreach (string skillName in unit.Skill)
         {
-            Skill skill = factory.CreateSkill(skillName);
-            if (skill != null)
-            {
-                skillsList.Add(skill);
-            }
+            Skill skill = _skillsFactory.CreateSkill(skillName);
+            skillsList.Add(skill);
         }
     }
 
