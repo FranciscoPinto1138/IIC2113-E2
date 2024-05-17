@@ -8,6 +8,7 @@ public class OpponentIsMaleCondition : Condition
     }
     public override bool IsConditionFulfilled(Unit unit, Unit opponent)
     {
-        return opponent.Gender == "Male";
+        const string MALE_GENDER = "Male";
+        return opponent.Gender == MALE_GENDER;
     }
 }

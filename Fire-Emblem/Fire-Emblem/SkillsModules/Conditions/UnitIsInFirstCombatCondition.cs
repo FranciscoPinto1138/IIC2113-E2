@@ -8,6 +8,7 @@ public class UnitIsInFirstCombatCondition : Condition
     }
     public override bool IsConditionFulfilled(Unit unit, Unit opponent)
     {
-        return unit.MostRecentRival == "";
+        const string NO_RECENT_RIVAL = "";
+        return unit.MostRecentRival == NO_RECENT_RIVAL;
     }
 }

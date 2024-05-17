@@ -8,6 +8,7 @@ public class OpponentStartsCombatCondition : Condition
     }
     public override bool IsConditionFulfilled(Unit unit, Unit opponent)
     {
-        return opponent.Role == "Attacker";
+        const string STARTING_COMBAT_ROLE = "Attacker";
+        return opponent.Role == STARTING_COMBAT_ROLE;
     }
 }

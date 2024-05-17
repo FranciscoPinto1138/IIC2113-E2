@@ -9,8 +9,11 @@ public class UnitHasWeaponAdvantageCondition : Condition
 
     public override bool IsConditionFulfilled(Unit unit, Unit opponent)
     {
-        return (unit.Weapon == "Sword" && opponent.Weapon == "Axe") ||
-               (unit.Weapon == "Axe" && opponent.Weapon == "Lance") ||
-               (unit.Weapon == "Lance" && opponent.Weapon == "Sword");
+        const string SWORD_WEAPON = "Sword";
+        const string AXE_WEAPON = "Axe"; 
+        const string LANCE_WEAPON = "Lance";
+        return (unit.Weapon == SWORD_WEAPON && opponent.Weapon == AXE_WEAPON) ||
+               (unit.Weapon == AXE_WEAPON && opponent.Weapon == LANCE_WEAPON) ||
+               (unit.Weapon == LANCE_WEAPON && opponent.Weapon == SWORD_WEAPON);
     }
 }

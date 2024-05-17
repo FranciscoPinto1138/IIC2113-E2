@@ -17,12 +17,17 @@ public class OpponentDamageTypeCondition : Condition
     
     private bool IsUnitDamageTypeCorrect(Unit opponent)
     {
+        const string SWORD_WEAPON = "Sword";
+        const string AXE_WEAPON = "Axe"; 
+        const string LANCE_WEAPON = "Lance";
+        const string BOW_WEAPON = "Bow";
+        const string MAGIC_WEAPON = "Magic";
         switch (_damageType)
         {
             case DamageType.Physical:
-                return opponent.Weapon == "Sword" || opponent.Weapon == "Axe" || opponent.Weapon == "Lance" || opponent.Weapon == "Bow";
+                return opponent.Weapon == SWORD_WEAPON || opponent.Weapon == AXE_WEAPON || opponent.Weapon == LANCE_WEAPON || opponent.Weapon == BOW_WEAPON;
             case DamageType.Magical:
-                return opponent.Weapon == "Magic";
+                return opponent.Weapon == MAGIC_WEAPON;
             default:
                 return false;
         }

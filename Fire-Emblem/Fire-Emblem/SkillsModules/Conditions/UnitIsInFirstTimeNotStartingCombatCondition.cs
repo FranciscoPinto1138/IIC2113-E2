@@ -9,6 +9,7 @@ public class UnitIsInFirstTimeNotStartingCombatCondition : Condition
     
     public override bool IsConditionFulfilled(Unit unit, Unit opponent)
     {
-        return unit.NumberOfTimesRivalStartsCombat == 1;
+        const int firstTimeRivalStartingCombat = 1;
+        return unit.NumberOfTimesRivalStartsCombat == firstTimeRivalStartingCombat;
     }
 }

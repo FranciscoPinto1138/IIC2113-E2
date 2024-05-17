@@ -8,6 +8,7 @@ public class FollowUpController
     private Unit _defenseUnit;
     private UnitStatsManager _unitStatsManager = new UnitStatsManager();
     private View _view;
+    private const int MIN_SPD_DIFFERENCE_FOR_FOLLOWUP = 5;
 
     public FollowUpController(Unit attackUnit, Unit defenseUnit, View view)
     {
@@ -41,14 +42,12 @@ public class FollowUpController
     
     private bool AttackUnitCanFollowUp()
     {
-        const int minimumSpdDifferenceForFollowUp = 5;
-        return _unitStatsManager.GetUnitTotalSpd(_attackUnit) - _unitStatsManager.GetUnitTotalSpd(_defenseUnit) >= minimumSpdDifferenceForFollowUp;
+        return _unitStatsManager.GetUnitTotalSpd(_attackUnit) - _unitStatsManager.GetUnitTotalSpd(_defenseUnit) >= MIN_SPD_DIFFERENCE_FOR_FOLLOWUP;
     }
     
     private bool DefenseUnitCanFollowUp()
     {
-        const int minimumSpdDifferenceForFollowUp = 5;
-        return _unitStatsManager.GetUnitTotalSpd(_defenseUnit) - _unitStatsManager.GetUnitTotalSpd(_attackUnit) >= minimumSpdDifferenceForFollowUp;
+        return _unitStatsManager.GetUnitTotalSpd(_defenseUnit) - _unitStatsManager.GetUnitTotalSpd(_attackUnit) >= MIN_SPD_DIFFERENCE_FOR_FOLLOWUP;
     }
     
     private bool UnitsCanFollowUp()
@@ -61,7 +60,7 @@ public class FollowUpController
         SetUnitsFollowUpStatus(attacker, defender);
         DamageManager damageManager = new DamageManager(attacker, defender);
         damageManager.ApplyDamage();
-        _view.WriteLine($"{attacker.Name} ataca a {defender.Name} con {damageManager.GetTotalDamage()} de daño");
+        ShowAppliedDamage(attacker, defender, damageManager);
         UnSetUnitsFollowUpStatus(attacker, defender);
     }
     
@@ -69,6 +68,11 @@ public class FollowUpController
     {
         unit.IsOnFollowUpAttack = 1;
         opponent.RivalIsOnFollowUpAttack = 1;
+    }
+    
+    private void ShowAppliedDamage(Unit attacker, Unit defender, DamageManager damageManager)
+    {
+        _view.WriteLine($"{attacker.Name} ataca a {defender.Name} con {damageManager.GetTotalDamage()} de daño");
     }
     
     private void UnSetUnitsFollowUpStatus(Unit unit, Unit opponent)

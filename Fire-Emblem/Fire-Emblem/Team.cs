@@ -43,8 +43,8 @@ public class Team
     
     private bool UnitHasEqualSkills(Unit unit)
     {
-        const int maxAmountOfSkills = 2;
-        if (unit.Skill.Length == maxAmountOfSkills)
+        const int MAX_AMOUNT_OF_SKILLS = 2;
+        if (unit.Skill.Length == MAX_AMOUNT_OF_SKILLS)
         {
             if (unit.Skill[0] == unit.Skill[1])
             {
@@ -57,14 +57,14 @@ public class Team
     
     private bool UnitHasValidAmountOfSkills(Unit unit)
     {
-        const int maxAmountOfSkills = 2;
-        return unit.Skill.Length <= maxAmountOfSkills;
+        const int MAX_AMOUNT_OF_SKILLS = 2;
+        return unit.Skill.Length <= MAX_AMOUNT_OF_SKILLS;
     }
     
     public void RemoveDeadUnits(Unit unitPostCombat)
     {
-        const int minimumHPOfUnit = 0;
-        if (unitPostCombat.HPCurrent <= minimumHPOfUnit)
+        const int MIN_HP_OF_UNIT = 0;
+        if (unitPostCombat.HPCurrent <= MIN_HP_OF_UNIT)
         {
             _units.Remove(unitPostCombat);
         }
@@ -72,21 +72,21 @@ public class Team
 
     public bool HasEqualUnits()
     {
-        const int allowedNumberOfEqualUnits = 1;
+        const int ALLOWED_NUMBER_OF_EQUAL_UNITS = 1;
         return _units.GroupBy(u => u.Name)
-            .Any(g => g.Count() > allowedNumberOfEqualUnits);
+            .Any(g => g.Count() > ALLOWED_NUMBER_OF_EQUAL_UNITS);
     }
     
     public bool HasValidLength()
     {
-        const int maxUnitsPerTeam = 3;
-        const int minUnitsPerTeam = 1;
-        return (_units.Count <= maxUnitsPerTeam && _units.Count >= minUnitsPerTeam);
+        const int MAX_UNITS_PER_TEAM = 3;
+        const int MIN_UNITS_PER_TEAM = 1;
+        return (_units.Count <= MAX_UNITS_PER_TEAM && _units.Count >= MIN_UNITS_PER_TEAM);
     }
 
     public bool HasEnoughNumberOfUnits()
     {
-        const int minAmountOfUnitsToBattle = 1;
-        return _units.Count >= minAmountOfUnitsToBattle;
+        const int MIN_AMOUNT_OF_UNITS_TO_BATTLE = 1;
+        return _units.Count >= MIN_AMOUNT_OF_UNITS_TO_BATTLE;
     }
 }

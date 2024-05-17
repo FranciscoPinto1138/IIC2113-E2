@@ -14,6 +14,6 @@ public class FortDefRes : Hybrid
         var effectOnUnit = new DecreaseStat(2, StatType.Atk);
         var effectOnUnitAdditional = new IncreaseStats([StatType.Def, StatType.Res], [6, 6]);
         return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnUnit),
-            new ConditionEffectPair(condition, effectOnUnitAdditional)};
+            new ConditionEffectPair(condition, effectOnUnitAdditional) };
     }
 }

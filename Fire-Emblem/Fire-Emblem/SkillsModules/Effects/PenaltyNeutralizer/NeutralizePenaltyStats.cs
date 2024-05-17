@@ -12,24 +12,25 @@ public class NeutralizePenaltyOnStats : Effect
 
     public override void ApplyEffect(Unit unit, Unit opponent)
     {
+        const int NEUTRALIZED_STAT_VALUE = 0; 
         foreach (var stat in _statsToNeutralize)
         {
             switch (stat)
             {
                 case StatType.Atk:
-                    unit.PenaltyNeutralizationManager.Atk = 0;
+                    unit.PenaltyNeutralizationManager.Atk = NEUTRALIZED_STAT_VALUE;
                     break;
                 case StatType.Spd:
-                    unit.PenaltyNeutralizationManager.Spd = 0;
+                    unit.PenaltyNeutralizationManager.Spd = NEUTRALIZED_STAT_VALUE;
                     break;
                 case StatType.Def:
-                    unit.PenaltyNeutralizationManager.Def = 0;
+                    unit.PenaltyNeutralizationManager.Def = NEUTRALIZED_STAT_VALUE;
                     break;
                 case StatType.Res:
-                    unit.PenaltyNeutralizationManager.Res = 0;
+                    unit.PenaltyNeutralizationManager.Res = NEUTRALIZED_STAT_VALUE;
                     break;
                 case StatType.HP:
-                    unit.PenaltyNeutralizationManager.HP = 0;
+                    unit.PenaltyNeutralizationManager.HP = NEUTRALIZED_STAT_VALUE;
                     break;
             }
         }

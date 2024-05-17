@@ -11,7 +11,8 @@ public class IncreaseAtkSpdByLostHP : BonusEffect
     
     public override void ApplyEffect(Unit unit, Unit opponent)
     {
-        _originalBonus = Math.Min(unit.HPMax - unit.HPCurrent, 30);
+        const int MAX_BONUS_BY_LOST_HP = 30;
+        _originalBonus = Math.Min(unit.HPMax - unit.HPCurrent, MAX_BONUS_BY_LOST_HP);
         unit.BonusStatsDiff.Atk += _originalBonus;
         unit.BonusStatsDiff.Spd += _originalBonus;
     }

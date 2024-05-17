@@ -12,24 +12,25 @@ public class NeutralizeOpponentBonusStats : Effect
 
     public override void ApplyEffect(Unit unit, Unit opponent)
     {
+        const int NEUTRALIZED_STAT_VALUE = 0;
         foreach (var stat in _statsToNeutralize)
         {
             switch (stat)
             {
                 case StatType.Atk:
-                    opponent.BonusNeutralizationManager.Atk = 0;
+                    opponent.BonusNeutralizationManager.Atk = NEUTRALIZED_STAT_VALUE;
                     break;
                 case StatType.Spd:
-                    opponent.BonusNeutralizationManager.Spd = 0;
+                    opponent.BonusNeutralizationManager.Spd = NEUTRALIZED_STAT_VALUE;
                     break;
                 case StatType.Def:
-                    opponent.BonusNeutralizationManager.Def = 0;
+                    opponent.BonusNeutralizationManager.Def = NEUTRALIZED_STAT_VALUE;
                     break;
                 case StatType.Res:
-                    opponent.BonusNeutralizationManager.Res = 0;
+                    opponent.BonusNeutralizationManager.Res = NEUTRALIZED_STAT_VALUE;
                     break;
                 case StatType.HP:
-                    opponent.BonusNeutralizationManager.HP = 0;
+                    opponent.BonusNeutralizationManager.HP = NEUTRALIZED_STAT_VALUE;
                     break;
             }
         }

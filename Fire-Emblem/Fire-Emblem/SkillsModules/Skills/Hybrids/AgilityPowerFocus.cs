@@ -8,7 +8,7 @@ public class AgilityPowerFocus : Hybrid
     private List<int> _changeBuffFactorsList;
     private List<int> _changeDecreaseFactorsList;
     
-    public AgilityPowerFocus(String weaponType,List<StatType> bufferedStatsList, List<int> changeBuffFactorsList, List<StatType>decreasedStatsList, List<int> changeDecreaseFactorsList)
+    public AgilityPowerFocus(String weaponType, List<StatType> bufferedStatsList, List<int> changeBuffFactorsList, List<StatType>decreasedStatsList, List<int> changeDecreaseFactorsList)
     {
         this.Name = "Agility/Power/Focus";
         this.Description = "Varias habilidades en que si la unidad usa cierta arma, aumenta un stat a cambio de disminuir otro";

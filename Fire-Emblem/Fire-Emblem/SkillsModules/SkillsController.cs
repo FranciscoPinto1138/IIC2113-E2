@@ -70,8 +70,8 @@ public class SkillsController
     
     public void ApplyUnitsSkillsEffectsIfConditionsAreSatisfiedByPriority()
     {
-        const int numberOfPriorities = 6;
-        for (int priority = 1; priority < numberOfPriorities + 1; priority++)
+        const int NUMBER_OF_PRIORITIES = 6;
+        for (int priority = 1; priority < NUMBER_OF_PRIORITIES + 1; priority++)
         {
             ApplyUnitSkillsEffectsIfConditionsAreSatisfiedByPriority(_attackUnit, _defenseUnit, _attackUnitConditionEffectPairList, priority);
             ApplyUnitSkillsEffectsIfConditionsAreSatisfiedByPriority(_defenseUnit, _attackUnit, _defenseUnitConditionEffectPairList, priority);

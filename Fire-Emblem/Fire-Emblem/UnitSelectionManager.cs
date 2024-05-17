@@ -18,11 +18,11 @@ public class UnitSelectionManager
     
     private void ShowAvailableUnits(Team team)
     {
-        const int minimumHPofUnit = 0;
+        const int MIN_HP_OF_UNIT = 0;
         _view.WriteLine($"{team.GetPlayerName()} selecciona una opción");
         for (int i = 0; i < team.GetUnits().Count; i++)
         {
-            if (team.GetUnits()[i].HPCurrent > minimumHPofUnit)
+            if (team.GetUnits()[i].HPCurrent > MIN_HP_OF_UNIT)
             {
                 _view.WriteLine($"{i}: {team.GetUnits()[i].Name}");
             }

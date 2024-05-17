@@ -17,7 +17,8 @@ public class Battle
     {
         this._player1Team = player1Team;
         this._player2Team = player2Team;
-        this._round = 1;
+        const int INITIAL_ROUND = 1;
+        this._round = INITIAL_ROUND;
         this._firstPlayerOfRoundName = _player1Team.GetPlayerName();
         this._secondPlayerOfRoundName = _player2Team.GetPlayerName();
         _view = view;
@@ -33,22 +34,24 @@ public class Battle
             SwapPlayersOrderForNextRound();
             AdvanceToNextRound();
         }
+        ShowWinner();
     }
     
     private bool BattleHasWinner()
     {
+        return !_player1Team.HasEnoughNumberOfUnits() || !_player2Team.HasEnoughNumberOfUnits();
+    }
+
+    private void ShowWinner()
+    {
         if (!_player1Team.HasEnoughNumberOfUnits())
         {
             _view.WriteLine($"{_player2Team.GetPlayerName()} ganó");
-            return true;
         }
-        if (!_player2Team.HasEnoughNumberOfUnits())
+        else if (!_player2Team.HasEnoughNumberOfUnits())
         {
             _view.WriteLine($"{_player1Team.GetPlayerName()} ganó");
-            return true;
         }
-
-        return false;
     }
     
     private void AssignPlayersRolesForRound()
