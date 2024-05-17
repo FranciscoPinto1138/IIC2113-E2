@@ -21,11 +21,11 @@ public class Combat
         IncreaseStartingCombatUnitsStats();
         ResolveSkills();
         AttackOrCounterAttack(_attackUnit, _defenseUnit);
-        if (CheckIfCombatIsOver()) return [_attackUnit, _defenseUnit];
+        if (IsCombatOver()) return [_attackUnit, _defenseUnit];
         AttackOrCounterAttack(_defenseUnit, _attackUnit);
-        if (CheckIfCombatIsOver()) return [_attackUnit, _defenseUnit];
+        if (IsCombatOver()) return [_attackUnit, _defenseUnit];
         FollowUp();
-        if (CheckIfCombatIsOver()) return [_attackUnit, _defenseUnit];
+        if (IsCombatOver()) return [_attackUnit, _defenseUnit];
         WrapUpCombat();
         return [_attackUnit, _defenseUnit];
     }
@@ -63,9 +63,9 @@ public class Combat
         new AttackCounterAttackController(attacker, defender, _view).AttackOrCounterAttack();
     }
     
-    private bool CheckIfCombatIsOver()
+    private bool IsCombatOver()
     {
-        if (!CheckIfUnitDied()) return false;
+        if (!HasUnitDied()) return false;
         WrapUpCombat();
         return true;
     }
@@ -80,7 +80,7 @@ public class Combat
         new FollowUpController(_attackUnit, _defenseUnit, _view).ResolveFollowUp();
     }
     
-    private bool CheckIfUnitDied()
+    private bool HasUnitDied()
     {
         return _attackUnit.HPCurrent <= 0 || _defenseUnit.HPCurrent <= 0;
     }

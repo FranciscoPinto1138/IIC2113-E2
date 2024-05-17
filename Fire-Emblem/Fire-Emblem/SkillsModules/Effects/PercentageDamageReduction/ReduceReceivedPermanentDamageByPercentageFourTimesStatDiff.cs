@@ -13,6 +13,7 @@ public class ReduceReceivedPermanentDamageByPercentageFourTimesStatDiff : Percen
     {
         UnitStatsManager unitStatsManager = new UnitStatsManager();
         double changeFactor = 0;
+        const double MAX_PERCENTAGE_DAMAGE_REDUCTION_BY_STAT_DIFF = 0.4;
         switch (_statType)
         {
             case StatType.Atk:
@@ -20,28 +21,28 @@ public class ReduceReceivedPermanentDamageByPercentageFourTimesStatDiff : Percen
                     Math.Min(
                         ((unitStatsManager.GetUnitNonSpecificTotalAtk(unit) -
                           unitStatsManager.GetUnitNonSpecificTotalAtk(opponent)) * 4) /
-                        100.0, 0.4);
+                        100.0, MAX_PERCENTAGE_DAMAGE_REDUCTION_BY_STAT_DIFF);
                 break;
             case StatType.Def:
                 changeFactor = 
                     Math.Min(
                         ((unitStatsManager.GetUnitNonSpecificTotalDef(unit) -
                           unitStatsManager.GetUnitNonSpecificTotalDef(opponent)) * 4) /
-                        100.0, 0.4);
+                        100.0, MAX_PERCENTAGE_DAMAGE_REDUCTION_BY_STAT_DIFF);
                 break;
             case StatType.Res:
                 changeFactor = 
                     Math.Min(
                         ((unitStatsManager.GetUnitNonSpecificTotalRes(unit) -
                           unitStatsManager.GetUnitNonSpecificTotalRes(opponent)) * 4) /
-                        100.0, 0.4);
+                        100.0, MAX_PERCENTAGE_DAMAGE_REDUCTION_BY_STAT_DIFF);
                 break;
             case StatType.Spd:
                 changeFactor = 
                     Math.Min(
                         ((unitStatsManager.GetUnitNonSpecificTotalSpd(unit) -
                           unitStatsManager.GetUnitNonSpecificTotalSpd(opponent)) * 4) /
-                        100.0, 0.4);
+                        100.0, MAX_PERCENTAGE_DAMAGE_REDUCTION_BY_STAT_DIFF);
                 break;
         }
         unit.DamageEffectsManager.DamagePercentageReductionPermanent =

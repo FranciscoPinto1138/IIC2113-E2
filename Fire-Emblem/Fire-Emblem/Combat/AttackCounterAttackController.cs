@@ -31,7 +31,7 @@ public class AttackCounterAttackController
     
     private void ShowAppliedDamage(DamageManager damageManager)
     {
-        _view.WriteLine($"{_attackUnit.Name} ataca a {_defenseUnit.Name} con {damageManager.GetTotalDamage()} de daño");
+        _view.WriteLine($"{_attackUnit.Name} ataca a {_defenseUnit.Name} con {damageManager.DetermineTotalDamageAfterEffects()} de daño");
     }
     
     private void UnSetUnitsFirstAttackStatus()

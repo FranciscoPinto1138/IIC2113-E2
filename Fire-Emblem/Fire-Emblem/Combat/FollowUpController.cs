@@ -72,7 +72,7 @@ public class FollowUpController
     
     private void ShowAppliedDamage(Unit attacker, Unit defender, DamageManager damageManager)
     {
-        _view.WriteLine($"{attacker.Name} ataca a {defender.Name} con {damageManager.GetTotalDamage()} de daño");
+        _view.WriteLine($"{attacker.Name} ataca a {defender.Name} con {damageManager.DetermineTotalDamageAfterEffects()} de daño");
     }
     
     private void UnSetUnitsFollowUpStatus(Unit unit, Unit opponent)

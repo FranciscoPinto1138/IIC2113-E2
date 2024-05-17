@@ -32,9 +32,9 @@ public class CombatWrapper
     
     private void SetUnitsHPToMinimumIfNegative()
     {
-        const int minimumHPofUnit = 0;
-        _attackUnit.HPCurrent = Math.Max(minimumHPofUnit, _attackUnit.HPCurrent);
-        _defenseUnit.HPCurrent = Math.Max(minimumHPofUnit, _defenseUnit.HPCurrent);
+        const int MIN_HP_OF_UNIT = 0;
+        _attackUnit.HPCurrent = Math.Max(MIN_HP_OF_UNIT, _attackUnit.HPCurrent);
+        _defenseUnit.HPCurrent = Math.Max(MIN_HP_OF_UNIT, _defenseUnit.HPCurrent);
     }
     
     private void ResetUnitsExtraDamage()

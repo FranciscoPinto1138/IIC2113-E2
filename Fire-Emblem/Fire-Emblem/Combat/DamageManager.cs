@@ -8,20 +8,19 @@ public class DamageManager
     private Unit _damageReceiver;
     private int _defOrRes;
     private int _initialDamage;
-    private int _totalDamage;
     private UnitStatsManager _unitStatsManager = new UnitStatsManager();
     
     public DamageManager(Unit damageMaker, Unit damageReceiver)
     {
         this._damageMaker = damageMaker;
         this._damageReceiver = damageReceiver;
+        SetResOrDef();
+        SetInitialDamage();
     }
     
-    public void ApplyDamage()
+    private void SetInitialDamage()
     {
-        SetResOrDef();
-        _totalDamage = DetermineDamage();
-        _damageReceiver.HPCurrent -= _totalDamage;
+        _initialDamage = Convert.ToInt32(Math.Max(0, Math.Floor((_unitStatsManager.GetUnitTotalAtk(_damageMaker) * _damageMaker.CurrentWTB) - _defOrRes)));
     }
     
     private void SetResOrDef()
@@ -29,13 +28,18 @@ public class DamageManager
         _defOrRes = _damageMaker.Weapon == "Magic" ? _unitStatsManager.GetUnitTotalRes(_damageReceiver) : _unitStatsManager.GetUnitTotalDef(_damageReceiver);
     }
     
-    private int DetermineDamage()
+    public void ApplyDamage()
     {
-        _initialDamage = Convert.ToInt32(Math.Max(0, Math.Floor((_unitStatsManager.GetUnitTotalAtk(_damageMaker) * _damageMaker.CurrentWTB) - _defOrRes)));
+        _damageReceiver.HPCurrent -= DetermineTotalDamageAfterEffects();
+    }
+    
+    public int DetermineTotalDamageAfterEffects()
+    {
+        const int MIN_TOTAL_DAMAGE = 0;
         int initialDamagePlusExtraDamage = _initialDamage + DetermineBaseExtraDamage();
         int percentageReducedDamage = DeterminePercentageReducedDamage(initialDamagePlusExtraDamage);
         int absoluteReducedDamage = DetermineAbsoluteReducedDamage(percentageReducedDamage);
-        return Math.Max(absoluteReducedDamage, 0);
+        return Math.Max(absoluteReducedDamage, MIN_TOTAL_DAMAGE);
     }
 
     private int DetermineBaseExtraDamage()
@@ -61,20 +65,14 @@ public class DamageManager
     
     public int GetReducedDamageOnFirstAttack()
     {
-        SetResOrDef();
-        return Convert.ToInt32(Convert.ToInt32(Math.Max(0, Math.Floor((_unitStatsManager.GetUnitTotalAtk(_damageMaker) * _damageMaker.CurrentWTB) - _defOrRes))) 
+        return Convert.ToInt32(_initialDamage
                                + _damageMaker.DamageEffectsManager.ExtraDamagePermanent
                                + _damageMaker.DamageEffectsManager.ExtraDamageFirstAttack
-                               - (Math.Floor((Convert.ToInt32(Math.Max(0, Math.Floor((_unitStatsManager.GetUnitTotalAtk(_damageMaker) * _damageMaker.CurrentWTB) - _defOrRes)))
+                               - (Math.Floor((_initialDamage
                                    + _damageMaker.DamageEffectsManager.ExtraDamagePermanent
                                    + _damageMaker.DamageEffectsManager.ExtraDamageFirstAttack) 
                                   * (1 - _damageReceiver.DamageEffectsManager.DamagePercentageReductionPermanent)
                                   * (1 - _damageReceiver.DamageEffectsManager.DamagePercentageReductionFirstAttack))
                                   - _damageReceiver.DamageEffectsManager.DamageAbsoluteReductionPermanent));
-    }
-    
-    public int GetTotalDamage()
-    {
-        return _totalDamage;
     }
 }

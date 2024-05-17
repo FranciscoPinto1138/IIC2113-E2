@@ -8,7 +8,8 @@ public abstract class Condition
     {
         return _priority;
     }
-    public void SetPriority(int priority)
+
+    protected void SetPriority(int priority)
     {
         _priority = priority;
     }
