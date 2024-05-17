@@ -10,7 +10,6 @@ public class DragonsWrath : Hybrid
 
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
-        UnitStatsManager unitStatsManager = new UnitStatsManager();
         return new ConditionEffectPair[] { 
             new ConditionEffectPair(
                 new NoCondition(), 

@@ -10,7 +10,8 @@ public class DivineRecreation : Hybrid
 
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
-        if (unit.Role == "Attacker")
+        const string ROLE_TO_START_COMBAT = "Attacker";
+        if (unit.Role == ROLE_TO_START_COMBAT)
         {
             return new ConditionEffectPair[] { 
                 new ConditionEffectPair(
