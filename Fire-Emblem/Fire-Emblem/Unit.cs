@@ -14,7 +14,7 @@ public class Unit
     public int Def { get; set;}
     public int Res { get; set;}
     public string MostRecentRival { get; set; } = "";
-    public string Role { get; set; } = null!;
+    public string Role { get; set; } = "";
     public StatsDiff BonusStatsDiff = new StatsDiff();
     public StatsDiff PenaltyStatsDiff = new StatsDiff();
     public StatsDiff FirstAttackBonusStatsDiff = new StatsDiff();

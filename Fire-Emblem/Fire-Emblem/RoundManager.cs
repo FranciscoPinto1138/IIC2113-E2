@@ -39,7 +39,7 @@ public class RoundManager
 
     private void ShowRoundStart()
     {
-        _view.WriteLine($"Round {_round}: {_currentPlayerSelectedUnit.Name} ({_currentPlayerTeam.GetPlayerName()}) comienza");
+        _view.WriteLine($"Round {_round}: {_currentPlayerSelectedUnit.Name} ({_currentPlayerTeam.PlayerName}) comienza");
     }
 
     private void StartCombat()
@@ -50,8 +50,17 @@ public class RoundManager
 
     private void RemoveDeadUnitsFromTeams()
     {
-        _currentPlayerTeam.RemoveDeadUnits(_postCombatUnits[0]);
-        _opponentPlayerTeam.RemoveDeadUnits(_postCombatUnits[1]);
+        RemoveDeadUnits(_currentPlayerTeam, _postCombatUnits[0]);
+        RemoveDeadUnits(_opponentPlayerTeam, _postCombatUnits[1]);
+    }
+    
+    private void RemoveDeadUnits(Team team, Unit postCombatUnit)
+    {
+        const int MIN_HP_OF_UNIT = 0;
+        if (postCombatUnit.HPCurrent <= MIN_HP_OF_UNIT)
+        {
+            team.Units.Remove(postCombatUnit);
+        }
     }
 
     private void SetUnitsLastRivalStats()

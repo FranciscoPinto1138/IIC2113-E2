@@ -19,8 +19,8 @@ public class Battle
         this._player2Team = player2Team;
         const int INITIAL_ROUND = 1;
         this._round = INITIAL_ROUND;
-        this._firstPlayerOfRoundName = _player1Team.GetPlayerName();
-        this._secondPlayerOfRoundName = _player2Team.GetPlayerName();
+        this._firstPlayerOfRoundName = _player1Team.PlayerName;
+        this._secondPlayerOfRoundName = _player2Team.PlayerName;
         _view = view;
         _unitSelectionManager = new UnitSelectionManager(_view);
     }
@@ -39,25 +39,31 @@ public class Battle
     
     private bool BattleHasWinner()
     {
-        return !_player1Team.HasEnoughNumberOfUnits() || !_player2Team.HasEnoughNumberOfUnits();
+        return !TeamHasEnoughNumberOfUnits(_player1Team) || !TeamHasEnoughNumberOfUnits(_player2Team);
+    }
+    
+    private bool TeamHasEnoughNumberOfUnits(Team team)
+    {
+        const int MIN_AMOUNT_OF_UNITS_TO_BATTLE = 1;
+        return team.Units.Count >= MIN_AMOUNT_OF_UNITS_TO_BATTLE;
     }
 
     private void ShowWinner()
     {
-        if (!_player1Team.HasEnoughNumberOfUnits())
+        if (!TeamHasEnoughNumberOfUnits(_player1Team))
         {
-            _view.WriteLine($"{_player2Team.GetPlayerName()} ganó");
+            _view.WriteLine($"{_player2Team.PlayerName} ganó");
         }
-        else if (!_player2Team.HasEnoughNumberOfUnits())
+        else if (!TeamHasEnoughNumberOfUnits(_player2Team))
         {
-            _view.WriteLine($"{_player1Team.GetPlayerName()} ganó");
+            _view.WriteLine($"{_player1Team.PlayerName} ganó");
         }
     }
     
     private void AssignPlayersRolesForRound()
     {
-        _currentPlayerTeam = _firstPlayerOfRoundName == _player1Team.GetPlayerName() ? _player1Team : _player2Team;
-        _opponentPlayerTeam = _secondPlayerOfRoundName == _player1Team.GetPlayerName() ? _player1Team : _player2Team;
+        _currentPlayerTeam = _firstPlayerOfRoundName == _player1Team.PlayerName ? _player1Team : _player2Team;
+        _opponentPlayerTeam = _secondPlayerOfRoundName == _player1Team.PlayerName ? _player1Team : _player2Team;
     }
     
     private void DevelopRound()
