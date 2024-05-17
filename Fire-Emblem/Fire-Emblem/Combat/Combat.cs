@@ -33,7 +33,7 @@ public class Combat
     private void SetWTBs()
     {
         WeaponTriangle weaponTriangle = new WeaponTriangle(_attackUnit, _defenseUnit, _view);
-        double[] WTBs = weaponTriangle.ResolveWeaponTriangle();
+        double[] WTBs = weaponTriangle.GetWTBsFromWeaponTriangle();
         _attackUnit.CurrentWTB = WTBs[0];
         _defenseUnit.CurrentWTB = WTBs[1];
     }

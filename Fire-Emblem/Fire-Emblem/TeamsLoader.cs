@@ -13,7 +13,7 @@ public class TeamsLoader
         _teamsFolder = teamsFolder;
     }
     
-    public Team[] LoadTeams()
+    public Team[] LoadSelectedTeamsFromFile()
     {
         List<Character> characters = ProcessCharactersJson();
         TeamFile teamFile = new TeamFile(GetSelectedTeamsFilePath());

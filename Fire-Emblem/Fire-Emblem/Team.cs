@@ -63,8 +63,8 @@ public class Team
     
     public void RemoveDeadUnits(Unit unitPostCombat)
     {
-        const int minimumHPofUnit = 0;
-        if (unitPostCombat.HPCurrent <= minimumHPofUnit)
+        const int minimumHPOfUnit = 0;
+        if (unitPostCombat.HPCurrent <= minimumHPOfUnit)
         {
             _units.Remove(unitPostCombat);
         }
