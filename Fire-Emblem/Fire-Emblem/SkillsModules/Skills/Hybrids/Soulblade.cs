@@ -17,7 +17,7 @@ public class Soulblade : Skill
         int differenceDef = averageDefResOfRival - opponent.Def;
         int differenceRes = averageDefResOfRival - opponent.Res;
     
-        List<ConditionEffectPair> pairs = new List<ConditionEffectPair>();
+        ConditionEffectPairList pairs = new ConditionEffectPairList();
     
         if (differenceDef != 0)
         {
