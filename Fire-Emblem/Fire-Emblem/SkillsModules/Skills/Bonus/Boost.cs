@@ -2,7 +2,7 @@ namespace Fire_Emblem;
 
 public class Boost : Skill
 {
-    private List<StatType>_bufferedStatsList;
+    private List<StatType> _bufferedStatsList;
     private List<int> _changeFactorsList;
     
     public Boost(List<StatType> bufferedStatsList, List<int> changeFactorsList)

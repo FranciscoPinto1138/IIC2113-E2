@@ -3,8 +3,8 @@ namespace Fire_Emblem;
 public class AgilityPowerFocus : Skill
 {
     private String _weaponType;
-    private List<StatType>_bufferedStatsList;
-    private List<StatType>_decreasedStatsList;
+    private List<StatType> _bufferedStatsList;
+    private List<StatType> _decreasedStatsList;
     private List<int> _changeBuffFactorsList;
     private List<int> _changeDecreaseFactorsList;
     

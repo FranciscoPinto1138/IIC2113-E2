@@ -2,9 +2,9 @@ namespace Fire_Emblem;
 
 public class NeutralizeBonusOnStats : Effect
 {
-    private List< StatType> _statsToNeutralize;
+    private List<StatType> _statsToNeutralize;
     
-    public NeutralizeBonusOnStats(List< StatType> statsToNeutralize)
+    public NeutralizeBonusOnStats(List<StatType> statsToNeutralize)
     {
         _statsToNeutralize = statsToNeutralize;
         this.SetPriority(1);

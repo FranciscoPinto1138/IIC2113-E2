@@ -5,12 +5,12 @@ namespace Fire_Emblem;
 public class Team
 {
     public string PlayerName;
-    public List<Unit> Units;
+    public UnitList Units;
 
     public Team(string playerName, string[] teamLines, List<Character> characters)
     {
         PlayerName = playerName;
-        Units = new List<Unit>();
+        Units = new UnitList();
         ConstructTeamFromFileLines(teamLines, characters);
     }
     
