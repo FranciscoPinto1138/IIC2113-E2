@@ -3,9 +3,9 @@ namespace Fire_Emblem;
 public class Boost : Skill
 {
     private StatTypeList _bufferedStatsList;
-    private List<int> _changeFactorsList;
+    private ChangeFactorList _changeFactorsList;
     
-    public Boost(StatTypeList bufferedStatsList, List<int> changeFactorsList)
+    public Boost(StatTypeList bufferedStatsList, ChangeFactorList changeFactorsList)
     {
         this.Name = "Boost";
         this.Description = "Varias habilidades donde si unidad tiene HP >= HP del rival+3, mejora ciertas stats";

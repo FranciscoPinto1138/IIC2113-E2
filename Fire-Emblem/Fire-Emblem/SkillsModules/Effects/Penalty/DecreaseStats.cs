@@ -3,9 +3,9 @@ namespace Fire_Emblem;
 public class DecreaseStats : PenaltyEffect
 {
     private StatTypeList _bufferedStatsList;
-    private List<int> _changeFactorsList;
+    private ChangeFactorList _changeFactorsList;
     
-    public DecreaseStats(StatTypeList bufferedStatsList, List<int> changeFactorsList)
+    public DecreaseStats(StatTypeList bufferedStatsList, ChangeFactorList changeFactorsList)
     {
         _bufferedStatsList = bufferedStatsList;
         _changeFactorsList = changeFactorsList;

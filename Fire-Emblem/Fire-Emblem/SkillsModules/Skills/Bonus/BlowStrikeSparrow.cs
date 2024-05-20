@@ -3,9 +3,9 @@ namespace Fire_Emblem;
 public class BlowStrikeSparrow : Skill
 {
     private StatTypeList _bufferedStatsList;
-    private List<int> _changeFactorsList;
+    private ChangeFactorList _changeFactorsList;
     
-    public BlowStrikeSparrow(StatTypeList bufferedStatsList, List<int> changeFactorsList)
+    public BlowStrikeSparrow(StatTypeList bufferedStatsList, ChangeFactorList changeFactorsList)
     {
         this.Name = "Blow/Strike/Sparrow";
         this.Description = "Varias habilidades donde si unidad empieza el combate, mejora ciertas stats";

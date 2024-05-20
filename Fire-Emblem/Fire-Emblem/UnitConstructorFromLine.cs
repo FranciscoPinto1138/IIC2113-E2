@@ -4,9 +4,9 @@ public class UnitConstructorFromLine
 {
     private string _line;
     private string[] _splitLine;
-    private List<Character> _characters;
+    private CharacterList _characters;
         
-    public UnitConstructorFromLine(string line, List<Character> characters)
+    public UnitConstructorFromLine(string line, CharacterList characters)
     {
         _line = line;
         _characters = characters;

@@ -4,9 +4,9 @@ public class Lull : Skill
 {
     private StatTypeList _rivalDecreasedStatsList;
     private StatTypeList _rivalNeutralizedStatsList;
-    private List<int> _changeDecreaseFactorsList;
+    private ChangeFactorList _changeDecreaseFactorsList;
     
-    public Lull(StatTypeList rivalDecreasedStatsList, List<int> changeDecreaseFactorsList, 
+    public Lull(StatTypeList rivalDecreasedStatsList, ChangeFactorList changeDecreaseFactorsList, 
         StatTypeList rivalNeutralizedStatsList)
     {
         this.Name = "Lull";

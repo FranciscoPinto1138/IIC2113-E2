@@ -15,16 +15,15 @@ public class TeamsLoader
     
     public Team[] GetSelectedTeamsFromFile()
     {
-        List<Character> characters = ProcessCharactersJson();
+        CharacterList characters = ProcessCharactersJson();
         TeamFile teamFile = new TeamFile(GetSelectedTeamsFilePath());
         return ConstructTeams(teamFile, characters);
     }
     
-    private List<Character> ProcessCharactersJson()
+    private CharacterList ProcessCharactersJson()
     {
         string myJson = File.ReadAllText("characters.json");
-        List<Character> characters =  JsonSerializer . Deserialize<List<Character>>(myJson);
-        return characters;
+        return CharacterList.FromJson(myJson);
     }
     
     private string GetSelectedTeamsFilePath()
@@ -45,7 +44,7 @@ public class TeamsLoader
         }
     }
     
-    private Team[] ConstructTeams(TeamFile teamFile, List<Character> characters)
+    private Team[] ConstructTeams(TeamFile teamFile, CharacterList characters)
     {
         string[][] teamsLines = teamFile.GetSplitTeamsLines();
         Team player1 = new Team("Player 1", teamsLines[0], characters);

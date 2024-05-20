@@ -3,9 +3,9 @@ namespace Fire_Emblem;
 public class Stance : Skill
 {
     private StatTypeList _bufferedStatsList;
-    private List<int> _changeFactorsList;
+    private ChangeFactorList _changeFactorsList;
     
-    public Stance(StatTypeList bufferedStatsList, List<int> changeFactorsList)
+    public Stance(StatTypeList bufferedStatsList, ChangeFactorList changeFactorsList)
     {
         this.Name = "Stance";
         this.Description = "Si el rival inicia el combate, otorga bonus a ciertos stats durante el combate " +

@@ -3,9 +3,9 @@ namespace Fire_Emblem;
 public class Brazen : Skill
 {
     private StatTypeList _bufferedStatsList;
-    private List<int> _changeFactorsList;
+    private ChangeFactorList _changeFactorsList;
     
-    public Brazen(StatTypeList bufferedStatsList, List<int> changeFactorsList)
+    public Brazen(StatTypeList bufferedStatsList, ChangeFactorList changeFactorsList)
     {
         this.Name = "Brazen";
         this.Description = "Varias habilidades donde si unidad tiene HP <= 80 %, mejora ciertas stats";

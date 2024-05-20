@@ -5,11 +5,12 @@ public class AgilityPowerFocus : Skill
     private String _weaponType;
     private StatTypeList _bufferedStatsList;
     private StatTypeList _decreasedStatsList;
-    private List<int> _changeBuffFactorsList;
-    private List<int> _changeDecreaseFactorsList;
+    private ChangeFactorList _changeBuffFactorsList;
+    private ChangeFactorList _changeDecreaseFactorsList;
     
     public AgilityPowerFocus(String weaponType, StatTypeList bufferedStatsList, 
-        List<int> changeBuffFactorsList, StatTypeList decreasedStatsList, List<int> changeDecreaseFactorsList)
+        ChangeFactorList changeBuffFactorsList, StatTypeList decreasedStatsList, 
+        ChangeFactorList changeDecreaseFactorsList)
     {
         this.Name = "Agility/Power/Focus";
         this.Description = "Varias habilidades en que si la unidad usa cierta arma, " +

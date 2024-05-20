@@ -3,9 +3,9 @@ namespace Fire_Emblem;
 public class IncreaseStats : BonusEffect
 {
     private StatTypeList _bufferedStatsList;
-    private List<int> _changeFactorsList;
+    private ChangeFactorList _changeFactorsList;
     
-    public IncreaseStats(StatTypeList bufferedStatsList, List<int> changeFactorsList)
+    public IncreaseStats(StatTypeList bufferedStatsList, ChangeFactorList changeFactorsList)
     {
         _bufferedStatsList = bufferedStatsList;
         _changeFactorsList = changeFactorsList;
