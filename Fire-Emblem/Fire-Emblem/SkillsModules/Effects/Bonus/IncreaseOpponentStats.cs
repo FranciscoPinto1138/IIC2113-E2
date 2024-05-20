@@ -2,10 +2,10 @@ namespace Fire_Emblem;
 
 public class IncreaseOpponentStats : BonusEffect
 {
-    private List<StatType> _bufferedStatsList;
+    private StatTypeList _bufferedStatsList;
     private List<int> _changeFactorsList;
     
-    public IncreaseOpponentStats(List<StatType> bufferedStatsList, List<int> changeFactorsList)
+    public IncreaseOpponentStats(StatTypeList bufferedStatsList, List<int> changeFactorsList)
     {
         _bufferedStatsList = bufferedStatsList;
         _changeFactorsList = changeFactorsList;

@@ -3,13 +3,13 @@ namespace Fire_Emblem;
 public class AgilityPowerFocus : Skill
 {
     private String _weaponType;
-    private List<StatType> _bufferedStatsList;
-    private List<StatType> _decreasedStatsList;
+    private StatTypeList _bufferedStatsList;
+    private StatTypeList _decreasedStatsList;
     private List<int> _changeBuffFactorsList;
     private List<int> _changeDecreaseFactorsList;
     
-    public AgilityPowerFocus(String weaponType, List<StatType> bufferedStatsList, 
-        List<int> changeBuffFactorsList, List<StatType>decreasedStatsList, List<int> changeDecreaseFactorsList)
+    public AgilityPowerFocus(String weaponType, StatTypeList bufferedStatsList, 
+        List<int> changeBuffFactorsList, StatTypeList decreasedStatsList, List<int> changeDecreaseFactorsList)
     {
         this.Name = "Agility/Power/Focus";
         this.Description = "Varias habilidades en que si la unidad usa cierta arma, " +

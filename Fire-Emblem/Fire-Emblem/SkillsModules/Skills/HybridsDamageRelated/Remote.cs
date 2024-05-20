@@ -2,10 +2,10 @@ namespace Fire_Emblem;
 
 public class Remote : Skill
 {
-    private List<StatType> _bufferedStatsList;
+    private StatTypeList _bufferedStatsList;
     private List<int> _changeFactorsList;
     
-    public Remote(List<StatType> bufferedStatsList, List<int> changeFactorsList)
+    public Remote(StatTypeList bufferedStatsList, List<int> changeFactorsList)
     {
         this.Name = "Remote";
         this.Description = "Si la unidad inicia el combate, otorga bonus a stats y reduce el daño del " +
