@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class FairFight : Bonus
+public class FairFight : Skill
 {
     public FairFight()
     {

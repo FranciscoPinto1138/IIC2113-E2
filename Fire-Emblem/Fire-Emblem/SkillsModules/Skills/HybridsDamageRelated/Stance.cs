@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class Stance : Hybrid
+public class Stance : Skill
 {
     private List<StatType> _bufferedStatsList;
     private List<int> _changeFactorsList;

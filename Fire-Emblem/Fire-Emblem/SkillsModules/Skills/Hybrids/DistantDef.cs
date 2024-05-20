@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class DistantDef : Hybrid
+public class DistantDef : Skill
 {
     public DistantDef()
     {

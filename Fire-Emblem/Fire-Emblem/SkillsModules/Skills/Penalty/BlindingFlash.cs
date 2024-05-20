@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class BlindingFlash : Penalty
+public class BlindingFlash : Skill
 {
     public BlindingFlash()
     {

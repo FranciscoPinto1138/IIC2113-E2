@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class Wrath : Bonus
+public class Wrath : Skill
 {
     public Wrath()
     {

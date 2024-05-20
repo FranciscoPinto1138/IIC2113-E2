@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class ArmsShield : AbsoluteDamageReduction
+public class ArmsShield : Skill
 {
     public ArmsShield()
     {

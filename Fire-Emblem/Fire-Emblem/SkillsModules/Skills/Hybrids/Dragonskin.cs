@@ -1,6 +1,6 @@
 namespace Fire_Emblem.SkillsModules.Skills.Hybrids;
 
-public class Dragonskin : Hybrid
+public class Dragonskin : Skill
 {
     public Dragonskin()
     {

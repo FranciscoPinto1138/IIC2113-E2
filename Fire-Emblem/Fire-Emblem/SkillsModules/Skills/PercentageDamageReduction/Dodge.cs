@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class Dodge : PercentageDamageReduction
+public class Dodge : Skill
 {
     public Dodge()
     {

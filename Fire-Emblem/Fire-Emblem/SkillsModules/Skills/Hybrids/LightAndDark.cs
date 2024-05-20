@@ -1,6 +1,6 @@
 namespace Fire_Emblem.SkillsModules.Skills.Hybrids;
 
-public class LightAndDark : Hybrid
+public class LightAndDark : Skill
 {
     public LightAndDark()
     {

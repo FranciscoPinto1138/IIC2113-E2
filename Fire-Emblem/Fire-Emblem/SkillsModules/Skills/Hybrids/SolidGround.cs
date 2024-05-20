@@ -1,6 +1,6 @@
 namespace Fire_Emblem.SkillsModules.Skills.Hybrids;
 
-public class SolidGround : Hybrid
+public class SolidGround : Skill
 {
     public SolidGround()
     {

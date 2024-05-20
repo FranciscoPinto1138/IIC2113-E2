@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class HPPlus15 : Bonus
+public class HPPlus15 : Skill
 {
     
     public HPPlus15()

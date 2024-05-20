@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class Resolve : Bonus
+public class Resolve : Skill
 {
     public Resolve()
     {

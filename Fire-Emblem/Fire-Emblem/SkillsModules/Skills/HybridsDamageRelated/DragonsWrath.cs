@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class DragonsWrath : Hybrid
+public class DragonsWrath : Skill
 {
     public DragonsWrath()
     {

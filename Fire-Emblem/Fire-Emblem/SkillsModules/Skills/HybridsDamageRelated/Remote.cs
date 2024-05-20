@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class Remote : Hybrid
+public class Remote : Skill
 {
     private List<StatType> _bufferedStatsList;
     private List<int> _changeFactorsList;

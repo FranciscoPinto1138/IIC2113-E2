@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class Bushido : Hybrid
+public class Bushido : Skill
 {
     public Bushido()
     {

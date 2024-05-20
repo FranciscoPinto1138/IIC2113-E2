@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class Gentility : AbsoluteDamageReduction
+public class Gentility : Skill
 {
     public Gentility()
     {

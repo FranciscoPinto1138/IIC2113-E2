@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class DragonWall : PercentageDamageReduction
+public class DragonWall : Skill
 {
     public DragonWall()
     {

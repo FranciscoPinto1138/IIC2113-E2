@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class GuardBearing : Hybrid
+public class GuardBearing : Skill
 {
     public GuardBearing()
     {
@@ -13,28 +13,21 @@ public class GuardBearing : Hybrid
 
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
+        Condition orCondition = new OrPairCondition(
+            new AndPairCondition(
+                new UnitIsInFirstTimeStartingCombatCondition(),
+                new UnitStartsCombatCondition()),
+            new AndPairCondition(
+                new UnitIsInFirstTimeNotStartingCombatCondition(),
+                new OpponentStartsCombatCondition()));
+        
         return new ConditionEffectPair[] { 
             new ConditionEffectPair(
                 new NoCondition(),
                 new DecreaseOpponentStats([StatType.Spd, StatType.Def], [4, 4])),
-            new ConditionEffectPair(
-                new OrPairCondition(
-                    new AndPairCondition(
-                        new UnitIsInFirstTimeStartingCombatCondition(),
-                        new UnitStartsCombatCondition()),
-                    new AndPairCondition(
-                        new UnitIsInFirstTimeNotStartingCombatCondition(),
-                        new OpponentStartsCombatCondition())), 
+            new ConditionEffectPair(orCondition, 
                 new ReduceReceivedPermanentDamageByPercentage(0.6)),
-            new ConditionEffectPair(
-                new NotCondition(
-                    new OrPairCondition(
-                        new AndPairCondition(
-                            new UnitIsInFirstTimeStartingCombatCondition(),
-                            new UnitStartsCombatCondition()),
-                        new AndPairCondition(
-                            new UnitIsInFirstTimeNotStartingCombatCondition(),
-                            new OpponentStartsCombatCondition()))), 
+            new ConditionEffectPair(new NotCondition(orCondition), 
                 new ReduceReceivedPermanentDamageByPercentage(0.3)),
         };
     }

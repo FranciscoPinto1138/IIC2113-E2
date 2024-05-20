@@ -1,6 +1,6 @@
 namespace Fire_Emblem.SkillsModules.Skills.Hybrids;
 
-public class FortDefRes : Hybrid
+public class FortDefRes : Skill
 {
     public FortDefRes()
     {

@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class Sympathetic : AbsoluteDamageReduction
+public class Sympathetic : Skill
 {
     public Sympathetic()
     {

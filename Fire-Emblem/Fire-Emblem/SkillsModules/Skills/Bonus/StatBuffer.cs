@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class StatBuffer : Bonus
+public class StatBuffer : Skill
 {
     private List<StatType> _bufferedStatsList;
     private List<int> _changeFactorsList;

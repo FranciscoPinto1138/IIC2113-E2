@@ -2,7 +2,7 @@ using System.Runtime.InteropServices.ComTypes;
 
 namespace Fire_Emblem.SkillsModules.Skills.Hybrids;
 
-public class LifeAndDeath : Hybrid
+public class LifeAndDeath : Skill
 {
     public LifeAndDeath()
     {

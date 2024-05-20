@@ -1,6 +1,6 @@
 namespace Fire_Emblem.SkillsModules.Skills.Hybrids;
 
-public class Soulblade : Hybrid
+public class Soulblade : Skill
 {
     public Soulblade()
     {

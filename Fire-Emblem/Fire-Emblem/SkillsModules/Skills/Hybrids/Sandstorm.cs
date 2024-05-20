@@ -1,6 +1,6 @@
 namespace Fire_Emblem.SkillsModules.Skills.Hybrids;
 
-public class Sandstorm : Hybrid
+public class Sandstorm : Skill
 {
     public Sandstorm()
     {

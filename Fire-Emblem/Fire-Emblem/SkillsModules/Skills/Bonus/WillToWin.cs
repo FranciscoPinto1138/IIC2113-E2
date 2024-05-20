@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class WillToWin : Bonus
+public class WillToWin : Skill
 {
     public WillToWin()
     {

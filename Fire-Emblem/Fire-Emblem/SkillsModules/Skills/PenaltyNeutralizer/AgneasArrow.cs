@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class AgneasArrow : PenaltyNeutralizer
+public class AgneasArrow : Skill
 {
     public AgneasArrow()
     {

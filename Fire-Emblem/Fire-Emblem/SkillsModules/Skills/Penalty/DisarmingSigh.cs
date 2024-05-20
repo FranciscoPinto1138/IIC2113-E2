@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class DisarmingSigh : Penalty
+public class DisarmingSigh : Skill
 {
     public DisarmingSigh()
     {

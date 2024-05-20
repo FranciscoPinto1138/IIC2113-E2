@@ -1,6 +1,6 @@
 namespace Fire_Emblem.SkillsModules.Skills.Hybrids;
 
-public class StillWater : Hybrid
+public class StillWater : Skill
 {
     public StillWater()
     {

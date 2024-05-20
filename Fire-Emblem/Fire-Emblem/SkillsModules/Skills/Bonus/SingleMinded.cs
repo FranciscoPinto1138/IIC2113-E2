@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class SingleMinded : Bonus
+public class SingleMinded : Skill
 {
     public SingleMinded()
     {

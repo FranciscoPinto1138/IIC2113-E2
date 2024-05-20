@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class TomePrecision : Bonus
+public class TomePrecision : Skill
 {
     public TomePrecision()
     {

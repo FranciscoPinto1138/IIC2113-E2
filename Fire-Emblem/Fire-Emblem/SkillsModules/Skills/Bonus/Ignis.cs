@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class Ignis : Bonus
+public class Ignis : Skill
 {
     public Ignis()
     {

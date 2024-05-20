@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class Charmer : Penalty
+public class Charmer : Skill
 {
     public Charmer()
     {

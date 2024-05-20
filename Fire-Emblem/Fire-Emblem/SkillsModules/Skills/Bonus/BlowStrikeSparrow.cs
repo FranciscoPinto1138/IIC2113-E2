@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class BlowStrikeSparrow : Bonus
+public class BlowStrikeSparrow : Skill
 {
     private List<StatType>_bufferedStatsList;
     private List<int> _changeFactorsList;

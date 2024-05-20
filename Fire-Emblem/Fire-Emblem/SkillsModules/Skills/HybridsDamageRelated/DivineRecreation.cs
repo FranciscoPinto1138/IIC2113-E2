@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class DivineRecreation : Hybrid
+public class DivineRecreation : Skill
 {
     public DivineRecreation()
     {

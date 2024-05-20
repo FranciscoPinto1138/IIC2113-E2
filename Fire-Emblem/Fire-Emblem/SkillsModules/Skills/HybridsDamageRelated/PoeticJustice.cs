@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class PoeticJustice : Hybrid
+public class PoeticJustice : Skill
 {
     public PoeticJustice()
     {

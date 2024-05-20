@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class StunningSmile : Penalty
+public class StunningSmile : Skill
 {
     public StunningSmile()
     {

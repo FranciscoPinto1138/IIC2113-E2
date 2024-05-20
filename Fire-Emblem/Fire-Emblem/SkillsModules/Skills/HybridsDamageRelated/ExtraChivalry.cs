@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class ExtraChivalry : Hybrid
+public class ExtraChivalry : Skill
 {
     public ExtraChivalry()
     {

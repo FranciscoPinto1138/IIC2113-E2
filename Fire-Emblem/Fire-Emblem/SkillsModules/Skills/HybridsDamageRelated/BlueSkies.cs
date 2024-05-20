@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class BlueSkies : Hybrid
+public class BlueSkies : Skill
 {
     public BlueSkies()
     {

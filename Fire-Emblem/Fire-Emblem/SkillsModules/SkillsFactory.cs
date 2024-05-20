@@ -109,37 +109,51 @@ public class SkillsFactory
             case "Sandstorm":
                 return new Sandstorm();
             case "Sword Agility":
-                return new AgilityPowerFocus("Sword", [StatType.Spd], [12], [StatType.Atk], [6]);
+                return new AgilityPowerFocus("Sword", [StatType.Spd], 
+                    [12], [StatType.Atk], [6]);
             case "Lance Power":
-                return new AgilityPowerFocus("Lance", [StatType.Atk], [10], [StatType.Def], [10]);
+                return new AgilityPowerFocus("Lance", [StatType.Atk], 
+                    [10], [StatType.Def], [10]);
             case "Sword Power":
-                return new AgilityPowerFocus("Sword", [StatType.Atk], [10], [StatType.Def], [10]);
+                return new AgilityPowerFocus("Sword", [StatType.Atk], 
+                    [10], [StatType.Def], [10]);
             case "Bow Focus":
-                return new AgilityPowerFocus("Bow", [StatType.Atk], [10], [StatType.Res], [10]);
+                return new AgilityPowerFocus("Bow", [StatType.Atk], 
+                    [10], [StatType.Res], [10]);
             case "Lance Agility":
-                return new AgilityPowerFocus("Lance", [StatType.Spd], [12], [StatType.Atk], [6]);
+                return new AgilityPowerFocus("Lance", [StatType.Spd], 
+                    [12], [StatType.Atk], [6]);
             case "Axe Power":
-                return new AgilityPowerFocus("Axe", [StatType.Atk], [10], [StatType.Def], [10]);
+                return new AgilityPowerFocus("Axe", [StatType.Atk], 
+                    [10], [StatType.Def], [10]);
             case "Bow Agility":
-                return new AgilityPowerFocus("Bow", [StatType.Spd], [12], [StatType.Atk], [6]);
+                return new AgilityPowerFocus("Bow", [StatType.Spd], 
+                    [12], [StatType.Atk], [6]);
             case "Sword Focus":
-                return new AgilityPowerFocus("Sword", [StatType.Atk], [10], [StatType.Res], [10]);
+                return new AgilityPowerFocus("Sword", [StatType.Atk], 
+                    [10], [StatType.Res], [10]);
             case "Close Def":
                 return new CloseDef();
             case "Distant Def":
                 return new DistantDef();
             case "Lull Atk/Spd":
-                return new Lull([StatType.Atk, StatType.Spd], [3, 3], [StatType.Atk, StatType.Spd]);
+                return new Lull([StatType.Atk, StatType.Spd], [3, 3], 
+                    [StatType.Atk, StatType.Spd]);
             case "Lull Atk/Def":
-                return new Lull([StatType.Atk, StatType.Def], [3, 3], [StatType.Atk, StatType.Def]);
+                return new Lull([StatType.Atk, StatType.Def], [3, 3], 
+                    [StatType.Atk, StatType.Def]);
             case "Lull Atk/Res":
-                return new Lull([StatType.Atk, StatType.Res], [3, 3], [StatType.Atk, StatType.Res]);
+                return new Lull([StatType.Atk, StatType.Res], [3, 3], 
+                    [StatType.Atk, StatType.Res]);
             case "Lull Spd/Def":
-                return new Lull([StatType.Spd, StatType.Def], [3, 3], [StatType.Spd, StatType.Def]);
+                return new Lull([StatType.Spd, StatType.Def], [3, 3], 
+                    [StatType.Spd, StatType.Def]);
             case "Lull Spd/Res":
-                return new Lull([StatType.Spd, StatType.Res], [3, 3], [StatType.Spd, StatType.Res]);
+                return new Lull([StatType.Spd, StatType.Res], [3, 3], 
+                    [StatType.Spd, StatType.Res]);
             case "Lull Def/Res":
-                return new Lull([StatType.Def, StatType.Res], [3, 3], [StatType.Def, StatType.Res]);
+                return new Lull([StatType.Def, StatType.Res], [3, 3], 
+                    [StatType.Def, StatType.Res]);
             case "Fort. Def/Res":
                 return new FortDefRes();
             case "Life and Death":

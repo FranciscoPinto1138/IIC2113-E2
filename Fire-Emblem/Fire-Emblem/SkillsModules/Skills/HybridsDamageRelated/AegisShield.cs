@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class AegisShield : Hybrid
+public class AegisShield : Skill
 {
     public AegisShield()
     {

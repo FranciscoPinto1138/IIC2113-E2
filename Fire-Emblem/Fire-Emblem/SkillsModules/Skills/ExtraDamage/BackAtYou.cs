@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class BackAtYou : ExtraDamage
+public class BackAtYou : Skill
 {
     public BackAtYou()
     {

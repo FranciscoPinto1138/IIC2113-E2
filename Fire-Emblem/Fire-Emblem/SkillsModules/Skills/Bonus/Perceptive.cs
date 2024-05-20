@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class Perceptive : Bonus
+public class Perceptive : Skill
 {
     public Perceptive()
     {

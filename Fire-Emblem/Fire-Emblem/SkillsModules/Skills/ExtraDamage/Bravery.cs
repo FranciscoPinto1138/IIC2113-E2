@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class Bravery : ExtraDamage
+public class Bravery : Skill
 {
     public Bravery()
     {

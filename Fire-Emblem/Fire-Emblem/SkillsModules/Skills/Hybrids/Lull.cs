@@ -1,12 +1,13 @@
 namespace Fire_Emblem;
 
-public class Lull : Hybrid
+public class Lull : Skill
 {
     private List<StatType> _rivalDecreasedStatsList;
     private List<StatType> _rivalNeutralizedStatsList;
     private List<int> _changeDecreaseFactorsList;
     
-    public Lull(List<StatType> rivalDecreasedStatsList, List<int> changeDecreaseFactorsList, List<StatType> rivalNeutralizedStatsList)
+    public Lull(List<StatType> rivalDecreasedStatsList, List<int> changeDecreaseFactorsList, 
+        List<StatType> rivalNeutralizedStatsList)
     {
         this.Name = "Lull";
         this.Description = "Varias habilidades en que se penaliza stats del rival y se neutralizan bonus de otras stats";

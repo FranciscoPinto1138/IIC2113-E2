@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class GoldenLotus : PercentageDamageReduction
+public class GoldenLotus : Skill
 {
     public GoldenLotus()
     {

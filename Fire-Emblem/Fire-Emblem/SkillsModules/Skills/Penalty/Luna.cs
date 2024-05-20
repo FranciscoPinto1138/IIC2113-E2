@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class Luna : Penalty
+public class Luna : Skill
 {
     public Luna()
     {

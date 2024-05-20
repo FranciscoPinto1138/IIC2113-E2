@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class Prescience : Hybrid
+public class Prescience : Skill
 {
     public Prescience()
     {

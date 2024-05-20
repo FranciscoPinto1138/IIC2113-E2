@@ -2,7 +2,7 @@ using System.Runtime.InteropServices.ComTypes;
 
 namespace Fire_Emblem;
 
-public class DeadlyBlade : Bonus
+public class DeadlyBlade : Skill
 {
     public DeadlyBlade()
     {

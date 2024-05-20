@@ -1,6 +1,6 @@
 namespace Fire_Emblem.Hybrids;
 
-public class CloseDef : Hybrid
+public class CloseDef : Skill
 {
     public CloseDef()
     {

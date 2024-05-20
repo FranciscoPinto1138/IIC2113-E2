@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class BeorcsBlessing : BonusNeutralizer
+public class BeorcsBlessing : Skill
 {
     public BeorcsBlessing()
     {

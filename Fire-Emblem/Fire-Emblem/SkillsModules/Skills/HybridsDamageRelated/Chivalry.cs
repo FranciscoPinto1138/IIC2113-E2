@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class Chivalry : Hybrid
+public class Chivalry : Skill
 {
     public Chivalry()
     {

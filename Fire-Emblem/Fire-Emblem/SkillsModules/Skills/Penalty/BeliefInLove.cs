@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class BeliefInLove : Penalty
+public class BeliefInLove : Skill
 {
     public BeliefInLove()
     {

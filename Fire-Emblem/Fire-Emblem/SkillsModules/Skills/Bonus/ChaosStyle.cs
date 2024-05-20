@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class ChaosStyle : Bonus
+public class ChaosStyle : Skill
 {
     public ChaosStyle()
     {

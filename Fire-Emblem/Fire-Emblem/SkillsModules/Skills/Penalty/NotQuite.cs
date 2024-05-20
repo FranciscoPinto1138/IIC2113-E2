@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class NotQuite : Penalty
+public class NotQuite : Skill
 {
     public NotQuite()
     {

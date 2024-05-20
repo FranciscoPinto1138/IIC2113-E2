@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class LaguzFriend : Hybrid
+public class LaguzFriend : Skill
 {
     public LaguzFriend()
     {

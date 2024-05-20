@@ -1,6 +1,6 @@
 namespace Fire_Emblem;
 
-public class Guard : AbsoluteDamageReduction
+public class Guard : Skill
 {
     private string _weaponOfOpponent;
     public Guard(string weaponOfOpponent)
