@@ -47,8 +47,9 @@ public class TeamsLoader
     
     private Team[] ConstructTeams(TeamFile teamFile, List<Character> characters)
     {
-        Team player1 = new Team("Player 1", teamFile.GetTeam1Lines(), characters);
-        Team player2 = new Team("Player 2", teamFile.GetTeam2Lines(), characters);
+        string[][] teamsLines = teamFile.GetSplitTeamsLines();
+        Team player1 = new Team("Player 1", teamsLines[0], characters);
+        Team player2 = new Team("Player 2", teamsLines[1], characters);
 
         return new Team[] { player1, player2 };
     }

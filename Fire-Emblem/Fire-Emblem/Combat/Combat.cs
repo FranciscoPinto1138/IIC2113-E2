@@ -21,11 +21,23 @@ public class Combat
         IncreaseStartingCombatUnitsStats();
         ResolveSkills();
         AttackOrCounterAttack(_attackUnit, _defenseUnit);
-        if (IsCombatOver()) return [_attackUnit, _defenseUnit];
+        if (IsCombatOver())
+        {
+            WrapUpCombat();
+            return [_attackUnit, _defenseUnit];
+        }
         AttackOrCounterAttack(_defenseUnit, _attackUnit);
-        if (IsCombatOver()) return [_attackUnit, _defenseUnit];
+        if (IsCombatOver())
+        {
+            WrapUpCombat();
+            return [_attackUnit, _defenseUnit];
+        }
         FollowUp();
-        if (IsCombatOver()) return [_attackUnit, _defenseUnit];
+        if (IsCombatOver())
+        {
+            WrapUpCombat();
+            return [_attackUnit, _defenseUnit];
+        }
         WrapUpCombat();
         return [_attackUnit, _defenseUnit];
     }
@@ -40,8 +52,10 @@ public class Combat
 
     private void SetUnitRoles()
     {
-        _attackUnit.Role = "Attacker";
-        _defenseUnit.Role = "Defender";
+        const string ATTACKER_ROLE = "Attacker";
+        const string DEFENDER_ROLE = "Defender";
+        _attackUnit.Role = ATTACKER_ROLE;
+        _defenseUnit.Role = DEFENDER_ROLE;
     }
     
     private void IncreaseStartingCombatUnitsStats()
@@ -65,9 +79,7 @@ public class Combat
     
     private bool IsCombatOver()
     {
-        if (!HasUnitDied()) return false;
-        WrapUpCombat();
-        return true;
+        return HasUnitDied();
     }
     
     private void WrapUpCombat()

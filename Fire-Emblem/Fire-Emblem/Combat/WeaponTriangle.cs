@@ -40,8 +40,9 @@ public class WeaponTriangle
     {
         const string MAGIC_WEAPON = "Magic";
         const string BOW_WEAPON = "Bow";
-        return (unit.Weapon == opponentUnit.Weapon || (unit.Weapon == MAGIC_WEAPON || opponentUnit.Weapon == MAGIC_WEAPON) ||
-                (unit.Weapon == BOW_WEAPON || opponentUnit.Weapon == BOW_WEAPON));
+        return (unit.Weapon == opponentUnit.Weapon 
+                || (unit.Weapon == MAGIC_WEAPON || opponentUnit.Weapon == MAGIC_WEAPON) 
+                || (unit.Weapon == BOW_WEAPON || opponentUnit.Weapon == BOW_WEAPON));
     }
     
     private void DetermineWeaponAdvantage()

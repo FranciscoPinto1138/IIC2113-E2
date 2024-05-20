@@ -42,12 +42,14 @@ public class FollowUpController
     
     private bool AttackUnitCanFollowUp()
     {
-        return _unitStatsManager.GetUnitTotalSpd(_attackUnit) - _unitStatsManager.GetUnitTotalSpd(_defenseUnit) >= MIN_SPD_DIFFERENCE_FOR_FOLLOWUP;
+        return _unitStatsManager.GetUnitTotalSpd(_attackUnit) - 
+            _unitStatsManager.GetUnitTotalSpd(_defenseUnit) >= MIN_SPD_DIFFERENCE_FOR_FOLLOWUP;
     }
     
     private bool DefenseUnitCanFollowUp()
     {
-        return _unitStatsManager.GetUnitTotalSpd(_defenseUnit) - _unitStatsManager.GetUnitTotalSpd(_attackUnit) >= MIN_SPD_DIFFERENCE_FOR_FOLLOWUP;
+        return _unitStatsManager.GetUnitTotalSpd(_defenseUnit) - 
+            _unitStatsManager.GetUnitTotalSpd(_attackUnit) >= MIN_SPD_DIFFERENCE_FOR_FOLLOWUP;
     }
     
     private bool UnitsCanFollowUp()

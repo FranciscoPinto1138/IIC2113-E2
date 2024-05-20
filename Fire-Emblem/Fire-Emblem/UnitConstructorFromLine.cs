@@ -44,6 +44,8 @@ public class UnitConstructorFromLine
     
     private string[] GetSkillsFromSplitLine()
     {
-        return _splitLine.Length > 1 ? _splitLine[1].Replace(")", "").Split(',') : Array.Empty<string>();
+        return _splitLine.Length > 1 ? 
+            _splitLine[1].Replace(")", "").Split(',') : 
+            Array.Empty<string>();
     }
 }

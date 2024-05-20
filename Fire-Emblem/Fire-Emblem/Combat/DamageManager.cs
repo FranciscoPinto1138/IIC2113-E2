@@ -25,7 +25,8 @@ public class DamageManager
     
     private void SetResOrDef()
     {
-        _defOrRes = _damageMaker.Weapon == "Magic" ? _unitStatsManager.GetUnitTotalRes(_damageReceiver) : _unitStatsManager.GetUnitTotalDef(_damageReceiver);
+        _defOrRes = _damageMaker.Weapon == "Magic" ? 
+            _unitStatsManager.GetUnitTotalRes(_damageReceiver) : _unitStatsManager.GetUnitTotalDef(_damageReceiver);
     }
     
     public void ApplyDamage()
@@ -53,8 +54,10 @@ public class DamageManager
     {
         double percentageReducedDamage =
             initialDamagePlusExtraDamage * (1 - _damageReceiver.DamageEffectsManager.DamagePercentageReductionPermanent)
-                                         * (1 - _damageReceiver.DamageEffectsManager.DamagePercentageReductionFirstAttack * _damageReceiver.RivalIsOnFirstAttack)
-                                         * (1 - _damageReceiver.DamageEffectsManager.DamagePercentageReductionFollowUp * _damageReceiver.RivalIsOnFollowUpAttack);
+                                         * (1 - _damageReceiver.DamageEffectsManager.DamagePercentageReductionFirstAttack 
+                                             * _damageReceiver.RivalIsOnFirstAttack)
+                                         * (1 - _damageReceiver.DamageEffectsManager.DamagePercentageReductionFollowUp 
+                                             * _damageReceiver.RivalIsOnFollowUpAttack);
         return Convert.ToInt32(Math.Floor(Math.Round(percentageReducedDamage, 9)));
     }
 
