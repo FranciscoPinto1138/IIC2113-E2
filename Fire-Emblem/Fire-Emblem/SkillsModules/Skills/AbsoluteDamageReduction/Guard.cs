@@ -12,8 +12,9 @@ public class Guard : AbsoluteDamageReduction
 
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
-        var condition = new OpponentHasWeaponTypeCondition(_weaponOfOpponent);
-        var effectOnUnit = new ReduceReceivedDamageByAbsoluteValue(5);
-        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnUnit) };
+        return new ConditionEffectPair[] { new ConditionEffectPair(
+            new OpponentHasWeaponTypeCondition(_weaponOfOpponent), 
+            new ReduceReceivedDamageByAbsoluteValue(5)) 
+        };
     }
 }

@@ -12,10 +12,9 @@ public class DeadlyBlade : Bonus
     
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
-        var firstCondition = new UnitStartsCombatCondition();
-        var secondCondition = new UnitHasWeaponTypeCondition("Sword");
-        var combinedAndCondition = new AndPairCondition(firstCondition, secondCondition);
-        var effect = new IncreaseStats([StatType.Atk, StatType.Spd], [8, 8]);
-        return new ConditionEffectPair[] { new ConditionEffectPair(combinedAndCondition, effect) };
+        return new ConditionEffectPair[] { new ConditionEffectPair(
+            new AndPairCondition(new UnitStartsCombatCondition(), new UnitHasWeaponTypeCondition("Sword")), 
+            new IncreaseStats([StatType.Atk, StatType.Spd], [8, 8])) 
+        };
     }
 }

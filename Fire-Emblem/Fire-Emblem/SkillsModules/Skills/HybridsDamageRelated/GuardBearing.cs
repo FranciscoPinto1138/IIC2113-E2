@@ -5,7 +5,10 @@ public class GuardBearing : Hybrid
     public GuardBearing()
     {
         this.Name = "Guard Bearing";
-        this.Description = "Inflige Spd/Def-4 en el rival. Reduce el daño de los ataques del rival en X% (Durante el primer combate de la unidad en que inicia el combate y durante el primer ataque de la unidad en que el rival inicia el combate, X = 60; en otro caso, X = 30).";
+        this.Description = "Inflige Spd/Def-4 en el rival. Reduce el daño de los ataques del rival en X% " +
+                           "(Durante el primer combate de la unidad en que inicia el combate y durante el " +
+                           "primer ataque de la unidad en que el rival inicia el combate, X = 60; " +
+                           "en otro caso, X = 30).";
     }
 
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)

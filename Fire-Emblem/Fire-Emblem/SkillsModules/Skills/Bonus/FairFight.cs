@@ -10,10 +10,11 @@ public class FairFight : Bonus
     
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
-        var condition = new UnitStartsCombatCondition();
-        var effectOnUnit = new IncreaseStats([StatType.Atk], [6]);
-        var effectOnOpponent = new IncreaseOpponentStats([StatType.Atk], [6]);
-        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnUnit), 
-            new ConditionEffectPair(condition, effectOnOpponent)};
+        return new ConditionEffectPair[] { 
+            new ConditionEffectPair(
+                new UnitStartsCombatCondition(), new IncreaseStats([StatType.Atk], [6])), 
+            new ConditionEffectPair(
+                new UnitStartsCombatCondition(), new IncreaseOpponentStats([StatType.Atk], [6]))
+        };
     }
 }

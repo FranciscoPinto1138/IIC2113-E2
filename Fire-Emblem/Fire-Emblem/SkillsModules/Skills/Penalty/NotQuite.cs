@@ -10,8 +10,7 @@ public class NotQuite : Penalty
 
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
-        var condition = new OpponentStartsCombatCondition();
-        var effectOnOpponent = new DecreaseOpponentStats([StatType.Atk], [4]);
-        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnOpponent) };
+        return new ConditionEffectPair[] { new ConditionEffectPair(new OpponentStartsCombatCondition(), 
+            new DecreaseOpponentStats([StatType.Atk], [4])) };
     }
 }

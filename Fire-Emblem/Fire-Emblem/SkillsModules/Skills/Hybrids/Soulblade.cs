@@ -5,12 +5,9 @@ public class Soulblade : Hybrid
     public Soulblade()
     {
         this.Name = "Soulblade";
-        this.Description = "Al atacar con una espada, el daño es calculado usando el promedio entre Def y Res base del rival. (Considere este como un bonus o un penalty a los stats correspondientes).";
-    }
-
-    private int CalculateAverageDefRes(Unit opponent)
-    {
-        return Convert.ToInt32(Math.Floor((double)(opponent.Def + opponent.Res) / 2));
+        this.Description = "Al atacar con una espada, el daño es calculado usando el promedio entre " +
+                           "Def y Res base del rival. (Considere este como un bonus o un penalty a " +
+                           "los stats correspondientes).";
     }
     
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
@@ -39,5 +36,10 @@ public class Soulblade : Hybrid
         }
     
         return pairs.ToArray();
+    }
+    
+    private int CalculateAverageDefRes(Unit opponent)
+    {
+        return Convert.ToInt32(Math.Floor((double)(opponent.Def + opponent.Res) / 2));
     }
 }

@@ -10,8 +10,7 @@ public class DisarmingSigh : Penalty
 
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
-        var condition = new OpponentIsMaleCondition();
-        var effectOnOpponent = new DecreaseOpponentStats([StatType.Atk], [8]);
-        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnOpponent) };
+        return new ConditionEffectPair[] { new ConditionEffectPair(new OpponentIsMaleCondition(), 
+            new DecreaseOpponentStats([StatType.Atk], [8])) };
     }
 }

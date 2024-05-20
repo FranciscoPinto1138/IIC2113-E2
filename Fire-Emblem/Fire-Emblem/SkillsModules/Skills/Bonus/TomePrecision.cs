@@ -10,8 +10,8 @@ public class TomePrecision : Bonus
 
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
-        var condition = new UnitHasWeaponTypeCondition("Magic");
-        var effectOnUnit = new IncreaseStats([StatType.Atk, StatType.Spd], [6, 6]);
-        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnUnit) };
+        return new ConditionEffectPair[] { new ConditionEffectPair(
+            new UnitHasWeaponTypeCondition("Magic"), new IncreaseStats([StatType.Atk, StatType.Spd], [6, 6])) 
+        };
     }
 }

@@ -15,8 +15,9 @@ public class Brazen : Bonus
 
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
-        var condition = new UnitHPCondition(80, ThresholdType.Percentage, ComparisonType.LowerThanOrEqual);
-        var effect = new IncreaseStats(_bufferedStatsList, _changeFactorsList);
-        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effect) };
+        return new ConditionEffectPair[] { new ConditionEffectPair(
+            new UnitHPCondition(80, ThresholdType.Percentage, ComparisonType.LowerThanOrEqual), 
+            new IncreaseStats(_bufferedStatsList, _changeFactorsList)) 
+        };
     }
 }

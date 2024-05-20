@@ -10,8 +10,10 @@ public class GoldenLotus : PercentageDamageReduction
 
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
-        var condition = new OpponentDamageTypeCondition(DamageType.Physical);
-        var effectOnUnit = new ReduceReceivedPermanentDamageByPercentageOnOpponentFirstAttack(0.5);
-        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnUnit) };
+        return new ConditionEffectPair[]
+        {
+            new ConditionEffectPair(new OpponentDamageTypeCondition(DamageType.Physical), 
+                new ReduceReceivedPermanentDamageByPercentageOnOpponentFirstAttack(0.5))
+        };
     }
 }

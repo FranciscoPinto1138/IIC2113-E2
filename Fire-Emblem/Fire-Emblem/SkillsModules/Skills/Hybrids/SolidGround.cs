@@ -10,10 +10,8 @@ public class SolidGround : Hybrid
     
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
-        var condition = new NoCondition();
-        var effectOnUnit = new IncreaseStats([StatType.Atk, StatType.Def], [6, 6]);
-        var effectOnUnitAdditional = new DecreaseStats([StatType.Res], [5]);
-        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnUnit),
-            new ConditionEffectPair(condition, effectOnUnitAdditional) };
+        return new ConditionEffectPair[] { 
+            new ConditionEffectPair(new NoCondition(), new IncreaseStats([StatType.Atk, StatType.Def], [6, 6])),
+            new ConditionEffectPair(new NoCondition(), new DecreaseStats([StatType.Res], [5])) };
     }
 }

@@ -10,8 +10,9 @@ public class Resolve : Bonus
 
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
-        var condition = new UnitHPCondition(75, ThresholdType.Percentage, ComparisonType.LowerThanOrEqual);
-        var effectOnUnit = new IncreaseStats([StatType.Def, StatType.Res], [7,7]);
-        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnUnit) };
+        return new ConditionEffectPair[] { new ConditionEffectPair(
+            new UnitHPCondition(75, ThresholdType.Percentage, ComparisonType.LowerThanOrEqual), 
+            new IncreaseStats([StatType.Def, StatType.Res], [7,7])) 
+        };
     }
 }

@@ -17,10 +17,10 @@ public class Lull : Hybrid
 
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
-        var condition = new NoCondition();
-        var neutralizeStatsOnRivalEffect = new NeutralizeOpponentBonusStats(_rivalNeutralizedStatsList);
-        var decreaseStatsOnRivalEffect = new DecreaseOpponentStats(_rivalDecreasedStatsList, _changeDecreaseFactorsList);
-        return new ConditionEffectPair[] { new ConditionEffectPair(condition, neutralizeStatsOnRivalEffect),
-            new ConditionEffectPair(condition, decreaseStatsOnRivalEffect)};
+        return new ConditionEffectPair[] { 
+            new ConditionEffectPair(new NoCondition(), 
+                new NeutralizeOpponentBonusStats(_rivalNeutralizedStatsList)),
+            new ConditionEffectPair(new NoCondition(), 
+                new DecreaseOpponentStats(_rivalDecreasedStatsList, _changeDecreaseFactorsList))};
     }
 }

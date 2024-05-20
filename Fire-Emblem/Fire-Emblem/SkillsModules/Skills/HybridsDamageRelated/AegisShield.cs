@@ -10,10 +10,11 @@ public class AegisShield : Hybrid
 
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
-        var condition = new NoCondition();
-        var firstEffectOnUnit = new IncreaseStats([StatType.Def, StatType.Res], [6, 3]);
-        var secondEffectOnUnit = new ReduceReceivedPermanentDamageByPercentageOnOpponentFirstAttack(0.5);
-        return new ConditionEffectPair[] { new ConditionEffectPair(condition, firstEffectOnUnit),
-            new ConditionEffectPair(condition, secondEffectOnUnit) };
+        return new ConditionEffectPair[] { 
+            new ConditionEffectPair(new NoCondition(), 
+                new IncreaseStats([StatType.Def, StatType.Res], [6, 3])),
+            new ConditionEffectPair(new NoCondition(), 
+                new ReduceReceivedPermanentDamageByPercentageOnOpponentFirstAttack(0.5)) 
+        };
     }
 }

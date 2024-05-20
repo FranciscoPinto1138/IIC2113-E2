@@ -5,7 +5,8 @@ public class Dragonskin : Hybrid
     public Dragonskin()
     {
         this.Name = "Dragonskin";
-        this.Description = "Si el rival inicia el combate o si el HP del rival >= 75% al inicio del combate, otorga Atk/Spd/Def/Res+6 a la unidad durante el combate y neutraliza los bonus del rival.";
+        this.Description = "Si el rival inicia el combate o si el HP del rival >= 75% al inicio del combate, " +
+                           "otorga Atk/Spd/Def/Res+6 a la unidad durante el combate y neutraliza los bonus del rival.";
     }
     
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)

@@ -10,8 +10,8 @@ public class Bravery : ExtraDamage
     
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
-        var condition = new NoCondition();
-        var effectOnUnit = new IncreaseExtraDamage(5);
-        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effectOnUnit) };
+        return new ConditionEffectPair[] { new ConditionEffectPair(
+            new NoCondition(), new IncreaseExtraDamage(5)) 
+        };
     }
 }

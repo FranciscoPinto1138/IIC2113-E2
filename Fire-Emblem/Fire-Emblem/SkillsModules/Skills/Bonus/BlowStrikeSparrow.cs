@@ -15,8 +15,8 @@ public class BlowStrikeSparrow : Bonus
     
     public override ConditionEffectPair[] GetConditionEffectPairs(Unit unit, Unit opponent)
     {
-        var condition = new UnitStartsCombatCondition();
-        var effect = new IncreaseStats(_bufferedStatsList, _changeFactorsList);
-        return new ConditionEffectPair[] { new ConditionEffectPair(condition, effect) };
+        return new ConditionEffectPair[] { new ConditionEffectPair(
+            new UnitStartsCombatCondition(), new IncreaseStats(_bufferedStatsList, _changeFactorsList)) 
+        };
     }
 }
