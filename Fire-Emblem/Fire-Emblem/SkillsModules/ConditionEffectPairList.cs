@@ -12,6 +12,17 @@ public class ConditionEffectPairList : IEnumerable<ConditionEffectPair>
     }
 
     public int Count => _conditionEffectPairs.Count;
+    
+    public void ApplyEffectsIfConditionsAreSatisfied(Unit attackUnit, Unit defenseUnit, int priority)
+    {
+        foreach (ConditionEffectPair pair in _conditionEffectPairs)
+        {
+            if (pair.HasPriority(priority))
+            {
+                pair.ApplyEffectIfConditionIsSatisfied(attackUnit, defenseUnit);
+            }
+        }
+    }
 
     public IEnumerator<ConditionEffectPair> GetEnumerator()
     {

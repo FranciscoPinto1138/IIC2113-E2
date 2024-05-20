@@ -43,53 +43,21 @@ public class SkillsController
 
     private void AddSkillsConditionEffectPairsOfUnits()
     {
-        AddSkillsConditionEffectPairs(_attackUnit, _defenseUnit, _attackUnitSkills, 
+        _attackUnitSkills.AddConditionEffectPairs(_attackUnit, _defenseUnit, 
             _attackUnitConditionEffectPairList);
-        AddSkillsConditionEffectPairs(_defenseUnit, _attackUnit, _defenseUnitSkills, 
+        _defenseUnitSkills.AddConditionEffectPairs(_defenseUnit, _attackUnit, 
             _defenseUnitConditionEffectPairList);
     }
 
-    private void AddSkillsConditionEffectPairs(Unit unit, Unit opponent, SkillList skills, 
-        ConditionEffectPairList unitConditionEffectPairsList)
-    {
-        if (skills.Count <= 0) return;
-        foreach (Skill skill in skills)
-        {
-            AddConditionEffectPairsOfSkill(unit, opponent, skill, unitConditionEffectPairsList);
-        }
-    }
-
-    private void AddConditionEffectPairsOfSkill(Unit unit, Unit opponent, Skill skill, 
-        ConditionEffectPairList unitConditionEffectPairsList)
-    {
-        foreach (ConditionEffectPair conditionEffectPair in skill.GetConditionEffectPairs(unit, opponent))
-        {
-            unitConditionEffectPairsList.Add(conditionEffectPair);
-        } 
-    }
-    
     public void ApplyUnitsSkillsEffectsIfConditionsAreSatisfiedByPriority()
     {
         const int NUMBER_OF_PRIORITIES = 6;
         for (int priority = 1; priority < NUMBER_OF_PRIORITIES + 1; priority++)
         {
-            ApplyUnitSkillsEffectsIfConditionsAreSatisfiedByPriority(_attackUnit, _defenseUnit, 
-                _attackUnitConditionEffectPairList, priority);
-            ApplyUnitSkillsEffectsIfConditionsAreSatisfiedByPriority(_defenseUnit, 
-                _attackUnit, _defenseUnitConditionEffectPairList, priority);
-        }
-    }
-    
-    private void ApplyUnitSkillsEffectsIfConditionsAreSatisfiedByPriority(Unit attackUnit, Unit defenseUnit, 
-        ConditionEffectPairList unitConditionEffectPairsList, int priority)
-    {
-        if (unitConditionEffectPairsList.Count <= 0) return;
-        foreach (ConditionEffectPair conditionEffectPair in unitConditionEffectPairsList)
-        {
-            if (conditionEffectPair.HasPriority(priority))
-            {
-                conditionEffectPair.ApplyEffectIfConditionIsSatisfied(attackUnit, defenseUnit);
-            }
+            _attackUnitConditionEffectPairList.ApplyEffectsIfConditionsAreSatisfied(_attackUnit, 
+                _defenseUnit, priority);
+            _defenseUnitConditionEffectPairList.ApplyEffectsIfConditionsAreSatisfied(_defenseUnit, 
+                _attackUnit, priority);
         }
     }
     

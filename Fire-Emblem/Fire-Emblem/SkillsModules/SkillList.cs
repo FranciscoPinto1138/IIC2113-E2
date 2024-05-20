@@ -12,6 +12,17 @@ public class SkillList : IEnumerable<Skill>
     }
 
     public int Count => _skills.Count;
+    
+    public void AddConditionEffectPairs(Unit unit, Unit opponent, ConditionEffectPairList conditionEffectPairsList)
+    {
+        foreach (Skill skill in _skills)
+        {
+            foreach (ConditionEffectPair pair in skill.GetConditionEffectPairs(unit, opponent))
+            {
+                conditionEffectPairsList.Add(pair);
+            }
+        }
+    }
 
     public IEnumerator<Skill> GetEnumerator()
     {
