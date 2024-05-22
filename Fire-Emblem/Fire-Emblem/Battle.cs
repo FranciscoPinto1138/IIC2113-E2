@@ -52,11 +52,11 @@ public class Battle
     {
         if (!TeamHasEnoughNumberOfUnits(_player1Team))
         {
-            _view.WriteLine($"{_player2Team.PlayerName} ganó");
+            _view.ShowWinnerName(_player2Team.PlayerName);
         }
         else if (!TeamHasEnoughNumberOfUnits(_player2Team))
         {
-            _view.WriteLine($"{_player1Team.PlayerName} ganó");
+            _view.ShowWinnerName(_player1Team.PlayerName);
         }
     }
     

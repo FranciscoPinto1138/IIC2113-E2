@@ -19,7 +19,7 @@ public class AttackCounterAttackController
         SetUnitsFirstAttackStatus();
         DamageManager damageManager = new DamageManager(_attackUnit, _defenseUnit);
         damageManager.ApplyDamage();
-        ShowAppliedDamage(damageManager);
+        _view.ShowAppliedDamage(_attackUnit.Name, _defenseUnit.Name, damageManager.DetermineTotalDamageAfterEffects());
         UnSetUnitsFirstAttackStatus();
     }
     
@@ -27,11 +27,6 @@ public class AttackCounterAttackController
     {
         _attackUnit.IsOnFirstAttack = 1;
         _defenseUnit.RivalIsOnFirstAttack = 1;
-    }
-    
-    private void ShowAppliedDamage(DamageManager damageManager)
-    {
-        _view.WriteLine($"{_attackUnit.Name} ataca a {_defenseUnit.Name} con {damageManager.DetermineTotalDamageAfterEffects()} de daño");
     }
     
     private void UnSetUnitsFirstAttackStatus()

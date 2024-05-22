@@ -1,1 +1,0 @@
-namespace Fire_Emblem;

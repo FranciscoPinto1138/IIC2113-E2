@@ -25,7 +25,7 @@ public class RoundManager
     public void DevelopRound()
     {
         AssignSelectedUnits();
-        ShowRoundStart();
+        _view.ShowRoundStart(_round, _currentPlayerSelectedUnit.Name, _currentPlayerTeam.PlayerName);
         StartCombat();
         RemoveDeadUnitsFromTeams();
         SetUnitsLastRivalStats();
@@ -36,12 +36,7 @@ public class RoundManager
         _currentPlayerSelectedUnit = _unitSelectionManager.SelectUnitOfPlayer(_currentPlayerTeam);
         _opponentSelectedUnit = _unitSelectionManager.SelectUnitOfPlayer(_opponentPlayerTeam);
     }
-
-    private void ShowRoundStart()
-    {
-        _view.WriteLine($"Round {_round}: {_currentPlayerSelectedUnit.Name} ({_currentPlayerTeam.PlayerName}) comienza");
-    }
-
+    
     private void StartCombat()
     {
         Combat combat = new Combat(_currentPlayerSelectedUnit, _opponentSelectedUnit, _view);

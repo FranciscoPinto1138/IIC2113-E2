@@ -20,7 +20,8 @@ public class CombatWrapper
         SetUnitsHPToMinimumIfNegative();
         ResetUnitsBonusAndPenaltyStatsDiff();
         ResetUnitsExtraDamage();
-        ShowCombatResults();
+        _view.ShowCombatResults(_attackUnit.Name, _attackUnit.HPCurrent, 
+            _defenseUnit.Name, _defenseUnit.HPCurrent);
     }
 
     private void ResetUnitsBonusAndPenaltyStatsDiff()
@@ -41,10 +42,5 @@ public class CombatWrapper
     {
         _attackUnit.DamageEffectsManager = new DamageEffectsManager();
         _defenseUnit.DamageEffectsManager = new DamageEffectsManager();
-    }
-    
-    private void ShowCombatResults()
-    {
-        _view.WriteLine($"{_attackUnit.Name} ({_attackUnit.HPCurrent}) : {_defenseUnit.Name} ({_defenseUnit.HPCurrent})");
     }
 }

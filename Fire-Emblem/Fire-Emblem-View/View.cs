@@ -25,6 +25,31 @@ public class View
         _view.WriteLine(message);
     }
     
+    public void ShowNotValidTeamFile()
+    {
+        _view.WriteLine("Archivo de equipos no válido");
+    }
+    
+    public void ShowCombatResults(string attackUnitName, int attackUnitHP, string defenseUnitName, int defenseUnitHP)
+    {
+        _view.WriteLine($"{attackUnitName} ({attackUnitHP}) : {defenseUnitName} ({defenseUnitHP})");
+    }
+    
+    public void ShowAppliedDamage(string attackUnitName, string defenseUnitName, int damage)
+    {
+        _view.WriteLine($"{attackUnitName} ataca a {defenseUnitName} con {damage} de daño");
+    }
+    
+    public void ShowWinnerName(string winner)
+    {
+        _view.WriteLine($"{winner} ganó");
+    }
+    
+    public void ShowRoundStart(int round, string currentPlayerSelectedUnitName, string currentPlayerTeamName)
+    {
+        _view.WriteLine($"Round {round}: {currentPlayerSelectedUnitName} ({currentPlayerTeamName}) comienza");
+    }
+    
     public string[] GetScript()
         => _view.GetScript();
 }

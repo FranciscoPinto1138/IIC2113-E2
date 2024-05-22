@@ -23,7 +23,7 @@ public class Game
         ValidTeamsChecker validTeamsChecker = new ValidTeamsChecker(teams[0], teams[1]);
         if (!validTeamsChecker.IsValidTeam())
         {
-            _view.WriteLine("Archivo de equipos no válido");
+            _view.ShowNotValidTeamFile();
         }
         else
         {

@@ -35,3 +35,8 @@ C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño 
 C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño Detallado de Software\Proyecto\IIC2113-E2\Fire-Emblem\Fire-Emblem\obj\Debug\net8.0\Fire-Emblem.pdb
 C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño Detallado de Software\Proyecto\IIC2113-E2\Fire-Emblem\Fire-Emblem\obj\Debug\net8.0\Fire-Emblem.genruntimeconfig.cache
 C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño Detallado de Software\Proyecto\IIC2113-E2\Fire-Emblem\Fire-Emblem\obj\Debug\net8.0\ref\Fire-Emblem.dll
+C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño Detallado de Software\Proyecto\IIC2113-E2\Fire-Emblem\Fire-Emblem\bin\Debug\net8.0\Fire-Emblem-Model.deps.json
+C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño Detallado de Software\Proyecto\IIC2113-E2\Fire-Emblem\Fire-Emblem\bin\Debug\net8.0\Fire-Emblem-Model.runtimeconfig.json
+C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño Detallado de Software\Proyecto\IIC2113-E2\Fire-Emblem\Fire-Emblem\bin\Debug\net8.0\Fire-Emblem-Model.exe
+C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño Detallado de Software\Proyecto\IIC2113-E2\Fire-Emblem\Fire-Emblem\bin\Debug\net8.0\Fire-Emblem-Model.dll
+C:\Users\Francisco\OneDrive - Universidad Católica de Chile\Documentos\Diseño Detallado de Software\Proyecto\IIC2113-E2\Fire-Emblem\Fire-Emblem\bin\Debug\net8.0\Fire-Emblem-Model.pdb
